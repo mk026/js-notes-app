@@ -5,3 +5,5 @@ extends:
 
 env:
   browser: true
+
+parser: '@babel/eslint-parser'
