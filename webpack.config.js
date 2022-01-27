@@ -1,21 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugi = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
-  mode: 'development',
   devtool: 'source-map',
   devServer: {
     historyApiFallback: true,
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugi({ template: './src/template.html' }),
+    new HtmlWebpackPlugin({ template: './src/template.html' }),
   ],
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    minimizer: [`...`, new CssMinimizerPlugin()],
   },
   module: {
     rules: [
@@ -25,6 +28,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
+      },
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
     ],
   },
