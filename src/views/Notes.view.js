@@ -1,4 +1,4 @@
-export default class Notes {
+export default class NotesView {
   constructor() {
     this.element = this.createElement(this.getTemplate());
   }

@@ -1,4 +1,4 @@
-export default class Home {
+export default class HomeView {
   constructor() {
     this.element = this.createElement(this.getTemplate());
   }
