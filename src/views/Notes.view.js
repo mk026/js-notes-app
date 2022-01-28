@@ -1,4 +1,4 @@
-class Notes {
+export default class Notes {
   constructor() {
     this.element = this.createElement(this.getTemplate());
   }
@@ -28,5 +28,3 @@ class Notes {
     this.element = null;
   }
 }
-
-export default Notes;

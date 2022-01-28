@@ -1,4 +1,4 @@
-class Home {
+export default class Home {
   constructor() {
     this.element = this.createElement(this.getTemplate());
   }
@@ -26,5 +26,3 @@ class Home {
     this.element = null;
   }
 }
-
-export default Home;

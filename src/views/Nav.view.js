@@ -1,4 +1,4 @@
-class NavView {
+export default class NavView {
   constructor() {
     this.element = this.createElement(this.getTemplate());
   }
@@ -41,5 +41,3 @@ class NavView {
     this.element = null;
   }
 }
-
-export default NavView;
