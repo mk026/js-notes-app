@@ -7,6 +7,7 @@ import HomeView from './views/Home.view';
 import NotesView from './views/Notes.view';
 
 import Route from './router/Route';
+import Router from './router/Router';
 
 const appRoot = document.getElementById('app');
 
@@ -21,7 +22,9 @@ const routes = [
   new Route('Notes', '/notes', notesController),
 ];
 
+const router = new Router(routes);
+
 const navView = new NavView();
-const navController = new NavController(appRoot, navView, routes);
+const navController = new NavController(appRoot, navView, router);
 
 navController.init();
