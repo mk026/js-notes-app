@@ -9,6 +9,9 @@ export default class Router {
   }
 
   navigateTo = (url) => {
+    if (this.activeRoute) {
+      this.activeRoute.controller.destroy();
+    }
     this.activeRoute = this.routes.find(
       (route) => route.path == url.replace(/^.*\//, '/')
     );

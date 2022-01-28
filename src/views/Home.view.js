@@ -1,6 +1,6 @@
 export default class HomeView {
   constructor() {
-    this.element = this.createElement(this.getTemplate());
+    this.element = this.getElement();
   }
 
   createElement(template) {
@@ -18,11 +18,17 @@ export default class HomeView {
   }
 
   getElement() {
+    if (this.element) {
+      return this.element;
+    }
+    this.element = this.createElement(this.getTemplate());
     return this.element;
   }
 
   removeElement() {
-    this.element.remove();
-    this.element = null;
+    if (this.element) {
+      this.element.remove();
+      this.element = null;
+    }
   }
 }
