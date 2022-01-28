@@ -1,12 +1,9 @@
-export default class HomeView {
-  constructor() {
-    this.element = this.getElement();
-  }
+import AbstractView from './Abstract.view';
 
-  createElement(template) {
-    const newElement = document.createElement('div');
-    newElement.innerHTML = template;
-    return newElement.firstElementChild;
+export default class HomeView extends AbstractView {
+  constructor() {
+    super();
+    this.element = this.getElement();
   }
 
   getTemplate() {
@@ -15,20 +12,5 @@ export default class HomeView {
         <h2>Home</h2>
       </div>
     `;
-  }
-
-  getElement() {
-    if (this.element) {
-      return this.element;
-    }
-    this.element = this.createElement(this.getTemplate());
-    return this.element;
-  }
-
-  removeElement() {
-    if (this.element) {
-      this.element.remove();
-      this.element = null;
-    }
   }
 }

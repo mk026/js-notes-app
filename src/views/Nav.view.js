@@ -1,12 +1,9 @@
-export default class NavView {
-  constructor() {
-    this.element = this.getElement();
-  }
+import AbstractView from './Abstract.view';
 
-  createElement(template) {
-    const newElement = document.createElement('div');
-    newElement.innerHTML = template;
-    return newElement.firstElementChild;
+export default class NavView extends AbstractView {
+  constructor() {
+    super();
+    this.element = this.getElement();
   }
 
   getTemplate() {
@@ -34,20 +31,5 @@ export default class NavView {
 
   setLinkClickHandler(handler) {
     this.element.addEventListener('click', handler);
-  }
-
-  getElement() {
-    if (this.element) {
-      return this.element;
-    }
-    this.element = this.createElement(this.getTemplate());
-    return this.element;
-  }
-
-  removeElement() {
-    if (this.element) {
-      this.element.remove();
-      this.element = null;
-    }
   }
 }
