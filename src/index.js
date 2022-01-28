@@ -14,8 +14,8 @@ const appRoot = document.getElementById('app');
 const homeView = new HomeView();
 const notesView = new NotesView();
 
-const homeController = new HomeController(homeView);
-const notesController = new NotesController(notesView);
+const homeController = new HomeController(appRoot, homeView);
+const notesController = new NotesController(appRoot, notesView);
 
 const routes = [
   new Route('Home', '/', homeController),
