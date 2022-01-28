@@ -32,6 +32,10 @@ export default class NavView {
     navListContainer.replaceWith(newNavListContainer);
   }
 
+  setLinkClickHandler(handler) {
+    this.element.addEventListener('click', handler);
+  }
+
   getElement() {
     return this.element;
   }
