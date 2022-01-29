@@ -1,7 +1,8 @@
 export default class NotesController {
-  constructor(appRoot, view) {
+  constructor(appRoot, view, model) {
     this.appRoot = appRoot;
     this.view = view;
+    this.model = model;
   }
 
   init() {
