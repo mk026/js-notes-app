@@ -1,30 +1,13 @@
-export const dummyNotes = [
-  {
-    id: 'dummyNote_01',
-    author: 'Author name',
-    title: 'My first note',
-    content: 'Content of my first note',
-    date: new Date().toLocaleDateString(),
-  },
-  {
-    id: 'dummyNote_02',
-    author: 'Author name',
-    title: 'My second note',
-    content: 'Content of my second note',
-    date: new Date().toLocaleDateString(),
-  },
-  {
-    id: 'dummyNote_03',
-    author: 'Author name',
-    title: 'My third note',
-    content: 'Content of my third note',
-    date: new Date().toLocaleDateString(),
-  },
-  {
-    id: 'dummyNote_04',
-    author: 'Author name',
-    title: 'My fourth note',
-    content: 'Content of my fourth note',
-    date: new Date().toLocaleDateString(),
-  },
-];
+export const getDummyNotes = (count) => {
+  const dummyNotes = [];
+  for (let i = 1; i <= count; i++) {
+    dummyNotes.push({
+      id: `dummyNote_${i}`,
+      author: 'Author name',
+      title: `Note #${i}`,
+      content: `Content of note #${i}`,
+      date: new Date().toLocaleDateString(),
+    });
+  }
+  return dummyNotes;
+};
