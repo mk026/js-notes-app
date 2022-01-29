@@ -6,6 +6,8 @@ export default class NavController {
   }
 
   init() {
+    this.router.navigateTo(location.href, false);
+
     this.appRoot.insertAdjacentElement('afterbegin', this.view.getElement());
     this.view.renderRoutes(this.router.getRoutes());
     this.view.setLinkClickHandler(this.linkClickHandler);
