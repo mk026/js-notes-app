@@ -11,9 +11,11 @@ import NotesModel from './models/Notes.model';
 import Route from './router/Route';
 import Router from './router/Router';
 
+import { dummyNotes } from './utils';
+
 const appRoot = document.getElementById('app');
 
-const notesModel = new NotesModel([]);
+const notesModel = new NotesModel(dummyNotes);
 
 const homeView = new HomeView();
 const notesView = new NotesView();

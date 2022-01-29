@@ -7,6 +7,7 @@ export default class NotesController {
 
   init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
+    this.view.renderNotes(this.model.getNotes());
   }
 
   destroy() {
