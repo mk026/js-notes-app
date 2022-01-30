@@ -6,11 +6,13 @@ export default class NavController {
   }
 
   init() {
+    this.router.setChangeActiveLinkHandler(this.view.setActiveLink);
     this.router.navigateTo(location.href, false);
 
     this.appRoot.insertAdjacentElement('afterbegin', this.view.getElement());
     this.view.renderRoutes(this.router.getRoutes());
     this.view.setLinkClickHandler(this.linkClickHandler);
+    this.view.setActiveLink(location.href);
   }
 
   destroy() {
@@ -22,6 +24,7 @@ export default class NavController {
       event.preventDefault();
 
       this.router.navigateTo(event.target.href);
+      this.view.setActiveLink(event.target.href);
     }
   };
 }

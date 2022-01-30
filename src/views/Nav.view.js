@@ -29,6 +29,16 @@ export default class NavView extends AbstractView {
     navListContainer.replaceWith(newNavListContainer);
   }
 
+  setActiveLink = (href) => {
+    this.element.querySelectorAll('.nav__link').forEach((link) => {
+      if (link.href == href) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  };
+
   setLinkClickHandler(handler) {
     this.element.addEventListener('click', handler);
   }

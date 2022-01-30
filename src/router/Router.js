@@ -5,11 +5,17 @@ export default class Router {
 
     window.addEventListener('popstate', () => {
       this.navigateTo(location.href, false);
+
+      this.changeActiveLink(location.href);
     });
   }
 
   getRoutes() {
     return this.routes;
+  }
+
+  setChangeActiveLinkHandler(handler) {
+    this.changeActiveLink = handler;
   }
 
   navigateTo = (url, pushState = true) => {
