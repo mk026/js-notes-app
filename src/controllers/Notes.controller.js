@@ -9,8 +9,12 @@ export default class NotesController {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
     this.view.renderNotes(this.model.getNotes());
     this.model.setOnNotesListChanged(this.onNotesListChanged);
+
     this.view.setAddNoteHandler(this.onAddNote);
     this.view.attachAddNoteHandler();
+
+    this.view.setDeleteNoteHandler(this.onDeleteNote);
+    this.view.attachDeleteNoteHandler();
   }
 
   destroy() {
@@ -27,5 +31,9 @@ export default class NotesController {
       author: 'Author name',
       ...note,
     });
+  };
+
+  onDeleteNote = (noteId) => {
+    this.model.removeNote(noteId);
   };
 }
