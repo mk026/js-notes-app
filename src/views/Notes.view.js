@@ -32,6 +32,7 @@ export default class NotesView extends AbstractView {
         <li class="notes__list__el" id="${note.id}">
           <h3>${note.title}</h3>
           <p>${note.content}</p>
+          <button class="delete-note">Delete</button>
         </li>
       `
     );
@@ -43,6 +44,10 @@ export default class NotesView extends AbstractView {
 
   setAddNoteHandler(handler) {
     this.addNoteHandler = handler;
+  }
+
+  setDeleteNoteHandler(handler) {
+    this.deleteNoteHandler = handler;
   }
 
   attachAddNoteHandler() {
@@ -57,5 +62,14 @@ export default class NotesView extends AbstractView {
 
         this.addNoteHandler({ title, content, date });
       });
+  }
+
+  attachDeleteNoteHandler() {
+    this.element.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete-note')) {
+        const noteId = event.target.parentElement.id;
+        this.deleteNoteHandler(noteId);
+      }
+    });
   }
 }
