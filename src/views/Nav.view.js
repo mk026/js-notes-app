@@ -15,18 +15,14 @@ export default class NavView extends AbstractView {
     `;
   }
 
+  getRouteTemplate(route) {
+    return `<li><a href="${route.path}" class="nav__link">${route.name}</a></li>`;
+  }
+
   renderRoutes(routes) {
     const navListContainer = this.element.querySelector('.nav__list');
-    const navList = routes
-      .map(
-        (route) =>
-          `<li><a href="${route.path}" class="nav__link">${route.name}</a></li>`
-      )
-      .join('');
-    const newNavListContainer = document.createElement('ul');
-    newNavListContainer.classList.add('nav__list');
-    newNavListContainer.insertAdjacentHTML('beforeend', navList);
-    navListContainer.replaceWith(newNavListContainer);
+    const navList = routes.map(this.getRouteTemplate);
+    navListContainer.innerHTML = navList.join('');
   }
 
   setActiveLink = (href) => {
