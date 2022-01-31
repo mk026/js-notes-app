@@ -40,4 +40,22 @@ export default class NotesView extends AbstractView {
     newNotesListContainer.insertAdjacentHTML('beforeend', notesList.join(''));
     notesListContainer.replaceWith(newNotesListContainer);
   }
+
+  setAddNoteHandler(handler) {
+    this.addNoteHandler = handler;
+  }
+
+  attachAddNoteHandler() {
+    this.element
+      .querySelector('#add-note')
+      .addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const title = this.element.querySelector('#new-note-title').value;
+        const content = this.element.querySelector('#new-note-content').value;
+        const date = new Date().toLocaleDateString();
+
+        this.addNoteHandler({ title, content, date });
+      });
+  }
 }
