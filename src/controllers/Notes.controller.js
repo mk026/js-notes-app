@@ -9,6 +9,8 @@ export default class NotesController {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
     this.view.renderNotes(this.model.getNotes());
     this.model.setOnNotesListChanged(this.onNotesListChanged);
+    this.view.setAddNoteHandler(this.onAddNote);
+    this.view.attachAddNoteHandler();
   }
 
   destroy() {
@@ -17,5 +19,13 @@ export default class NotesController {
 
   onNotesListChanged = (notes) => {
     this.view.renderNotes(notes);
+  };
+
+  onAddNote = (note) => {
+    this.model.addNote({
+      id: `${new Date().getTime().toString()}`,
+      author: 'Author name',
+      ...note,
+    });
   };
 }
