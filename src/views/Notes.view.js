@@ -10,6 +10,15 @@ export default class NotesView extends AbstractView {
     return `
       <div class="notes">
         <h2>Notes</h2>
+        <div>
+          <form id="add-note">
+            <label for="new-note-title">Title</label>
+            <textarea id="new-note-title"></textarea>
+            <label for="new-note-content">Content</label>
+            <textarea id="new-note-content"/></textarea>
+            <button type="submit">Add new note</button>
+          </form>
+        </div>
         <ul class="notes__list">
         </ul>
       </div>
