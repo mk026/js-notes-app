@@ -143,6 +143,7 @@ export default class NotesView extends AbstractView {
     const date = new Date().toLocaleDateString();
 
     this.onAddNote({ title, content, date });
+    this.closeAddNoteForm();
   };
 
   editNoteHandler = (event) => {
@@ -160,6 +161,7 @@ export default class NotesView extends AbstractView {
     const editDate = new Date().toLocaleDateString();
 
     this.onSaveEditedNote({ title, content, editDate });
+    this.closeEditNoteForm();
   };
 
   deleteNoteHandler = (event) => {
