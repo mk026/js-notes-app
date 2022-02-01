@@ -10,18 +10,26 @@ export default class NotesView extends AbstractView {
     return `
       <div class="notes">
         <h2>Notes</h2>
-        <div>
-          <form id="add-note">
-            <label for="new-note-title">Title</label>
-            <textarea id="new-note-title"></textarea>
-            <label for="new-note-content">Content</label>
-            <textarea id="new-note-content"/></textarea>
-            <button type="submit">Add new note</button>
-          </form>
+        <div class="notes__controls">
+          <button id="show-add-note">Add new note</button>
         </div>
+        <div class="notes__form"></div>
         <ul class="notes__list">
         </ul>
       </div>
+    `;
+  }
+
+  getAddNoteFormTemlate() {
+    return `
+      <form id="add-note">
+        <label for="new-note-title">Title</label>
+        <textarea id="new-note-title"></textarea>
+        <label for="new-note-content">Content</label>
+        <textarea id="new-note-content"/></textarea>
+        <button type="submit">Save</button>
+        <button id="close-new-note">Cancel</button>
+      </form>
     `;
   }
 
@@ -39,6 +47,34 @@ export default class NotesView extends AbstractView {
     const notesListContainer = this.element.querySelector('.notes__list');
     const notesList = notes.map(this.getNoteTemplate);
     notesListContainer.innerHTML = notesList.join('');
+  }
+
+  showAddNoteForm() {
+    this.element.querySelector('.notes__form').innerHTML =
+      this.getAddNoteFormTemlate();
+
+    this.attachAddNoteHandler();
+    this.attachCloseAddNoteFormHandler();
+  }
+
+  attachShowAddNoteFormHandler() {
+    this.element
+      .querySelector('#show-add-note')
+      .addEventListener('click', () => {
+        this.showAddNoteForm();
+      });
+  }
+
+  closeAddNoteForm() {
+    this.element.querySelector('.notes__form').innerHTML = '';
+  }
+
+  attachCloseAddNoteFormHandler() {
+    this.element
+      .querySelector('#close-new-note')
+      .addEventListener('click', () => {
+        this.closeAddNoteForm();
+      });
   }
 
   setAddNoteHandler(handler) {
