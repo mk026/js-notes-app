@@ -74,40 +74,43 @@ export default class NotesView extends AbstractView {
   }
 
   removeShowAddNoteFormHandler() {
-    console.log('Removing show form handler');
     this.element
       .querySelector('#show-add-note')
       .removeEventListener('click', this.showAddNoteForm);
   }
 
-  setAddNoteHandler(handler) {
-    this.addNoteHandler = handler;
+  setOnAddNote(handler) {
+    this.onAddNote = handler;
   }
 
-  setDeleteNoteHandler(handler) {
-    this.deleteNoteHandler = handler;
+  setOnDeleteNote(handler) {
+    this.onDeleteNote = handler;
   }
+
+  addNoteHandler = (event) => {
+    event.preventDefault();
+
+    const title = this.element.querySelector('#new-note-title').value;
+    const content = this.element.querySelector('#new-note-content').value;
+    const date = new Date().toLocaleDateString();
+
+    this.onAddNote({ title, content, date });
+  };
+
+  deleteNoteHandler = (event) => {
+    if (event.target.classList.contains('delete-note')) {
+      const noteId = event.target.parentElement.id;
+      this.onDeleteNote(noteId);
+    }
+  };
 
   attachAddNoteHandler() {
     this.element
       .querySelector('#add-note')
-      .addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const title = this.element.querySelector('#new-note-title').value;
-        const content = this.element.querySelector('#new-note-content').value;
-        const date = new Date().toLocaleDateString();
-
-        this.addNoteHandler({ title, content, date });
-      });
+      .addEventListener('submit', this.addNoteHandler);
   }
 
   attachDeleteNoteHandler() {
-    this.element.addEventListener('click', (event) => {
-      if (event.target.classList.contains('delete-note')) {
-        const noteId = event.target.parentElement.id;
-        this.deleteNoteHandler(noteId);
-      }
-    });
+    this.element.addEventListener('click', this.deleteNoteHandler);
   }
 }

@@ -10,10 +10,10 @@ export default class NotesController {
     this.view.renderNotes(this.model.getNotes());
     this.model.setOnNotesListChanged(this.onNotesListChanged);
 
-    this.view.setAddNoteHandler(this.onAddNote);
+    this.view.setOnAddNote(this.onAddNote);
     this.view.attachShowAddNoteFormHandler();
 
-    this.view.setDeleteNoteHandler(this.onDeleteNote);
+    this.view.setOnDeleteNote(this.onDeleteNote);
     this.view.attachDeleteNoteHandler();
   }
 
