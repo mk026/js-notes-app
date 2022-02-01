@@ -15,8 +15,19 @@ export default class NotesModel {
     return this.notes;
   }
 
+  getNoteById(id) {
+    return this.notes.find((note) => note.id == id);
+  }
+
   addNote(note) {
     this.notes.push(note);
+    this.update(this.notes);
+  }
+
+  editNote(id, newData) {
+    this.notes = this.notes.map((note) =>
+      note.id == id ? { ...note, ...newData } : note
+    );
     this.update(this.notes);
   }
 
