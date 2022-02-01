@@ -13,6 +13,10 @@ export default class NotesController {
     this.view.setOnAddNote(this.onAddNote);
     this.view.attachShowAddNoteFormHandler();
 
+    this.view.setOnEditNote(this.onEditNote);
+    this.view.setOnSaveEditedNote(this.onSaveEditedNote);
+    this.view.attachEditNoteHandler();
+
     this.view.setOnDeleteNote(this.onDeleteNote);
     this.view.attachDeleteNoteHandler();
   }
@@ -32,6 +36,15 @@ export default class NotesController {
       author: 'Author name',
       ...note,
     });
+  };
+
+  onEditNote = (id) => {
+    this.view.showEditNoteForm(this.model.getNoteById(id));
+    this.editedNoteId = id;
+  };
+
+  onSaveEditedNote = (newData) => {
+    this.model.editNote(this.editedNoteId, newData);
   };
 
   onDeleteNote = (noteId) => {

@@ -53,6 +53,7 @@ export default class NotesView extends AbstractView {
       <li class="notes__list__el" id="${note.id}">
         <h3>${note.title}</h3>
         <p>${note.content}</p>
+        <button class="edit-note">Edit</button>
         <button class="delete-note">Delete</button>
       </li>
     `;
@@ -82,6 +83,9 @@ export default class NotesView extends AbstractView {
   showEditNoteForm(note) {
     this.element.querySelector('.notes__form').innerHTML =
       this.getEditNoteTemplate(note);
+
+    this.attachSaveEditedNoteHandler();
+    this.attachCancelEditedNoteHandler();
   }
 
   closeEditNoteForm = () => {
@@ -116,6 +120,14 @@ export default class NotesView extends AbstractView {
     this.onAddNote = handler;
   }
 
+  setOnEditNote(handler) {
+    this.onEditNote = handler;
+  }
+
+  setOnSaveEditedNote(handler) {
+    this.onSaveEditedNote = handler;
+  }
+
   setOnDeleteNote(handler) {
     this.onDeleteNote = handler;
   }
@@ -130,6 +142,23 @@ export default class NotesView extends AbstractView {
     this.onAddNote({ title, content, date });
   };
 
+  editNoteHandler = (event) => {
+    if (event.target.classList.contains('edit-note')) {
+      const noteId = event.target.parentElement.id;
+      this.onEditNote(noteId);
+    }
+  };
+
+  saveEditedNoteHandler = (event) => {
+    event.preventDefault();
+
+    const title = this.element.querySelector('#edit-note-title').value;
+    const content = this.element.querySelector('#edit-note-content').value;
+    const editDate = new Date().toLocaleDateString();
+
+    this.onSaveEditedNote({ title, content, editDate });
+  };
+
   deleteNoteHandler = (event) => {
     if (event.target.classList.contains('delete-note')) {
       const noteId = event.target.parentElement.id;
@@ -141,6 +170,22 @@ export default class NotesView extends AbstractView {
     this.element
       .querySelector('#add-note')
       .addEventListener('submit', this.addNoteHandler);
+  }
+
+  attachEditNoteHandler() {
+    this.element.addEventListener('click', this.editNoteHandler);
+  }
+
+  attachSaveEditedNoteHandler() {
+    this.element
+      .querySelector('#edit-note-form')
+      .addEventListener('submit', this.saveEditedNoteHandler);
+  }
+
+  attachCancelEditedNoteHandler() {
+    this.element
+      .querySelector('#close-edit-note-form')
+      .addEventListener('click', this.closeEditNoteForm);
   }
 
   attachDeleteNoteHandler() {
