@@ -33,6 +33,21 @@ export default class NotesView extends AbstractView {
     `;
   }
 
+  getEditNoteTemplate(note) {
+    return `
+      <div>
+        <form id="edit-note-form">
+          <label for="edit-note-title">Title</label>
+          <textarea id="edit-note-title">${note.title}</textarea>
+          <label for="edit-note-content">Content</label>
+          <textarea id="edit-note-content"/>${note.content}</textarea>
+          <button type="submit">Save</button>
+          <button type="button" id="close-edit-note-form">Cancel</button>
+        </form>
+      </div>
+    `;
+  }
+
   getNoteTemplate(note) {
     return `
       <li class="notes__list__el" id="${note.id}">
@@ -61,6 +76,15 @@ export default class NotesView extends AbstractView {
     this.removeAddNoteHandler();
     this.removeCloseAddNoteFormHandler();
 
+    this.element.querySelector('.notes__form').innerHTML = '';
+  };
+
+  showEditNoteForm(note) {
+    this.element.querySelector('.notes__form').innerHTML =
+      this.getEditNoteTemplate(note);
+  }
+
+  closeEditNoteForm = () => {
     this.element.querySelector('.notes__form').innerHTML = '';
   };
 
