@@ -201,6 +201,14 @@ export default class NotesView extends AbstractView {
       .removeEventListener('submit', this.addNoteHandler);
   }
 
+  removeEditNoteHandler() {
+    this.element.removeEventListener('click', this.editNoteHandler);
+  }
+
+  removeDeleteNoteHandler() {
+    this.element.removeEventListener('click', this.deleteNoteHandler);
+  }
+
   removeSaveEditedNoteHandler() {
     this.element
       .querySelector('#edit-note-form')
