@@ -89,6 +89,9 @@ export default class NotesView extends AbstractView {
   }
 
   closeEditNoteForm = () => {
+    this.removeSaveEditedNoteHandler();
+    this.removeCancelEditedNoteHandler();
+
     this.element.querySelector('.notes__form').innerHTML = '';
   };
 
@@ -196,5 +199,17 @@ export default class NotesView extends AbstractView {
     this.element
       .querySelector('#add-note')
       .removeEventListener('submit', this.addNoteHandler);
+  }
+
+  removeSaveEditedNoteHandler() {
+    this.element
+      .querySelector('#edit-note-form')
+      .removeEventListener('submit', this.saveEditedNoteHandler);
+  }
+
+  removeCancelEditedNoteHandler() {
+    this.element
+      .querySelector('#close-edit-note-form')
+      .removeEventListener('click', this.closeEditNoteForm);
   }
 }
