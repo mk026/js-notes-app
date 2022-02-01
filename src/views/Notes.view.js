@@ -73,6 +73,13 @@ export default class NotesView extends AbstractView {
       .addEventListener('click', this.closeAddNoteForm);
   }
 
+  removeShowAddNoteFormHandler() {
+    console.log('Removing show form handler');
+    this.element
+      .querySelector('#show-add-note')
+      .removeEventListener('click', this.showAddNoteForm);
+  }
+
   setAddNoteHandler(handler) {
     this.addNoteHandler = handler;
   }

@@ -18,6 +18,7 @@ export default class NotesController {
   }
 
   destroy() {
+    this.view.removeShowAddNoteFormHandler();
     this.view.removeElement();
   }
 
