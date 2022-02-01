@@ -58,6 +58,9 @@ export default class NotesView extends AbstractView {
   };
 
   closeAddNoteForm = () => {
+    this.removeAddNoteHandler();
+    this.removeCloseAddNoteFormHandler();
+
     this.element.querySelector('.notes__form').innerHTML = '';
   };
 
@@ -77,6 +80,12 @@ export default class NotesView extends AbstractView {
     this.element
       .querySelector('#show-add-note')
       .removeEventListener('click', this.showAddNoteForm);
+  }
+
+  removeCloseAddNoteFormHandler() {
+    this.element
+      .querySelector('#close-new-note')
+      .removeEventListener('click', this.closeAddNoteForm);
   }
 
   setOnAddNote(handler) {
@@ -112,5 +121,11 @@ export default class NotesView extends AbstractView {
 
   attachDeleteNoteHandler() {
     this.element.addEventListener('click', this.deleteNoteHandler);
+  }
+
+  removeAddNoteHandler() {
+    this.element
+      .querySelector('#add-note')
+      .removeEventListener('submit', this.addNoteHandler);
   }
 }
