@@ -49,32 +49,28 @@ export default class NotesView extends AbstractView {
     notesListContainer.innerHTML = notesList.join('');
   }
 
-  showAddNoteForm() {
+  showAddNoteForm = () => {
     this.element.querySelector('.notes__form').innerHTML =
       this.getAddNoteFormTemlate();
 
     this.attachAddNoteHandler();
     this.attachCloseAddNoteFormHandler();
-  }
+  };
+
+  closeAddNoteForm = () => {
+    this.element.querySelector('.notes__form').innerHTML = '';
+  };
 
   attachShowAddNoteFormHandler() {
     this.element
       .querySelector('#show-add-note')
-      .addEventListener('click', () => {
-        this.showAddNoteForm();
-      });
-  }
-
-  closeAddNoteForm() {
-    this.element.querySelector('.notes__form').innerHTML = '';
+      .addEventListener('click', this.showAddNoteForm);
   }
 
   attachCloseAddNoteFormHandler() {
     this.element
       .querySelector('#close-new-note')
-      .addEventListener('click', () => {
-        this.closeAddNoteForm();
-      });
+      .addEventListener('click', this.closeAddNoteForm);
   }
 
   setAddNoteHandler(handler) {
