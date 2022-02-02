@@ -8,9 +8,14 @@ export default class TodosController {
   init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
     this.view.renderTodos(this.model.getTodos());
+    this.model.setOnTodosListChanged(this.onTodosListChanged);
   }
 
   destroy() {
     this.view.removeElement();
   }
+
+  onTodosListChanged = (todos) => {
+    this.view.renderTodos(todos);
+  };
 }
