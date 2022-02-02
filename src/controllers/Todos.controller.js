@@ -9,6 +9,9 @@ export default class TodosController {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
     this.view.renderTodos(this.model.getTodos());
     this.model.setOnTodosListChanged(this.onTodosListChanged);
+
+    this.view.setOnDeleteTodo(this.onDeleteTodo);
+    this.view.attachDeleteTodoHandler();
   }
 
   destroy() {
@@ -17,5 +20,9 @@ export default class TodosController {
 
   onTodosListChanged = (todos) => {
     this.view.renderTodos(todos);
+  };
+
+  onDeleteTodo = (id) => {
+    this.model.removeTodo(id);
   };
 }
