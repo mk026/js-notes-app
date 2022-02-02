@@ -19,10 +19,21 @@ export default class TodosView extends AbstractView {
   getTodoTemplate(todo) {
     return `
       <li class="todos__list__el" id="${todo.id}">
-        <h3>${todo.title}</h3>
+        <h3 class="todo__title">${todo.title}</h3>
         <input type="checkbox" ${todo.completed ? 'checked' : ''}/>
+        <button class="edit-todo-title">Edit</button>
         <button class="delete-todo">Delete</button>
       </li>
+    `;
+  }
+
+  getEditTodoTitleForm(title) {
+    return `
+      <form id="edit-todo-title-form">
+        <input id="new-todo-title" type="text" value="${title}"/>
+        <button type="submit">Save</button>
+        <button id="close-edit-todo-title-form">Cancel</button>
+      </form>
     `;
   }
 
