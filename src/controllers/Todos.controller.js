@@ -7,6 +7,7 @@ export default class TodosController {
 
   init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
+    this.view.renderTodos(this.model.getTodos());
   }
 
   destroy() {
