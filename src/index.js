@@ -9,36 +9,17 @@ import NotesView from './views/Notes.view';
 import TodosView from './views/Todos.view';
 
 import NotesModel from './models/Notes.model';
+import TodosModel from './models/Todos.model';
 
 import Route from './router/Route';
 import Router from './router/Router';
 
-import { getDummyNotes } from './utils';
-import TodosModel from './models/Todos.model';
+import { getDummyNotes, getDummyTodos } from './utils';
 
 const appRoot = document.getElementById('app');
 
 const notesModel = new NotesModel(getDummyNotes(6));
-const todosModel = new TodosModel([
-  {
-    id: 'dummyTodo_01',
-    title: 'Todo #1',
-    date: new Date().toLocaleDateString(),
-    completed: false,
-  },
-  {
-    id: 'dummyTodo_02',
-    title: 'Todo #2',
-    date: new Date().toLocaleDateString(),
-    completed: true,
-  },
-  {
-    id: 'dummyTodo_03',
-    title: 'Todo #3',
-    date: new Date().toLocaleDateString(),
-    completed: false,
-  },
-]);
+const todosModel = new TodosModel(getDummyTodos(6));
 
 const homeView = new HomeView();
 const notesView = new NotesView();

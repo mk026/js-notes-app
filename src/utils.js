@@ -11,3 +11,16 @@ export const getDummyNotes = (count) => {
   }
   return dummyNotes;
 };
+
+export const getDummyTodos = (count) => {
+  const dummyTodos = [];
+  for (let i = 1; i <= count; i++) {
+    dummyTodos.push({
+      id: `dummyTodo_${i}`,
+      title: `Todo #${i}`,
+      completed: Math.random() > 0.5,
+      date: new Date().toLocaleDateString(),
+    });
+  }
+  return dummyTodos;
+};
