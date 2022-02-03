@@ -63,18 +63,20 @@ export default class TodosView extends AbstractView {
   }
 
   closeEditTodoTitleForm = () => {
-    this.removeSaveEditedTodoTitleHandler();
-    this.removeCloseEditTodoTitleFormHandler();
+    if (this.editedTodo) {
+      this.removeSaveEditedTodoTitleHandler();
+      this.removeCloseEditTodoTitleFormHandler();
 
-    const todoTitleElement = document.createElement('h3');
-    todoTitleElement.classList.add('todo__title');
-    todoTitleElement.innerText = this.editedTodoTitle;
-    this.editedTodo
-      .querySelector('#edit-todo-title-form')
-      .replaceWith(todoTitleElement);
+      const todoTitleElement = document.createElement('h3');
+      todoTitleElement.classList.add('todo__title');
+      todoTitleElement.innerText = this.editedTodoTitle;
+      this.editedTodo
+        .querySelector('#edit-todo-title-form')
+        .replaceWith(todoTitleElement);
 
-    this.editedTodo = null;
-    this.editedTodoTitle = null;
+      this.editedTodo = null;
+      this.editedTodoTitle = null;
+    }
   };
 
   setOnEditTodoTitle(handler) {
@@ -107,6 +109,9 @@ export default class TodosView extends AbstractView {
 
   deleteTodoHandler = (event) => {
     if (event.target.classList.contains('delete-todo')) {
+      if (this.editedTodo) {
+        this.closeEditTodoTitleForm();
+      }
       const todoId = event.target.parentElement.id;
       this.onDeleteTodo(todoId);
     }

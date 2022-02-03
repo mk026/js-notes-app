@@ -20,6 +20,7 @@ export default class TodosController {
 
   destroy() {
     this.view.removeEditTodoTitleHandler();
+    this.view.closeEditTodoTitleForm();
     this.view.removeDeleteTodoHandler();
     this.view.removeElement();
   }
