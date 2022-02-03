@@ -43,6 +43,37 @@ export default class TodosView extends AbstractView {
     todosListContainer.innerHTML = todosList.join('');
   }
 
+  showEditTodoTitleForm(id, title) {
+    if (this.editedTodo) {
+      this.closeEditTodoTitleForm();
+    }
+    this.editedTodo = this.element.querySelector(`#${id}`);
+    this.editedTodoTitle =
+      this.editedTodo.querySelector('.todo__title').innerText;
+
+    const editTodoTitleFormContainer = document.createElement('div');
+    editTodoTitleFormContainer.innerHTML = this.getEditTodoTitleForm(title);
+
+    this.editedTodo
+      .querySelector('.todo__title')
+      .replaceWith(editTodoTitleFormContainer.firstElementChild);
+
+    this.attachSaveEditedTodoTitleHandler();
+    this.attachCloseEditTodoTitleFormHandler();
+  }
+
+  closeEditTodoTitleForm = () => {
+    const todoTitleElement = document.createElement('h3');
+    todoTitleElement.classList.add('todo__title');
+    todoTitleElement.innerText = this.editedTodoTitle;
+    this.editedTodo
+      .querySelector('#edit-todo-title-form')
+      .replaceWith(todoTitleElement);
+
+    this.editedTodo = null;
+    this.editedTodoTitle = null;
+  };
+
   setOnEditTodoTitle(handler) {
     this.onEditTodoTitle = handler;
   }
@@ -62,6 +93,15 @@ export default class TodosView extends AbstractView {
     }
   };
 
+  saveEditedTodoTitleHandler = (event) => {
+    event.preventDefault();
+
+    const newTitle = this.element.querySelector('#new-todo-title').value;
+
+    this.onSaveEditedTodoTitle(newTitle);
+    this.closeEditTodoTitleForm();
+  };
+
   deleteTodoHandler = (event) => {
     if (event.target.classList.contains('delete-todo')) {
       const todoId = event.target.parentElement.id;
@@ -69,8 +109,20 @@ export default class TodosView extends AbstractView {
     }
   };
 
+  attachCloseEditTodoTitleFormHandler() {
+    this.element
+      .querySelector('#close-edit-todo-title-form')
+      .addEventListener('click', this.closeEditTodoTitleForm);
+  }
+
   attachEditTodoTitleHandler() {
     this.element.addEventListener('click', this.editTodoTitleHandler);
+  }
+
+  attachSaveEditedTodoTitleHandler() {
+    this.element
+      .querySelector('#edit-todo-title-form')
+      .addEventListener('submit', this.saveEditedTodoTitleHandler);
   }
 
   attachDeleteTodoHandler() {
