@@ -43,9 +43,24 @@ export default class TodosView extends AbstractView {
     todosListContainer.innerHTML = todosList.join('');
   }
 
+  setOnEditTodoTitle(handler) {
+    this.onEditTodoTitle = handler;
+  }
+
+  setOnSaveEditedTodoTitle(handler) {
+    this.onSaveEditedTodoTitle = handler;
+  }
+
   setOnDeleteTodo(handler) {
     this.onDeleteTodo = handler;
   }
+
+  editTodoTitleHandler = (event) => {
+    if (event.target.classList.contains('edit-todo-title')) {
+      const todoId = event.target.parentElement.id;
+      this.onEditTodoTitle(todoId);
+    }
+  };
 
   deleteTodoHandler = (event) => {
     if (event.target.classList.contains('delete-todo')) {
@@ -53,6 +68,10 @@ export default class TodosView extends AbstractView {
       this.onDeleteTodo(todoId);
     }
   };
+
+  attachEditTodoTitleHandler() {
+    this.element.addEventListener('click', this.editTodoTitleHandler);
+  }
 
   attachDeleteTodoHandler() {
     this.element.addEventListener('click', this.deleteTodoHandler);
