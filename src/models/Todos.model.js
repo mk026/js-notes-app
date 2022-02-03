@@ -15,14 +15,18 @@ export default class TodosModel {
     return this.todos;
   }
 
+  getTodoById(id) {
+    return this.todos.find((todo) => todo.id == id);
+  }
+
   addTodo(todo) {
     this.todos.push(todo);
     this.update(this.todos);
   }
 
-  editTodo(id, newData) {
+  editTodoTitle(id, newTitle) {
     this.todos = this.todos.map((todo) =>
-      todo.id == id ? { ...todo, ...newData } : todo
+      todo.id == id ? { ...todo, title: newTitle } : todo
     );
     this.update(this.todos);
   }
