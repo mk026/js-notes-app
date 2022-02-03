@@ -19,6 +19,7 @@ export default class TodosController {
   }
 
   destroy() {
+    this.view.removeEditTodoTitleHandler();
     this.view.removeDeleteTodoHandler();
     this.view.removeElement();
   }
