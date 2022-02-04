@@ -58,17 +58,17 @@ export default class TodosView extends AbstractView {
     todosListContainer.innerHTML = todosList.join('');
   }
 
-  showAddTodoForm() {
-    this.element.querySelector('todos__form').innerHTML =
+  showAddTodoForm = () => {
+    this.element.querySelector('.todos__form').innerHTML =
       this.getAddTodoFormTemplate();
 
     this.attachAddTodoHandler();
     this.attachCloseAddTodoFormHandler();
-  }
+  };
 
-  closeAddTodoForm() {
-    this.element.querySelector('todos__form').innerHTML = '';
-  }
+  closeAddTodoForm = () => {
+    this.element.querySelector('.todos__form').innerHTML = '';
+  };
 
   showEditTodoTitleForm(id, title) {
     if (this.editedTodo) {
