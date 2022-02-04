@@ -10,6 +10,9 @@ export default class TodosController {
     this.view.renderTodos(this.model.getTodos());
     this.model.setOnTodosListChanged(this.onTodosListChanged);
 
+    this.view.setOnAddTodo(this.onAddTodo);
+    this.view.attachShowAddTodoFormHandler();
+
     this.view.setOnDeleteTodo(this.onDeleteTodo);
     this.view.attachDeleteTodoHandler();
 
@@ -27,6 +30,14 @@ export default class TodosController {
 
   onTodosListChanged = (todos) => {
     this.view.renderTodos(todos);
+  };
+
+  onAddTodo = (todo) => {
+    this.model.addTodo({
+      id: `${new Date().getTime().toString()}`,
+      completed: false,
+      ...todo,
+    });
   };
 
   onEditTodoTitle = (id) => {
