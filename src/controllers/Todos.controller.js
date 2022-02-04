@@ -34,7 +34,7 @@ export default class TodosController {
 
   onAddTodo = (todo) => {
     this.model.addTodo({
-      id: `${new Date().getTime().toString()}`,
+      id: `id_${new Date().getTime().toString()}`,
       completed: false,
       ...todo,
     });

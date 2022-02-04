@@ -34,7 +34,7 @@ export default class NotesController {
 
   onAddNote = (note) => {
     this.model.addNote({
-      id: `${new Date().getTime().toString()}`,
+      id: `id_${new Date().getTime().toString()}`,
       author: 'Author name',
       ...note,
     });
