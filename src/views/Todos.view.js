@@ -61,6 +61,9 @@ export default class TodosView extends AbstractView {
   showAddTodoForm() {
     this.element.querySelector('todos__form').innerHTML =
       this.getAddTodoFormTemplate();
+
+    this.attachAddTodoHandler();
+    this.attachCloseAddTodoFormHandler();
   }
 
   closeAddTodoForm() {
@@ -103,6 +106,10 @@ export default class TodosView extends AbstractView {
     }
   };
 
+  setOnAddTodo(handler) {
+    this.onAddTodo = handler;
+  }
+
   setOnEditTodoTitle(handler) {
     this.onEditTodoTitle = handler;
   }
@@ -114,6 +121,15 @@ export default class TodosView extends AbstractView {
   setOnDeleteTodo(handler) {
     this.onDeleteTodo = handler;
   }
+
+  addTodoHandler = (event) => {
+    event.preventDefault();
+
+    const title = this.element.querySelector('#new-todo-title').value;
+    const date = new Date().toLocaleDateString();
+
+    this.onAddTodo({ title, date });
+  };
 
   editTodoTitleHandler = (event) => {
     if (event.target.classList.contains('edit-todo-title')) {
@@ -151,6 +167,12 @@ export default class TodosView extends AbstractView {
     this.element
       .querySelector('#close-new-todo')
       .addEventListener('click', this.closeAddTodoForm);
+  }
+
+  attachAddTodoHandler() {
+    this.element
+      .querySelector('#add-todo')
+      .addEventListener('submit', this.addTodoHandler);
   }
 
   attachCloseEditTodoTitleFormHandler() {
