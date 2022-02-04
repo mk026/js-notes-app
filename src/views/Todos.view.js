@@ -45,7 +45,7 @@ export default class TodosView extends AbstractView {
   getEditTodoTitleForm(title) {
     return `
       <form id="edit-todo-title-form">
-        <input id="new-todo-title" type="text" value="${title}"/>
+        <input id="edited-todo-title" type="text" value="${title}"/>
         <button type="submit">Save</button>
         <button id="close-edit-todo-title-form">Cancel</button>
       </form>
@@ -141,7 +141,7 @@ export default class TodosView extends AbstractView {
   saveEditedTodoTitleHandler = (event) => {
     event.preventDefault();
 
-    const newTitle = this.element.querySelector('#new-todo-title').value;
+    const newTitle = this.element.querySelector('#edited-todo-title').value;
 
     this.closeEditTodoTitleForm();
     this.onSaveEditedTodoTitle(newTitle);
