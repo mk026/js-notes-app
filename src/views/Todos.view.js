@@ -10,6 +10,10 @@ export default class TodosView extends AbstractView {
     return `
       <div class="todos">
         <h2>Todos</h2>
+        <div class="todos__controls">
+          <button id="show-add-todo">Add new todo</button>
+        </div>
+        <div class="todos__form"></div>
         <ul class="todos__list">
         </ul>
       </div>
@@ -24,6 +28,17 @@ export default class TodosView extends AbstractView {
         <button class="edit-todo-title">Edit</button>
         <button class="delete-todo">Delete</button>
       </li>
+    `;
+  }
+
+  getAddTodoFormTemplate() {
+    return `
+      <form id="add-todo">
+        <label for="new-todo-title">Title</label>
+        <input id="new-todo-title" type="text"/>
+        <button type="submit">Save</button>
+        <button id="close-new-todo">Cancel</button>
+      </form>
     `;
   }
 
