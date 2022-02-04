@@ -58,6 +58,15 @@ export default class TodosView extends AbstractView {
     todosListContainer.innerHTML = todosList.join('');
   }
 
+  showAddTodoForm() {
+    this.element.querySelector('todos__form').innerHTML =
+      this.getAddTodoFormTemplate();
+  }
+
+  closeAddTodoForm() {
+    this.element.querySelector('todos__form').innerHTML = '';
+  }
+
   showEditTodoTitleForm(id, title) {
     if (this.editedTodo) {
       this.closeEditTodoTitleForm();
@@ -131,6 +140,18 @@ export default class TodosView extends AbstractView {
       this.onDeleteTodo(todoId);
     }
   };
+
+  attachShowAddTodoFormHandler() {
+    this.element
+      .querySelector('#show-add-todo')
+      .addEventListener('click', this.showAddTodoForm);
+  }
+
+  attachCloseAddTodoFormHandler() {
+    this.element
+      .querySelector('#close-new-todo')
+      .addEventListener('click', this.closeAddTodoForm);
+  }
 
   attachCloseEditTodoTitleFormHandler() {
     this.element
