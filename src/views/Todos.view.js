@@ -24,7 +24,9 @@ export default class TodosView extends AbstractView {
     return `
       <li class="todos__list__el" id="${todo.id}">
         <h3 class="todo__title">${todo.title}</h3>
-        <input type="checkbox" ${todo.completed ? 'checked' : ''}/>
+        <input class="change-todo-status" type="checkbox" ${
+          todo.completed ? 'checked' : ''
+        }/>
         <button class="edit-todo-title">Edit</button>
         <button class="delete-todo">Delete</button>
       </li>
@@ -118,6 +120,10 @@ export default class TodosView extends AbstractView {
     this.onSaveEditedTodoTitle = handler;
   }
 
+  setOnChangeTodoStatus(handler) {
+    this.onChangeTodoStatus = handler;
+  }
+
   setOnDeleteTodo(handler) {
     this.onDeleteTodo = handler;
   }
@@ -145,6 +151,14 @@ export default class TodosView extends AbstractView {
 
     this.closeEditTodoTitleForm();
     this.onSaveEditedTodoTitle(newTitle);
+  };
+
+  changeTodoStatusHandler = (event) => {
+    if (event.target.classList.contains('change-todo-status')) {
+      const todoId = event.target.parentElement.id;
+
+      this.onChangeTodoStatus(todoId);
+    }
   };
 
   deleteTodoHandler = (event) => {
@@ -189,6 +203,10 @@ export default class TodosView extends AbstractView {
     this.element
       .querySelector('#edit-todo-title-form')
       .addEventListener('submit', this.saveEditedTodoTitleHandler);
+  }
+
+  attachChangeTodoStatusHandler() {
+    this.element.addEventListener('change', this.changeTodoStatusHandler);
   }
 
   attachDeleteTodoHandler() {
