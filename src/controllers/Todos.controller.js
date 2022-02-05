@@ -19,6 +19,9 @@ export default class TodosController {
     this.view.setOnEditTodoTitle(this.onEditTodoTitle);
     this.view.setOnSaveEditedTodoTitle(this.onSaveEditedTodoTitle);
     this.view.attachEditTodoTitleHandler();
+
+    this.view.setOnChangeTodoStatus(this.onChangeTodoStatus);
+    this.view.attachChangeTodoStatusHandler();
   }
 
   destroy() {
@@ -48,6 +51,10 @@ export default class TodosController {
 
   onSaveEditedTodoTitle = (newTitle) => {
     this.model.editTodoTitle(this.editedTodoId, newTitle);
+  };
+
+  onChangeTodoStatus = (id) => {
+    this.model.changeTodoStatus(id);
   };
 
   onDeleteTodo = (id) => {
