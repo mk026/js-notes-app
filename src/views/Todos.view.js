@@ -217,6 +217,10 @@ export default class TodosView extends AbstractView {
     this.element.removeEventListener('click', this.deleteTodoHandler);
   }
 
+  removeChangeTodoStatusHandler() {
+    this.element.removeEventListener('change', this.changeTodoStatusHandler);
+  }
+
   removeEditTodoTitleHandler() {
     this.element.removeEventListener('click', this.editTodoTitleHandler);
   }
