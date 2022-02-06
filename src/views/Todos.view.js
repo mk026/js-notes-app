@@ -69,6 +69,9 @@ export default class TodosView extends AbstractView {
   };
 
   closeAddTodoForm = () => {
+    this.removeAddTodoHandler();
+    this.removeCloseAddTodoFormHandler();
+
     this.element.querySelector('.todos__form').innerHTML = '';
   };
 
@@ -211,6 +214,18 @@ export default class TodosView extends AbstractView {
 
   attachDeleteTodoHandler() {
     this.element.addEventListener('click', this.deleteTodoHandler);
+  }
+
+  removeAddTodoHandler() {
+    this.element
+      .querySelector('#add-todo')
+      .removeEventListener('submit', this.addTodoHandler);
+  }
+
+  removeCloseAddTodoFormHandler() {
+    this.element
+      .querySelector('#close-new-todo')
+      .removeEventListener('click', this.closeAddTodoForm);
   }
 
   removeDeleteTodoHandler() {
