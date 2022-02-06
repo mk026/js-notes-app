@@ -25,6 +25,7 @@ export default class TodosController {
   }
 
   destroy() {
+    this.view.removeShowAddTodoFormHandler();
     this.view.removeChangeTodoStatusHandler();
     this.view.removeEditTodoTitleHandler();
     this.view.closeEditTodoTitleForm();

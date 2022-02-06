@@ -137,6 +137,7 @@ export default class TodosView extends AbstractView {
     const title = this.element.querySelector('#new-todo-title').value;
     const date = new Date().toLocaleDateString();
 
+    this.closeAddTodoForm();
     this.onAddTodo({ title, date });
   };
 
@@ -214,6 +215,12 @@ export default class TodosView extends AbstractView {
 
   attachDeleteTodoHandler() {
     this.element.addEventListener('click', this.deleteTodoHandler);
+  }
+
+  removeShowAddTodoFormHandler() {
+    this.element
+      .querySelector('#show-add-todo')
+      .removeEventListener('click', this.showAddTodoForm);
   }
 
   removeAddTodoHandler() {
