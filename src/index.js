@@ -14,7 +14,7 @@ import TodosModel from './models/Todos.model';
 import Route from './router/Route';
 import Router from './router/Router';
 
-import ApiService from './api';
+import ApiService from './services/Api.service';
 
 import { getDummyNotes, getDummyTodos } from './utils';
 
