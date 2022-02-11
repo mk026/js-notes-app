@@ -3,11 +3,19 @@ export default class ApiService {
     this.baseUrl = baseUrl;
   }
 
+  transformData(data) {
+    return data.map(({ _id, title, content }) => ({
+      id: _id,
+      title,
+      content,
+    }));
+  }
+
   async getNotes() {
     try {
       const response = await fetch(`${this.baseUrl}/notes`);
       const data = await response.json();
-      return data;
+      return this.transformData(data);
     } catch (error) {
       console.log(error);
     }
