@@ -14,11 +14,17 @@ import TodosModel from './models/Todos.model';
 import Route from './router/Route';
 import Router from './router/Router';
 
+import ApiService from './api';
+
 import { getDummyNotes, getDummyTodos } from './utils';
 
 const appRoot = document.getElementById('app');
 
-const notesModel = new NotesModel(getDummyNotes(6));
+const apiBaseUrl = 'http://localhost:8080/api';
+
+const apiService = new ApiService(apiBaseUrl);
+
+const notesModel = new NotesModel(getDummyNotes(6), apiService);
 const todosModel = new TodosModel(getDummyTodos(6));
 
 const homeView = new HomeView();

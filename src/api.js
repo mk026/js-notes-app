@@ -3,7 +3,15 @@ export default class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  getNotes() {}
+  async getNotes() {
+    try {
+      const response = await fetch(`${this.baseUrl}/notes`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   addNote() {}
 

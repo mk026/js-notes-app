@@ -5,9 +5,9 @@ export default class NotesController {
     this.model = model;
   }
 
-  init() {
+  async init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
-    this.view.renderNotes(this.model.getNotes());
+    this.view.renderNotes(await this.model.getNotes());
     this.model.setOnNotesListChanged(this.onNotesListChanged);
 
     this.view.setOnAddNote(this.onAddNote);

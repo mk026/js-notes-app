@@ -1,6 +1,7 @@
 export default class NotesModel {
-  constructor(notes) {
+  constructor([notes], apiService) {
     this.notes = notes;
+    this.apiService = apiService;
   }
 
   setOnNotesListChanged(handler) {
@@ -11,7 +12,8 @@ export default class NotesModel {
     this.onNotesListChanged(notes);
   }
 
-  getNotes() {
+  async getNotes() {
+    this.notes = await this.apiService.getNotes();
     return this.notes;
   }
 
