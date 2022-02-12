@@ -21,7 +21,21 @@ export default class ApiService {
     }
   }
 
-  addNote() {}
+  async addNote(noteData) {
+    try {
+      const response = await fetch(`${this.baseUrl}/notes`, {
+        method: 'POST',
+        body: JSON.stringify(noteData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      const newNote = { ...data, id: data._id };
+      delete newNote._id;
+      return newNote;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   editNote() {}
 

@@ -21,8 +21,9 @@ export default class NotesModel {
     return this.notes.find((note) => note.id == id);
   }
 
-  addNote(note) {
-    this.notes.push(note);
+  async addNote(note) {
+    const newNote = await this.apiService.addNote(note);
+    this.notes.push(newNote);
     this.update(this.notes);
   }
 
