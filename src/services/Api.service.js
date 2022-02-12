@@ -55,7 +55,19 @@ export default class ApiService {
     }
   }
 
-  removeNote() {}
+  async removeNote(id) {
+    try {
+      const response = await fetch(`${this.baseUrl}/notes/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      const deletedNote = { ...data, id: data._id };
+      delete deletedNote._id;
+      return deletedNote;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   getTodos() {}
 

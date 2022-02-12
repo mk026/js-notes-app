@@ -37,8 +37,9 @@ export default class NotesModel {
     this.update(this.notes);
   }
 
-  removeNote(id) {
-    this.notes = this.notes.filter((note) => note.id != id);
+  async removeNote(id) {
+    const deletedNote = await this.apiService.removeNote(id);
+    this.notes = this.notes.filter((note) => note.id != deletedNote.id);
     this.update(this.notes);
   }
 }
