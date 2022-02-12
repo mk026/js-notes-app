@@ -27,10 +27,13 @@ export default class NotesModel {
     this.update(this.notes);
   }
 
-  editNote(id, newData) {
-    this.notes = this.notes.map((note) =>
-      note.id == id ? { ...note, ...newData } : note
-    );
+  async editNote(id, newData) {
+    const oldNote = this.getNoteById(id);
+    const updatedNote = await this.apiService.editNote({
+      ...oldNote,
+      ...newData,
+    });
+    this.notes = this.notes.map((note) => (note.id == id ? updatedNote : note));
     this.update(this.notes);
   }
 

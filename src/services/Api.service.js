@@ -37,7 +37,23 @@ export default class ApiService {
     }
   }
 
-  editNote() {}
+  async editNote(noteData) {
+    const editedNote = { ...noteData, _id: noteData.id };
+    delete editedNote.id;
+    try {
+      const response = await fetch(`${this.baseUrl}/notes`, {
+        method: 'PUT',
+        body: JSON.stringify(editedNote),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      const updatedNote = { ...data, id: data._id };
+      delete updatedNote._id;
+      return updatedNote;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   removeNote() {}
 
