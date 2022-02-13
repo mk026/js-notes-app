@@ -1,11 +1,13 @@
 import AbstractView from './Abstract.view';
 import AddTodoView from './AddTodo.view';
+import TodoListView from './TodoList.view';
 
 export default class TodosView extends AbstractView {
   constructor() {
     super();
     this.element = this.getElement();
     this.addTodoView = new AddTodoView();
+    this.todoListView = new TodoListView();
   }
 
   getTemplate() {
@@ -15,23 +17,9 @@ export default class TodosView extends AbstractView {
         <div class="todos__controls">
           <button id="show-add-todo">Add new todo</button>
         </div>
-        <div class="todos__form"></div>
-        <ul class="todos__list">
-        </ul>
+        <div class="todos__form-container"></div>
+        <div class="todos__list-container"></div>
       </div>
-    `;
-  }
-
-  getTodoTemplate(todo) {
-    return `
-      <li class="todos__list__el" id="${todo.id}">
-        <h3 class="todo__title">${todo.title}</h3>
-        <input class="change-todo-status" type="checkbox" ${
-          todo.completed ? 'checked' : ''
-        }/>
-        <button class="edit-todo-title">Edit</button>
-        <button class="delete-todo">Delete</button>
-      </li>
     `;
   }
 
@@ -46,13 +34,16 @@ export default class TodosView extends AbstractView {
   }
 
   renderTodos(todos) {
-    const todosListContainer = this.element.querySelector('.todos__list');
-    const todosList = todos.map(this.getTodoTemplate);
-    todosListContainer.innerHTML = todosList.join('');
+    this.todoListView.mount(
+      this.element.querySelector('.todos__list-container'),
+      todos
+    );
   }
 
   showAddTodoForm = () => {
-    this.addTodoView.mount(this.element.querySelector('.todos__form'));
+    this.addTodoView.mount(
+      this.element.querySelector('.todos__form-container')
+    );
   };
 
   showEditTodoTitleForm(id, title) {
@@ -104,11 +95,11 @@ export default class TodosView extends AbstractView {
   }
 
   setOnChangeTodoStatus(handler) {
-    this.onChangeTodoStatus = handler;
+    this.todoListView.onChangeTodoStatus = handler;
   }
 
   setOnDeleteTodo(handler) {
-    this.onDeleteTodo = handler;
+    this.todoListView.onDeleteTodo = handler;
   }
 
   editTodoTitleHandler = (event) => {
@@ -125,24 +116,6 @@ export default class TodosView extends AbstractView {
 
     this.closeEditTodoTitleForm();
     this.onSaveEditedTodoTitle(newTitle);
-  };
-
-  changeTodoStatusHandler = (event) => {
-    if (event.target.classList.contains('change-todo-status')) {
-      const todoId = event.target.parentElement.id;
-
-      this.onChangeTodoStatus(todoId);
-    }
-  };
-
-  deleteTodoHandler = (event) => {
-    if (event.target.classList.contains('delete-todo')) {
-      if (this.editedTodo) {
-        this.closeEditTodoTitleForm();
-      }
-      const todoId = event.target.parentElement.id;
-      this.onDeleteTodo(todoId);
-    }
   };
 
   attachShowAddTodoFormHandler() {
@@ -167,26 +140,10 @@ export default class TodosView extends AbstractView {
       .addEventListener('submit', this.saveEditedTodoTitleHandler);
   }
 
-  attachChangeTodoStatusHandler() {
-    this.element.addEventListener('change', this.changeTodoStatusHandler);
-  }
-
-  attachDeleteTodoHandler() {
-    this.element.addEventListener('click', this.deleteTodoHandler);
-  }
-
   removeShowAddTodoFormHandler() {
     this.element
       .querySelector('#show-add-todo')
       .removeEventListener('click', this.showAddTodoForm);
-  }
-
-  removeDeleteTodoHandler() {
-    this.element.removeEventListener('click', this.deleteTodoHandler);
-  }
-
-  removeChangeTodoStatusHandler() {
-    this.element.removeEventListener('change', this.changeTodoStatusHandler);
   }
 
   removeEditTodoTitleHandler() {
