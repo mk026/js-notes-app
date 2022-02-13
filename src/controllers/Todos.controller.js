@@ -14,22 +14,18 @@ export default class TodosController {
     this.view.attachShowAddTodoFormHandler();
 
     this.view.setOnDeleteTodo(this.onDeleteTodo);
-    this.view.attachDeleteTodoHandler();
 
     this.view.setOnEditTodoTitle(this.onEditTodoTitle);
     this.view.setOnSaveEditedTodoTitle(this.onSaveEditedTodoTitle);
     this.view.attachEditTodoTitleHandler();
 
     this.view.setOnChangeTodoStatus(this.onChangeTodoStatus);
-    this.view.attachChangeTodoStatusHandler();
   }
 
   destroy() {
     this.view.removeShowAddTodoFormHandler();
-    this.view.removeChangeTodoStatusHandler();
     this.view.removeEditTodoTitleHandler();
     this.view.closeEditTodoTitleForm();
-    this.view.removeDeleteTodoHandler();
     this.view.removeElement();
   }
 
