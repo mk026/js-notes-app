@@ -1,9 +1,11 @@
 import AbstractView from './Abstract.view';
+import AddTodoView from './AddTodo.view';
 
 export default class TodosView extends AbstractView {
   constructor() {
     super();
     this.element = this.getElement();
+    this.addTodoView = new AddTodoView();
   }
 
   getTemplate() {
@@ -33,17 +35,6 @@ export default class TodosView extends AbstractView {
     `;
   }
 
-  getAddTodoFormTemplate() {
-    return `
-      <form id="add-todo">
-        <label for="new-todo-title">Title</label>
-        <input id="new-todo-title" type="text"/>
-        <button type="submit">Save</button>
-        <button id="close-new-todo">Cancel</button>
-      </form>
-    `;
-  }
-
   getEditTodoTitleForm(title) {
     return `
       <form id="edit-todo-title-form">
@@ -61,18 +52,7 @@ export default class TodosView extends AbstractView {
   }
 
   showAddTodoForm = () => {
-    this.element.querySelector('.todos__form').innerHTML =
-      this.getAddTodoFormTemplate();
-
-    this.attachAddTodoHandler();
-    this.attachCloseAddTodoFormHandler();
-  };
-
-  closeAddTodoForm = () => {
-    this.removeAddTodoHandler();
-    this.removeCloseAddTodoFormHandler();
-
-    this.element.querySelector('.todos__form').innerHTML = '';
+    this.addTodoView.mount(this.element.querySelector('.todos__form'));
   };
 
   showEditTodoTitleForm(id, title) {
@@ -112,7 +92,7 @@ export default class TodosView extends AbstractView {
   };
 
   setOnAddTodo(handler) {
-    this.onAddTodo = handler;
+    this.addTodoView.onAddTodo = handler;
   }
 
   setOnEditTodoTitle(handler) {
@@ -130,16 +110,6 @@ export default class TodosView extends AbstractView {
   setOnDeleteTodo(handler) {
     this.onDeleteTodo = handler;
   }
-
-  addTodoHandler = (event) => {
-    event.preventDefault();
-
-    const title = this.element.querySelector('#new-todo-title').value;
-    const date = new Date().toLocaleDateString();
-
-    this.closeAddTodoForm();
-    this.onAddTodo({ title, date });
-  };
 
   editTodoTitleHandler = (event) => {
     if (event.target.classList.contains('edit-todo-title')) {
@@ -181,18 +151,6 @@ export default class TodosView extends AbstractView {
       .addEventListener('click', this.showAddTodoForm);
   }
 
-  attachCloseAddTodoFormHandler() {
-    this.element
-      .querySelector('#close-new-todo')
-      .addEventListener('click', this.closeAddTodoForm);
-  }
-
-  attachAddTodoHandler() {
-    this.element
-      .querySelector('#add-todo')
-      .addEventListener('submit', this.addTodoHandler);
-  }
-
   attachCloseEditTodoTitleFormHandler() {
     this.element
       .querySelector('#close-edit-todo-title-form')
@@ -221,18 +179,6 @@ export default class TodosView extends AbstractView {
     this.element
       .querySelector('#show-add-todo')
       .removeEventListener('click', this.showAddTodoForm);
-  }
-
-  removeAddTodoHandler() {
-    this.element
-      .querySelector('#add-todo')
-      .removeEventListener('submit', this.addTodoHandler);
-  }
-
-  removeCloseAddTodoFormHandler() {
-    this.element
-      .querySelector('#close-new-todo')
-      .removeEventListener('click', this.closeAddTodoForm);
   }
 
   removeDeleteTodoHandler() {
