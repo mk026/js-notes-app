@@ -1,9 +1,11 @@
 import AbstractView from './Abstract.view';
+import EditTodoView from './EditTodo.view';
 
 export default class AddTodo extends AbstractView {
   constructor() {
     super();
     this.element = this.getElement();
+    this.editTodoView = new EditTodoView();
   }
 
   getTemplate() {
@@ -31,21 +33,46 @@ export default class AddTodo extends AbstractView {
 
     container.appendChild(this.element, 'afterbegin');
 
+    this.attachEditTodoTitleHandler();
     this.attachChangeTodoStatusHandler();
     this.attachDeleteTodoHandler();
   }
 
   unmount() {
+    this.removeEditTodoTitleHandler();
     this.removeChangeTodoStatusHandler();
     this.removeDeleteTodoHandler();
 
     this.element.remove();
   }
 
+  showEditTodoTitleForm(id, title) {
+    this.editTodoView.onEditTodoTitle = this.onEditTodoTitle;
+    this.editTodoView.onSaveEditedTodoTitle = this.onSaveEditedTodoTitle;
+
+    this.editedTodo = this.element.querySelector(`#${id}`);
+
+    this.editTodoView.mount(this.editedTodo, title);
+  }
+
+  closeEditTodoTitleForm = () => {
+    if (this.editedTodo) {
+      this.editTodoView.unmount();
+      this.editedTodo = null;
+    }
+  };
+
+  editTodoTitleHandler = (event) => {
+    if (event.target.classList.contains('edit-todo-title')) {
+      const todoId = event.target.parentElement.id;
+      this.onEditTodoTitle(todoId);
+    }
+  };
+
   deleteTodoHandler = (event) => {
     if (event.target.classList.contains('delete-todo')) {
       if (this.editedTodo) {
-        this.closeEditTodoTitleForm();
+        this.editTodoView.unmount();
       }
       const todoId = event.target.parentElement.id;
       this.onDeleteTodo(todoId);
@@ -59,6 +86,10 @@ export default class AddTodo extends AbstractView {
       this.onChangeTodoStatus(todoId);
     }
   };
+
+  attachEditTodoTitleHandler() {
+    this.element.addEventListener('click', this.editTodoTitleHandler);
+  }
 
   attachDeleteTodoHandler() {
     this.element.addEventListener('click', this.deleteTodoHandler);
@@ -74,5 +105,9 @@ export default class AddTodo extends AbstractView {
 
   removeDeleteTodoHandler() {
     this.element.removeEventListener('click', this.deleteTodoHandler);
+  }
+
+  removeEditTodoTitleHandler() {
+    this.element.removeEventListener('click', this.editTodoTitleHandler);
   }
 }

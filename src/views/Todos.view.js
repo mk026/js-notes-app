@@ -23,16 +23,6 @@ export default class TodosView extends AbstractView {
     `;
   }
 
-  getEditTodoTitleForm(title) {
-    return `
-      <form id="edit-todo-title-form">
-        <input id="edited-todo-title" type="text" value="${title}"/>
-        <button type="submit">Save</button>
-        <button id="close-edit-todo-title-form">Cancel</button>
-      </form>
-    `;
-  }
-
   renderTodos(todos) {
     this.todoListView.mount(
       this.element.querySelector('.todos__list-container'),
@@ -47,51 +37,19 @@ export default class TodosView extends AbstractView {
   };
 
   showEditTodoTitleForm(id, title) {
-    if (this.editedTodo) {
-      this.closeEditTodoTitleForm();
-    }
-    this.editedTodo = this.element.querySelector(`#${id}`);
-    this.editedTodoTitle =
-      this.editedTodo.querySelector('.todo__title').innerText;
-
-    const editTodoTitleFormContainer = document.createElement('div');
-    editTodoTitleFormContainer.innerHTML = this.getEditTodoTitleForm(title);
-
-    this.editedTodo
-      .querySelector('.todo__title')
-      .replaceWith(editTodoTitleFormContainer.firstElementChild);
-
-    this.attachSaveEditedTodoTitleHandler();
-    this.attachCloseEditTodoTitleFormHandler();
+    this.todoListView.showEditTodoTitleForm(id, title);
   }
-
-  closeEditTodoTitleForm = () => {
-    if (this.editedTodo) {
-      this.removeSaveEditedTodoTitleHandler();
-      this.removeCloseEditTodoTitleFormHandler();
-
-      const todoTitleElement = document.createElement('h3');
-      todoTitleElement.classList.add('todo__title');
-      todoTitleElement.innerText = this.editedTodoTitle;
-      this.editedTodo
-        .querySelector('#edit-todo-title-form')
-        .replaceWith(todoTitleElement);
-
-      this.editedTodo = null;
-      this.editedTodoTitle = null;
-    }
-  };
 
   setOnAddTodo(handler) {
     this.addTodoView.onAddTodo = handler;
   }
 
   setOnEditTodoTitle(handler) {
-    this.onEditTodoTitle = handler;
+    this.todoListView.onEditTodoTitle = handler;
   }
 
   setOnSaveEditedTodoTitle(handler) {
-    this.onSaveEditedTodoTitle = handler;
+    this.todoListView.onSaveEditedTodoTitle = handler;
   }
 
   setOnChangeTodoStatus(handler) {
@@ -102,63 +60,15 @@ export default class TodosView extends AbstractView {
     this.todoListView.onDeleteTodo = handler;
   }
 
-  editTodoTitleHandler = (event) => {
-    if (event.target.classList.contains('edit-todo-title')) {
-      const todoId = event.target.parentElement.id;
-      this.onEditTodoTitle(todoId);
-    }
-  };
-
-  saveEditedTodoTitleHandler = (event) => {
-    event.preventDefault();
-
-    const newTitle = this.element.querySelector('#edited-todo-title').value;
-
-    this.closeEditTodoTitleForm();
-    this.onSaveEditedTodoTitle(newTitle);
-  };
-
   attachShowAddTodoFormHandler() {
     this.element
       .querySelector('#show-add-todo')
       .addEventListener('click', this.showAddTodoForm);
   }
 
-  attachCloseEditTodoTitleFormHandler() {
-    this.element
-      .querySelector('#close-edit-todo-title-form')
-      .addEventListener('click', this.closeEditTodoTitleForm);
-  }
-
-  attachEditTodoTitleHandler() {
-    this.element.addEventListener('click', this.editTodoTitleHandler);
-  }
-
-  attachSaveEditedTodoTitleHandler() {
-    this.element
-      .querySelector('#edit-todo-title-form')
-      .addEventListener('submit', this.saveEditedTodoTitleHandler);
-  }
-
   removeShowAddTodoFormHandler() {
     this.element
       .querySelector('#show-add-todo')
       .removeEventListener('click', this.showAddTodoForm);
-  }
-
-  removeEditTodoTitleHandler() {
-    this.element.removeEventListener('click', this.editTodoTitleHandler);
-  }
-
-  removeSaveEditedTodoTitleHandler() {
-    this.element
-      .querySelector('#edit-todo-title-form')
-      .removeEventListener('submit', this.saveEditedTodoTitleHandler);
-  }
-
-  removeCloseEditTodoTitleFormHandler() {
-    this.element
-      .querySelector('#close-edit-todo-title-form')
-      .removeEventListener('click', this.closeEditTodoTitleForm);
   }
 }
