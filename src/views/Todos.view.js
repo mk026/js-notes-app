@@ -10,6 +10,14 @@ export default class TodosView extends AbstractView {
     this.todoListView = new TodoListView();
   }
 
+  get formContainer() {
+    return this.element.querySelector('.todos__form-container');
+  }
+
+  get listContainer() {
+    return this.element.querySelector('.todos__list-container');
+  }
+
   getTemplate() {
     return `
       <div class="todos">
@@ -24,16 +32,11 @@ export default class TodosView extends AbstractView {
   }
 
   renderTodos(todos) {
-    this.todoListView.mount(
-      this.element.querySelector('.todos__list-container'),
-      todos
-    );
+    this.todoListView.mount(this.listContainer, todos);
   }
 
   showAddTodoForm = () => {
-    this.addTodoView.mount(
-      this.element.querySelector('.todos__form-container')
-    );
+    this.addTodoView.mount(this.formContainer);
   };
 
   showEditTodoTitleForm(id, title) {
