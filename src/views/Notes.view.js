@@ -1,11 +1,13 @@
 import AbstractView from './Abstract.view';
 import AddNoteView from './AddNote.view';
+import NoteListView from './NoteList.view';
 
 export default class NotesView extends AbstractView {
   constructor() {
     super();
     this.element = this.getElement();
     this.addNoteView = new AddNoteView();
+    this.noteListView = new NoteListView();
   }
 
   getTemplate() {
@@ -15,9 +17,8 @@ export default class NotesView extends AbstractView {
         <div class="notes__controls">
           <button id="show-add-note">Add new note</button>
         </div>
-        <div class="notes__form"></div>
-        <ul class="notes__list">
-        </ul>
+        <div class="notes__form-container"></div>
+        <div class="notes__list-container"></div>
       </div>
     `;
   }
@@ -38,13 +39,16 @@ export default class NotesView extends AbstractView {
   }
 
   renderNotes(notes) {
-    const notesListContainer = this.element.querySelector('.notes__list');
-    const notesList = notes.map(this.getNoteTemplate);
-    notesListContainer.innerHTML = notesList.join('');
+    this.noteListView.mount(
+      this.element.querySelector('.notes__list-container'),
+      notes
+    );
   }
 
   showAddNoteForm = () => {
-    this.addNoteView.mount(this.element.querySelector('.notes__form'));
+    this.addNoteView.mount(
+      this.element.querySelector('.notes__form-container')
+    );
   };
 
   showEditNoteForm(note) {
@@ -87,7 +91,7 @@ export default class NotesView extends AbstractView {
   }
 
   setOnDeleteNote(handler) {
-    this.onDeleteNote = handler;
+    this.noteListView.onDeleteNote = handler;
   }
 
   editNoteHandler = (event) => {
@@ -108,13 +112,6 @@ export default class NotesView extends AbstractView {
     this.closeEditNoteForm();
   };
 
-  deleteNoteHandler = (event) => {
-    if (event.target.classList.contains('delete-note')) {
-      const noteId = event.target.parentElement.id;
-      this.onDeleteNote(noteId);
-    }
-  };
-
   attachEditNoteHandler() {
     this.element.addEventListener('click', this.editNoteHandler);
   }
@@ -131,16 +128,8 @@ export default class NotesView extends AbstractView {
       .addEventListener('click', this.closeEditNoteForm);
   }
 
-  attachDeleteNoteHandler() {
-    this.element.addEventListener('click', this.deleteNoteHandler);
-  }
-
   removeEditNoteHandler() {
     this.element.removeEventListener('click', this.editNoteHandler);
-  }
-
-  removeDeleteNoteHandler() {
-    this.element.removeEventListener('click', this.deleteNoteHandler);
   }
 
   removeSaveEditedNoteHandler() {
