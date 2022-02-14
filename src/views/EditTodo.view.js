@@ -44,6 +44,10 @@ export default class AddTodo extends AbstractView {
     this.element.querySelector('#edited-todo-title').value = title;
   }
 
+  setOnSaveEditedTodo(handler) {
+    this.onSaveEditedTodoTitle = handler;
+  }
+
   saveEditedTodoTitleHandler = (event) => {
     event.preventDefault();
 

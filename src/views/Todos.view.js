@@ -49,7 +49,7 @@ export default class TodosView extends AbstractView {
   }
 
   setOnSaveEditedTodoTitle(handler) {
-    this.todoListView.onSaveEditedTodoTitle = handler;
+    this.todoListView.setOnSaveEditedTodoTitle(handler);
   }
 
   setOnChangeTodoStatus(handler) {

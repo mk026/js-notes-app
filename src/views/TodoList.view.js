@@ -46,10 +46,11 @@ export default class AddTodo extends AbstractView {
     this.element.remove();
   }
 
-  showEditTodoTitleForm(id, title) {
-    this.editTodoView.onEditTodoTitle = this.onEditTodoTitle;
-    this.editTodoView.onSaveEditedTodoTitle = this.onSaveEditedTodoTitle;
+  setOnSaveEditedTodoTitle(handler) {
+    this.editTodoView.setOnSaveEditedTodo(handler);
+  }
 
+  showEditTodoTitleForm(id, title) {
     this.editedTodo = this.element.querySelector(`#${id}`);
 
     this.editTodoView.mount(this.editedTodo, title);
