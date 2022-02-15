@@ -12,6 +12,14 @@ export default class NotesView extends AbstractView {
     this.editNoteView = new EditNoteView();
   }
 
+  get formContainer() {
+    return this.element.querySelector('.notes__form-container');
+  }
+
+  get listContainer() {
+    return this.element.querySelector('.notes__list-container');
+  }
+
   getTemplate() {
     return `
       <div class="notes">
@@ -26,23 +34,15 @@ export default class NotesView extends AbstractView {
   }
 
   renderNotes(notes) {
-    this.noteListView.mount(
-      this.element.querySelector('.notes__list-container'),
-      notes
-    );
+    this.noteListView.mount(this.listContainer, notes);
   }
 
   showAddNoteForm = () => {
-    this.addNoteView.mount(
-      this.element.querySelector('.notes__form-container')
-    );
+    this.addNoteView.mount(this.formContainer);
   };
 
   showEditNoteForm(note) {
-    this.editNoteView.mount(
-      this.element.querySelector('.notes__form-container'),
-      note
-    );
+    this.editNoteView.mount(this.formContainer, note);
   }
 
   attachShowAddNoteFormHandler() {
