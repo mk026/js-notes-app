@@ -1,6 +1,6 @@
 import AbstractView from '../Abstract.view';
 
-export default class AddTodo extends AbstractView {
+export default class EditTodoView extends AbstractView {
   constructor() {
     super();
     this.element = this.getElement();

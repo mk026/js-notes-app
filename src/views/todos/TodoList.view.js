@@ -1,7 +1,7 @@
 import AbstractView from '../Abstract.view';
 import EditTodoView from './EditTodo.view';
 
-export default class AddTodo extends AbstractView {
+export default class TodoListView extends AbstractView {
   constructor() {
     super();
     this.element = this.getElement();
