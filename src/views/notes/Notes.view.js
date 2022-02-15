@@ -1,4 +1,4 @@
-import AbstractView from './Abstract.view';
+import AbstractView from '../Abstract.view';
 import AddNoteView from './AddNote.view';
 import NoteListView from './NoteList.view';
 import EditNoteView from './EditNote.view';

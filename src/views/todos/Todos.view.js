@@ -1,4 +1,4 @@
-import AbstractView from './Abstract.view';
+import AbstractView from '../Abstract.view';
 import AddTodoView from './AddTodo.view';
 import TodoListView from './TodoList.view';
 

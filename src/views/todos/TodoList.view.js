@@ -1,4 +1,4 @@
-import AbstractView from './Abstract.view';
+import AbstractView from '../Abstract.view';
 import EditTodoView from './EditTodo.view';
 
 export default class AddTodo extends AbstractView {
