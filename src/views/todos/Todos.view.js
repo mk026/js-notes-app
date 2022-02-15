@@ -44,11 +44,11 @@ export default class TodosView extends AbstractView {
   }
 
   setOnAddTodo(handler) {
-    this.addTodoView.onAddTodo = handler;
+    this.addTodoView.setOnAddTodo(handler);
   }
 
   setOnEditTodoTitle(handler) {
-    this.todoListView.onEditTodoTitle = handler;
+    this.todoListView.setOnEditTodoTitle(handler);
   }
 
   setOnSaveEditedTodoTitle(handler) {
@@ -56,11 +56,11 @@ export default class TodosView extends AbstractView {
   }
 
   setOnChangeTodoStatus(handler) {
-    this.todoListView.onChangeTodoStatus = handler;
+    this.todoListView.setOnChangeTodoStatus(handler);
   }
 
   setOnDeleteTodo(handler) {
-    this.todoListView.onDeleteTodo = handler;
+    this.todoListView.setOnDeleteTodo(handler);
   }
 
   attachShowAddTodoFormHandler() {

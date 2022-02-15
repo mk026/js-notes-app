@@ -46,8 +46,20 @@ export default class TodoListView extends AbstractView {
     this.element.remove();
   }
 
+  setOnEditTodoTitle(handler) {
+    this.onEditTodoTitle = handler;
+  }
+
   setOnSaveEditedTodoTitle(handler) {
     this.editTodoView.setOnSaveEditedTodo(handler);
+  }
+
+  setOnChangeTodoStatus(handler) {
+    this.onChangeTodoStatus = handler;
+  }
+
+  setOnDeleteTodo(handler) {
+    this.onDeleteTodo = handler;
   }
 
   showEditTodoTitleForm(id, title) {

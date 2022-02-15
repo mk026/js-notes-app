@@ -28,6 +28,10 @@ export default class AddTodoView extends AbstractView {
     this.element.remove();
   }
 
+  setOnAddTodo(handler) {
+    this.onAddTodo = handler;
+  }
+
   addTodoHandler = (event) => {
     event.preventDefault();
 
