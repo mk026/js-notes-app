@@ -30,6 +30,10 @@ export default class AddNoteView extends AbstractView {
     this.element.remove();
   }
 
+  setOnAddNote(handler) {
+    this.onAddNote = handler;
+  }
+
   addNoteHandler = (event) => {
     event.preventDefault();
 

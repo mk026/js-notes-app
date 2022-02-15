@@ -38,6 +38,10 @@ export default class EditNoteView extends AbstractView {
     this.element.querySelector('#edit-note-content').value = note.content;
   }
 
+  setOnSaveEditedNote(handler) {
+    this.onSaveEditedNote = handler;
+  }
+
   closeEditNoteForm = () => {
     this.removeSaveEditedNoteHandler();
     this.removeCancelEditedNoteHandler();

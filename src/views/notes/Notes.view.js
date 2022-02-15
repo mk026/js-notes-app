@@ -58,7 +58,7 @@ export default class NotesView extends AbstractView {
   }
 
   setOnAddNote(handler) {
-    this.addNoteView.onAddNote = handler;
+    this.addNoteView.setOnAddNote(handler);
   }
 
   setOnEditNote(handler) {
@@ -66,11 +66,11 @@ export default class NotesView extends AbstractView {
   }
 
   setOnSaveEditedNote(handler) {
-    this.editNoteView.onSaveEditedNote = handler;
+    this.editNoteView.setOnSaveEditedNote(handler);
   }
 
   setOnDeleteNote(handler) {
-    this.noteListView.onDeleteNote = handler;
+    this.noteListView.setOnDeleteNote(handler);
   }
 
   editNoteHandler = (event) => {

@@ -38,6 +38,10 @@ export default class NoteListView extends AbstractView {
     this.element.remove();
   }
 
+  setOnDeleteNote(handler) {
+    this.onDeleteNote = handler;
+  }
+
   deleteNoteHandler = (event) => {
     if (event.target.classList.contains('delete-note')) {
       const noteId = event.target.parentElement.id;
