@@ -1,6 +1,7 @@
 import AbstractView from './Abstract.view';
 import AddNoteView from './AddNote.view';
 import NoteListView from './NoteList.view';
+import EditNoteView from './EditNote.view';
 
 export default class NotesView extends AbstractView {
   constructor() {
@@ -8,6 +9,7 @@ export default class NotesView extends AbstractView {
     this.element = this.getElement();
     this.addNoteView = new AddNoteView();
     this.noteListView = new NoteListView();
+    this.editNoteView = new EditNoteView();
   }
 
   getTemplate() {
@@ -19,21 +21,6 @@ export default class NotesView extends AbstractView {
         </div>
         <div class="notes__form-container"></div>
         <div class="notes__list-container"></div>
-      </div>
-    `;
-  }
-
-  getEditNoteTemplate(note) {
-    return `
-      <div>
-        <form id="edit-note-form">
-          <label for="edit-note-title">Title</label>
-          <textarea id="edit-note-title">${note.title}</textarea>
-          <label for="edit-note-content">Content</label>
-          <textarea id="edit-note-content"/>${note.content}</textarea>
-          <button type="submit">Save</button>
-          <button type="button" id="close-edit-note-form">Cancel</button>
-        </form>
       </div>
     `;
   }
@@ -52,19 +39,11 @@ export default class NotesView extends AbstractView {
   };
 
   showEditNoteForm(note) {
-    this.element.querySelector('.notes__form').innerHTML =
-      this.getEditNoteTemplate(note);
-
-    this.attachSaveEditedNoteHandler();
-    this.attachCancelEditedNoteHandler();
+    this.editNoteView.mount(
+      this.element.querySelector('.notes__form-container'),
+      note
+    );
   }
-
-  closeEditNoteForm = () => {
-    this.removeSaveEditedNoteHandler();
-    this.removeCancelEditedNoteHandler();
-
-    this.element.querySelector('.notes__form').innerHTML = '';
-  };
 
   attachShowAddNoteFormHandler() {
     this.element
@@ -87,7 +66,7 @@ export default class NotesView extends AbstractView {
   }
 
   setOnSaveEditedNote(handler) {
-    this.onSaveEditedNote = handler;
+    this.editNoteView.onSaveEditedNote = handler;
   }
 
   setOnDeleteNote(handler) {
@@ -101,46 +80,11 @@ export default class NotesView extends AbstractView {
     }
   };
 
-  saveEditedNoteHandler = (event) => {
-    event.preventDefault();
-
-    const title = this.element.querySelector('#edit-note-title').value;
-    const content = this.element.querySelector('#edit-note-content').value;
-    const editDate = new Date().toLocaleDateString();
-
-    this.onSaveEditedNote({ title, content, editDate });
-    this.closeEditNoteForm();
-  };
-
   attachEditNoteHandler() {
     this.element.addEventListener('click', this.editNoteHandler);
   }
 
-  attachSaveEditedNoteHandler() {
-    this.element
-      .querySelector('#edit-note-form')
-      .addEventListener('submit', this.saveEditedNoteHandler);
-  }
-
-  attachCancelEditedNoteHandler() {
-    this.element
-      .querySelector('#close-edit-note-form')
-      .addEventListener('click', this.closeEditNoteForm);
-  }
-
   removeEditNoteHandler() {
     this.element.removeEventListener('click', this.editNoteHandler);
-  }
-
-  removeSaveEditedNoteHandler() {
-    this.element
-      .querySelector('#edit-note-form')
-      .removeEventListener('submit', this.saveEditedNoteHandler);
-  }
-
-  removeCancelEditedNoteHandler() {
-    this.element
-      .querySelector('#close-edit-note-form')
-      .removeEventListener('click', this.closeEditNoteForm);
   }
 }
