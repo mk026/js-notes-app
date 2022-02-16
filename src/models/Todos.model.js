@@ -41,8 +41,9 @@ export default class TodosModel {
     this.update(this.todos);
   }
 
-  removeTodo(id) {
-    this.todos = this.todos.filter((todo) => todo.id != id);
+  async removeTodo(id) {
+    const deletedTodo = await this.apiService.removeTodo(id);
+    this.todos = this.todos.filter((todo) => todo.id != deletedTodo.id);
     this.update(this.todos);
   }
 }

@@ -101,5 +101,17 @@ export default class ApiService {
 
   editTodo() {}
 
-  removeTodo() {}
+  async removeTodo(id) {
+    try {
+      const response = await fetch(`${this.baseUrl}/todos/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      const deletedTodo = { ...data, id: data._id };
+      delete deletedTodo._id;
+      return deletedTodo;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
