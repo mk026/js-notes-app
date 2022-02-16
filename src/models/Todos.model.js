@@ -21,8 +21,9 @@ export default class TodosModel {
     return this.todos.find((todo) => todo.id == id);
   }
 
-  addTodo(todo) {
-    this.todos.push(todo);
+  async addTodo(todo) {
+    const newTodo = await this.apiService.addTodo(todo);
+    this.todos.push(newTodo);
     this.update(this.todos);
   }
 

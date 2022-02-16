@@ -83,7 +83,21 @@ export default class ApiService {
     }
   }
 
-  addTodo() {}
+  async addTodo(todoData) {
+    try {
+      const response = await fetch(`${this.baseUrl}/todos`, {
+        method: 'POST',
+        body: JSON.stringify(todoData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      const newTodo = { ...data, id: data._id };
+      delete newTodo._id;
+      return newTodo;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   editTodo() {}
 
