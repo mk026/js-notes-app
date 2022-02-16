@@ -69,7 +69,19 @@ export default class ApiService {
     }
   }
 
-  getTodos() {}
+  async getTodos() {
+    try {
+      const response = await fetch(`${this.baseUrl}/todos`);
+      const data = await response.json();
+      return data.map(({ _id, title, completed }) => ({
+        id: _id,
+        title,
+        completed,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   addTodo() {}
 

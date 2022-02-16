@@ -25,7 +25,7 @@ const apiBaseUrl = 'http://localhost:8080/api';
 const apiService = new ApiService(apiBaseUrl);
 
 const notesModel = new NotesModel(getDummyNotes(6), apiService);
-const todosModel = new TodosModel(getDummyTodos(6));
+const todosModel = new TodosModel(getDummyTodos(6), apiService);
 
 const homeView = new HomeView();
 const notesView = new NotesView();

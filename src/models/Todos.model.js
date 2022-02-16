@@ -1,6 +1,7 @@
 export default class TodosModel {
-  constructor(todos) {
+  constructor(todos, apiService) {
     this.todos = todos;
+    this.apiService = apiService;
   }
 
   setOnTodosListChanged(handler) {
@@ -11,7 +12,8 @@ export default class TodosModel {
     this.onTodosListChanged(todos);
   }
 
-  getTodos() {
+  async getTodos() {
+    this.todos = await this.apiService.getTodos();
     return this.todos;
   }
 
