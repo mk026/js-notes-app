@@ -5,9 +5,9 @@ export default class TodosController {
     this.model = model;
   }
 
-  init() {
+  async init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
-    this.view.renderTodos(this.model.getTodos());
+    this.view.renderTodos(await this.model.getTodos());
     this.model.setOnTodosListChanged(this.onTodosListChanged);
 
     this.view.setOnAddTodo(this.onAddTodo);
