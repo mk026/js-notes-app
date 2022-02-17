@@ -14,7 +14,8 @@ import TodosModel from './models/Todos.model';
 import Route from './router/Route';
 import Router from './router/Router';
 
-import ApiService from './services/Api.service';
+import NotesService from './services/Notes.service';
+import TodosService from './services/Todos.service';
 
 import { getDummyNotes, getDummyTodos } from './utils';
 
@@ -22,10 +23,11 @@ const appRoot = document.getElementById('app');
 
 const apiBaseUrl = 'http://localhost:8080/api';
 
-const apiService = new ApiService(apiBaseUrl);
+const notesService = new NotesService(apiBaseUrl);
+const todosService = new TodosService(apiBaseUrl);
 
-const notesModel = new NotesModel(getDummyNotes(6), apiService);
-const todosModel = new TodosModel(getDummyTodos(6), apiService);
+const notesModel = new NotesModel(getDummyNotes(6), notesService);
+const todosModel = new TodosModel(getDummyTodos(6), todosService);
 
 const homeView = new HomeView();
 const notesView = new NotesView();
