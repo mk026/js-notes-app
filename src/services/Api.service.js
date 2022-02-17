@@ -74,7 +74,7 @@ export default class ApiService {
       const response = await fetch(`${this.baseUrl}/todos`);
       const data = await response.json();
       return data.map(({ _id, title, completed }) => ({
-        id: _id,
+        id: `todo_${_id}`,
         title,
         completed,
       }));
@@ -91,7 +91,7 @@ export default class ApiService {
         headers: { 'Content-Type': 'application/json' },
       });
       const data = await response.json();
-      const newTodo = { ...data, id: data._id };
+      const newTodo = { ...data, id: `todo_${data._id}` };
       delete newTodo._id;
       return newTodo;
     } catch (error) {
@@ -100,7 +100,7 @@ export default class ApiService {
   }
 
   async editTodo(todoData) {
-    const editedTodo = { ...todoData, _id: todoData.id };
+    const editedTodo = { ...todoData, _id: todoData.id.replace(/^todo_/, '') };
     delete editedTodo.id;
     try {
       const response = await fetch(`${this.baseUrl}/todos`, {
@@ -109,7 +109,7 @@ export default class ApiService {
         headers: { 'Content-Type': 'application/json' },
       });
       const data = await response.json();
-      const updatedTodo = { ...data, id: data._id };
+      const updatedTodo = { ...data, id: `todo_${data._id}` };
       delete updatedTodo._id;
       return updatedTodo;
     } catch (error) {
@@ -119,11 +119,14 @@ export default class ApiService {
 
   async removeTodo(id) {
     try {
-      const response = await fetch(`${this.baseUrl}/todos/${id}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `${this.baseUrl}/todos/${id.replace(/^todo_/, '')}`,
+        {
+          method: 'DELETE',
+        }
+      );
       const data = await response.json();
-      const deletedTodo = { ...data, id: data._id };
+      const deletedTodo = { ...data, id: `todo_${data._id}` };
       delete deletedTodo._id;
       return deletedTodo;
     } catch (error) {
