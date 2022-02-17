@@ -1,6 +1,6 @@
 export default class NotesModel {
-  constructor([notes], apiService) {
-    this.notes = notes;
+  constructor(apiService) {
+    this.notes = [];
     this.apiService = apiService;
   }
 

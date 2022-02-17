@@ -1,6 +1,6 @@
 export default class TodosModel {
-  constructor(todos, apiService) {
-    this.todos = todos;
+  constructor(apiService) {
+    this.todos = [];
     this.apiService = apiService;
   }
 
