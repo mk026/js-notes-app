@@ -99,7 +99,23 @@ export default class ApiService {
     }
   }
 
-  editTodo() {}
+  async editTodo(todoData) {
+    const editedTodo = { ...todoData, _id: todoData.id };
+    delete editedTodo.id;
+    try {
+      const response = await fetch(`${this.baseUrl}/todos`, {
+        method: 'PUT',
+        body: JSON.stringify(editedTodo),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      const updatedTodo = { ...data, id: data._id };
+      delete updatedTodo._id;
+      return updatedTodo;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async removeTodo(id) {
     try {

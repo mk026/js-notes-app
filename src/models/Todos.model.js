@@ -27,10 +27,11 @@ export default class TodosModel {
     this.update(this.todos);
   }
 
-  editTodoTitle(id, newTitle) {
-    this.todos = this.todos.map((todo) =>
-      todo.id == id ? { ...todo, title: newTitle } : todo
-    );
+  async editTodoTitle(id, newTitle) {
+    const editedTodo = this.getTodoById(id);
+    editedTodo.title = newTitle;
+    const updatedTodo = await this.apiService.editTodo(editedTodo);
+    this.todos = this.todos.map((todo) => (todo.id == id ? updatedTodo : todo));
     this.update(this.todos);
   }
 
