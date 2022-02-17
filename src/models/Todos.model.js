@@ -35,10 +35,11 @@ export default class TodosModel {
     this.update(this.todos);
   }
 
-  changeTodoStatus(id) {
-    this.todos = this.todos.map((todo) =>
-      todo.id == id ? { ...todo, completed: !todo.completed } : todo
-    );
+  async changeTodoStatus(id) {
+    const editedTodo = this.getTodoById(id);
+    editedTodo.completed = !editedTodo.completed;
+    const updatedTodo = await this.apiService.editTodo(editedTodo);
+    this.todos = this.todos.map((todo) => (todo.id == id ? updatedTodo : todo));
     this.update(this.todos);
   }
 
