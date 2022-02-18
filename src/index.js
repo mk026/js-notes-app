@@ -18,6 +18,7 @@ import Router from './router/Router';
 
 import NotesService from './services/Notes.service';
 import TodosService from './services/Todos.service';
+import AuthService from './services/Auth.service';
 
 const appRoot = document.getElementById('app');
 
@@ -25,6 +26,7 @@ const apiBaseUrl = 'http://localhost:8080/api';
 
 const notesService = new NotesService(apiBaseUrl);
 const todosService = new TodosService(apiBaseUrl);
+const authService = new AuthService(apiBaseUrl);
 
 const notesModel = new NotesModel(notesService);
 const todosModel = new TodosModel(todosService);
@@ -37,7 +39,7 @@ const authView = new AuthView();
 const homeController = new HomeController(appRoot, homeView);
 const notesController = new NotesController(appRoot, notesView, notesModel);
 const todosController = new TodosController(appRoot, todosView, todosModel);
-const authController = new AuthController(appRoot, authView);
+const authController = new AuthController(appRoot, authView, authService);
 
 const routes = [
   new Route('Home', '/', homeController),
