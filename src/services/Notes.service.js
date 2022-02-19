@@ -1,6 +1,7 @@
 export default class NotesService {
-  constructor(baseUrl) {
+  constructor(baseUrl, authService) {
     this.baseUrl = baseUrl;
+    this.authService = authService;
   }
 
   transformData(data) {

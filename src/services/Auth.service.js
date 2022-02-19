@@ -4,6 +4,10 @@ export default class AuthService {
     this.token = this.getStoredToken();
   }
 
+  getToken() {
+    return this.token;
+  }
+
   setToken(token) {
     this.token = token;
     localStorage.setItem('token', token);

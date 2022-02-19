@@ -24,9 +24,9 @@ const appRoot = document.getElementById('app');
 
 const apiBaseUrl = 'http://localhost:8080/api';
 
-const notesService = new NotesService(apiBaseUrl);
-const todosService = new TodosService(apiBaseUrl);
 const authService = new AuthService(apiBaseUrl);
+const notesService = new NotesService(apiBaseUrl, authService);
+const todosService = new TodosService(apiBaseUrl, authService);
 
 const notesModel = new NotesModel(notesService);
 const todosModel = new TodosModel(todosService);

@@ -1,6 +1,7 @@
 export default class TodosService {
-  constructor(baseUrl) {
+  constructor(baseUrl, authService) {
     this.baseUrl = baseUrl;
+    this.authService = authService;
   }
 
   async getTodos() {
