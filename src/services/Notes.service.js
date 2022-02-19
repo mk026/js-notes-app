@@ -14,7 +14,10 @@ export default class NotesService {
 
   async getNotes() {
     try {
-      const response = await fetch(`${this.baseUrl}/notes`);
+      const token = `Bearer ${this.authService.getToken()}`;
+      const response = await fetch(`${this.baseUrl}/notes`, {
+        headers: { Authorization: token },
+      });
       const data = await response.json();
       return this.transformData(data);
     } catch (error) {
@@ -24,10 +27,11 @@ export default class NotesService {
 
   async addNote(noteData) {
     try {
+      const token = `Bearer ${this.authService.getToken()}`;
       const response = await fetch(`${this.baseUrl}/notes`, {
         method: 'POST',
         body: JSON.stringify(noteData),
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Authorization: token },
       });
       const data = await response.json();
       const newNote = { ...data, id: data._id };
@@ -42,10 +46,11 @@ export default class NotesService {
     const editedNote = { ...noteData, _id: noteData.id };
     delete editedNote.id;
     try {
+      const token = `Bearer ${this.authService.getToken()}`;
       const response = await fetch(`${this.baseUrl}/notes`, {
         method: 'PUT',
         body: JSON.stringify(editedNote),
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Authorization: token },
       });
       const data = await response.json();
       const updatedNote = { ...data, id: data._id };
@@ -58,8 +63,10 @@ export default class NotesService {
 
   async removeNote(id) {
     try {
+      const token = `Bearer ${this.authService.getToken()}`;
       const response = await fetch(`${this.baseUrl}/notes/${id}`, {
         method: 'DELETE',
+        headers: { Authorization: token },
       });
       const data = await response.json();
       const deletedNote = { ...data, id: data._id };
