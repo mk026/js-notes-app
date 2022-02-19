@@ -1,11 +1,16 @@
 export default class AuthService {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
-    this.token = null;
+    this.token = this.getStoredToken();
   }
 
   setToken(token) {
     this.token = token;
+    localStorage.setItem('token', token);
+  }
+
+  getStoredToken() {
+    return localStorage.getItem('token');
   }
 
   async signup(name, email, password) {
