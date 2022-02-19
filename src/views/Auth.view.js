@@ -41,4 +41,12 @@ export default class AuthView extends AbstractView {
       </form>
     `;
   }
+
+  setOnSignup(handler) {
+    this.onSignup = handler;
+  }
+
+  setOnSignin(handler) {
+    this.onSignin = handler;
+  }
 }
