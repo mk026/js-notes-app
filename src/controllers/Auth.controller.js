@@ -10,6 +10,8 @@ export default class AuthController {
 
     this.view.setOnSignup(this.onSignup);
     this.view.setOnSignin(this.onSignin);
+
+    this.view.renderSignupForm();
   }
 
   destroy() {

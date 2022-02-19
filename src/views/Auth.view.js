@@ -10,6 +10,7 @@ export default class AuthView extends AbstractView {
     return `
       <div class="auth">
         <h2>Auth</h2>
+        <div class="auth__form-container"></div>
       </div>
     `;
   }
@@ -48,5 +49,15 @@ export default class AuthView extends AbstractView {
 
   setOnSignin(handler) {
     this.onSignin = handler;
+  }
+
+  renderSignupForm() {
+    this.element.querySelector('.auth__form-container').innerHTML =
+      this.getSignupForm();
+  }
+
+  renderSigninForm() {
+    this.element.querySelector('.auth__form-container').innerHTML =
+      this.getSigninForm();
   }
 }
