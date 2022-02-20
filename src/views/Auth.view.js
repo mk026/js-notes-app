@@ -54,10 +54,45 @@ export default class AuthView extends AbstractView {
   renderSignupForm() {
     this.element.querySelector('.auth__form-container').innerHTML =
       this.getSignupForm();
+
+    this.attachSignupHandler();
   }
 
   renderSigninForm() {
     this.element.querySelector('.auth__form-container').innerHTML =
       this.getSigninForm();
+
+    this.attachSigninHandler();
+  }
+
+  signupHandler = (event) => {
+    event.preventDefault();
+
+    const name = this.element.querySelector('#name').value;
+    const email = this.element.querySelector('#email').value;
+    const password = this.element.querySelector('#password').value;
+
+    this.onSignup(name, email, password);
+  };
+
+  signinHandler = (event) => {
+    event.preventDefault();
+
+    const email = this.element.querySelector('#email').value;
+    const password = this.element.querySelector('#password').value;
+
+    this.onSignin(email, password);
+  };
+
+  attachSignupHandler() {
+    this.element
+      .querySelector('.signup-form')
+      .addEventListener('submit', this.signupHandler);
+  }
+
+  attachSigninHandler() {
+    this.element
+      .querySelector('.signin-form')
+      .addEventListener('submit', this.signinHandler);
   }
 }
