@@ -51,6 +51,6 @@ const routes = [
 const router = new Router(routes);
 
 const navView = new NavView();
-const navController = new NavController(appRoot, navView, router);
+const navController = new NavController(appRoot, navView, router, authService);
 
 navController.init();

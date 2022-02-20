@@ -17,6 +17,10 @@ export default class AuthService {
     return localStorage.getItem('token');
   }
 
+  setOnAuthStatusChange(handler) {
+    this.onAuthStatusChange = handler;
+  }
+
   async signup(name, email, password) {
     try {
       const response = await fetch(`${this.baseUrl}/signup`, {
@@ -26,6 +30,7 @@ export default class AuthService {
       });
       const data = await response.json();
       this.setToken(data.token);
+      this.onAuthStatusChange();
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +45,7 @@ export default class AuthService {
       });
       const data = await response.json();
       this.setToken(data.token);
+      this.onAuthStatusChange();
     } catch (error) {
       console.log(error);
     }
