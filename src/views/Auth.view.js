@@ -23,8 +23,9 @@ export default class AuthView extends AbstractView {
         <label for="password">Password</label>
         <input id="password" type="password"/>
         <button type="submit">Sign in</button>
-      </form>
-    `;
+        <button id="switch-to-signup">Switch to signup</button>
+        </form>
+        `;
   }
 
   getSignupForm() {
@@ -39,6 +40,7 @@ export default class AuthView extends AbstractView {
         <label for="confirm-password">Confirm password</label>
         <input id="confirm-password" type="password"/>
         <button type="submit">Sign up</button>
+        <button id="switch-to-signin">Switch to signin</button>
       </form>
     `;
   }
@@ -51,19 +53,21 @@ export default class AuthView extends AbstractView {
     this.onSignin = handler;
   }
 
-  renderSignupForm() {
+  renderSignupForm = () => {
     this.element.querySelector('.auth__form-container').innerHTML =
       this.getSignupForm();
 
     this.attachSignupHandler();
-  }
+    this.attachSwitchToSigninHandler();
+  };
 
-  renderSigninForm() {
+  renderSigninForm = () => {
     this.element.querySelector('.auth__form-container').innerHTML =
       this.getSigninForm();
 
     this.attachSigninHandler();
-  }
+    this.attachSwitchToSignupHandler();
+  };
 
   signupHandler = (event) => {
     event.preventDefault();
@@ -94,5 +98,17 @@ export default class AuthView extends AbstractView {
     this.element
       .querySelector('.signin-form')
       .addEventListener('submit', this.signinHandler);
+  }
+
+  attachSwitchToSignupHandler() {
+    this.element
+      .querySelector('#switch-to-signup')
+      .addEventListener('click', this.renderSignupForm);
+  }
+
+  attachSwitchToSigninHandler() {
+    this.element
+      .querySelector('#switch-to-signin')
+      .addEventListener('click', this.renderSigninForm);
   }
 }
