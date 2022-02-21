@@ -14,6 +14,10 @@ export default class Router {
     return this.routes;
   }
 
+  getUnauthRoutes() {
+    return this.routes.filter((route) => !route.authOnly);
+  }
+
   setChangeActiveLinkHandler(handler) {
     this.changeActiveLink = handler;
   }

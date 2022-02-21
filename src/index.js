@@ -43,8 +43,8 @@ const authController = new AuthController(appRoot, authView, authService);
 
 const routes = [
   new Route('Home', '/', homeController),
-  new Route('Notes', '/notes', notesController),
-  new Route('Todos', '/todos', todosController),
+  new Route('Notes', '/notes', notesController, true),
+  new Route('Todos', '/todos', todosController, true),
   new Route('Auth', '/auth', authController),
 ];
 
