@@ -51,5 +51,9 @@ export default class AuthService {
     }
   }
 
-  signout() {}
+  signout() {
+    this.token = null;
+    localStorage.removeItem('token');
+    this.onAuthStatusChange();
+  }
 }
