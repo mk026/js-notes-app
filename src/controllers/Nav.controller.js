@@ -13,9 +13,18 @@ export default class NavController {
     this.authService.setOnAuthStatusChange(this.onAuthStatusChange);
 
     this.appRoot.insertAdjacentElement('afterbegin', this.view.getElement());
-    this.view.renderRoutes(this.router.getRoutes());
+    this.renderNavLinks();
+
     this.view.setLinkClickHandler(this.linkClickHandler);
     this.view.setActiveLink(location.href);
+  }
+
+  renderNavLinks() {
+    if (this.authService.getToken()) {
+      this.view.renderRoutes(this.router.getRoutes());
+    } else {
+      this.view.renderRoutes(this.router.getUnauthRoutes());
+    }
   }
 
   destroy() {
@@ -24,6 +33,7 @@ export default class NavController {
 
   onAuthStatusChange = () => {
     this.router.navigateTo('/');
+    this.renderNavLinks();
   };
 
   linkClickHandler = (event) => {
