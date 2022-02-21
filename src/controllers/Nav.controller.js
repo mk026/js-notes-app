@@ -8,7 +8,19 @@ export default class NavController {
 
   init() {
     this.router.setChangeActiveLinkHandler(this.view.setActiveLink);
-    this.router.navigateTo(location.href, false);
+    const isRouteProtected = this.router
+      .getRoutes()
+      .find(
+        (route) => route.path == location.href.replace(/^.*\//, '/')
+      ).authOnly;
+
+    if (isRouteProtected && this.authService.getToken()) {
+      this.router.navigateTo(location.href, false);
+    } else if (!isRouteProtected) {
+      this.router.navigateTo(location.href, false);
+    } else {
+      this.router.navigateTo('/', false);
+    }
 
     this.authService.setOnAuthStatusChange(this.onAuthStatusChange);
 
