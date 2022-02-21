@@ -48,7 +48,7 @@ const routes = [
   new Route('Auth', '/auth', authController),
 ];
 
-const router = new Router(routes);
+const router = new Router(routes, authService);
 
 const navView = new NavView();
 const navController = new NavController(appRoot, navView, router, authService);
