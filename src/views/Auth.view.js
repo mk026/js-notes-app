@@ -11,7 +11,6 @@ export default class AuthView extends AbstractView {
       <div class="auth">
         <h2>Auth</h2>
         <div class="auth__form-container"></div>
-        <button id="signout">Signout</button>
       </div>
     `;
   }
@@ -54,10 +53,6 @@ export default class AuthView extends AbstractView {
     this.onSignin = handler;
   }
 
-  setOnSignout(handler) {
-    this.onSignout = handler;
-  }
-
   renderSignupForm = () => {
     this.element.querySelector('.auth__form-container').innerHTML =
       this.getSignupForm();
@@ -93,10 +88,6 @@ export default class AuthView extends AbstractView {
     this.onSignin(email, password);
   };
 
-  signoutHandler = () => {
-    this.onSignout();
-  };
-
   attachSignupHandler() {
     this.element
       .querySelector('.signup-form')
@@ -119,11 +110,5 @@ export default class AuthView extends AbstractView {
     this.element
       .querySelector('#switch-to-signin')
       .addEventListener('click', this.renderSigninForm);
-  }
-
-  attachSignoutHandler() {
-    this.element
-      .querySelector('#signout')
-      .addEventListener('click', this.signoutHandler);
   }
 }
