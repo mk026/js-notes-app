@@ -1,7 +1,8 @@
 export default class AccountController {
-  constructor(appRoot, view) {
+  constructor(appRoot, view, accountService) {
     this.appRoot = appRoot;
     this.view = view;
+    this.accountService = accountService;
   }
 
   init() {

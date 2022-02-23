@@ -20,6 +20,7 @@ import Router from './router/Router';
 
 import NotesService from './services/Notes.service';
 import TodosService from './services/Todos.service';
+import AccountService from './services/Account.service';
 import AuthService from './services/Auth.service';
 
 const appRoot = document.getElementById('app');
@@ -27,6 +28,7 @@ const appRoot = document.getElementById('app');
 const apiBaseUrl = 'http://localhost:8080/api';
 
 const authService = new AuthService(apiBaseUrl);
+const accountService = new AccountService(apiBaseUrl, authService);
 const notesService = new NotesService(apiBaseUrl, authService);
 const todosService = new TodosService(apiBaseUrl, authService);
 
@@ -43,7 +45,11 @@ const homeController = new HomeController(appRoot, homeView);
 const notesController = new NotesController(appRoot, notesView, notesModel);
 const todosController = new TodosController(appRoot, todosView, todosModel);
 const authController = new AuthController(appRoot, authView, authService);
-const accountController = new AccountController(appRoot, accountView);
+const accountController = new AccountController(
+  appRoot,
+  accountView,
+  accountService
+);
 
 const routes = [
   new Route('Home', '/', homeController),
