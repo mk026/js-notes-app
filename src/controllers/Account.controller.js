@@ -7,9 +7,16 @@ export default class AccountController {
 
   init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
+
+    this.view.setOnSignout(this.onSignout);
+    this.view.attachSignoutHandler();
   }
 
   destroy() {
     this.view.removeElement();
   }
+
+  onSignout = () => {
+    this.accountService.signout();
+  };
 }

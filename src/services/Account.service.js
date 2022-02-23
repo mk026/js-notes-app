@@ -13,4 +13,8 @@ export default class AccountService {
   changeEmail() {}
 
   changePassword() {}
+
+  signout() {
+    this.authService.signout();
+  }
 }

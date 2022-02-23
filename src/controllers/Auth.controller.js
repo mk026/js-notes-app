@@ -10,10 +10,8 @@ export default class AuthController {
 
     this.view.setOnSignup(this.onSignup);
     this.view.setOnSignin(this.onSignin);
-    this.view.setOnSignout(this.onSignout);
 
     this.view.renderSignupForm();
-    this.view.attachSignoutHandler();
   }
 
   destroy() {
@@ -26,9 +24,5 @@ export default class AuthController {
 
   onSignin = async (email, password) => {
     await this.authService.signin(email, password);
-  };
-
-  onSignout = () => {
-    this.authService.signout();
   };
 }
