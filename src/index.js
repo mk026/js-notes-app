@@ -56,7 +56,7 @@ const routes = [
   new Route('Notes', '/notes', notesController, true),
   new Route('Todos', '/todos', todosController, true),
   new Route('Auth', '/auth', authController),
-  new Route('Account', '/account', accountController),
+  new Route('Account', '/account', accountController, true),
 ];
 
 const router = new Router(routes, authService);
