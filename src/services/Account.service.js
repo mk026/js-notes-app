@@ -4,9 +4,18 @@ export default class AccountService {
     this.authService = authService;
   }
 
-  getName() {}
-
-  getEmail() {}
+  async getAccountInfo() {
+    try {
+      const token = `Bearer ${this.authService.getToken()}`;
+      const resposne = await fetch(`${this.baseUrl}/user`, {
+        headers: { Authorization: token },
+      });
+      const data = await resposne.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   changeName() {}
 
