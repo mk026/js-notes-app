@@ -32,7 +32,20 @@ export default class AccountService {
     }
   }
 
-  changeEmail() {}
+  async changeEmail(newEmail) {
+    try {
+      const token = `Bearer ${this.authService.getToken()}`;
+      const response = await fetch(`${this.baseUrl}/user`, {
+        method: 'PUT',
+        body: JSON.stringify({ email: newEmail }),
+        headers: { Authorization: token },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   changePassword() {}
 
