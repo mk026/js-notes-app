@@ -17,7 +17,20 @@ export default class AccountService {
     }
   }
 
-  changeName() {}
+  async changeName(newName) {
+    try {
+      const token = `Bearer ${this.authService.getToken()}`;
+      const response = await fetch(`${this.baseUrl}/user`, {
+        method: 'PUT',
+        body: JSON.stringify({ name: newName }),
+        headers: { Authorization: token },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   changeEmail() {}
 
