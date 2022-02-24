@@ -5,11 +5,14 @@ export default class AccountController {
     this.accountService = accountService;
   }
 
-  init() {
+  async init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
 
     this.view.setOnSignout(this.onSignout);
     this.view.attachSignoutHandler();
+
+    const accountInfo = await this.accountService.getAccountInfo();
+    this.view.renderAccountInfo(accountInfo);
   }
 
   destroy() {
