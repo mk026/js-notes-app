@@ -8,6 +8,8 @@ export default class AccountController {
   async init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
 
+    this.view.setOnChangeName(this.onChangeName);
+    this.view.setOnChangeEmail(this.onChangeEmail);
     this.view.setOnSignout(this.onSignout);
     this.view.attachSignoutHandler();
 
@@ -18,6 +20,14 @@ export default class AccountController {
   destroy() {
     this.view.removeElement();
   }
+
+  onChangeName = async (newName) => {
+    await this.accountService.changeName(newName);
+  };
+
+  onChangeEmail = async (newEmail) => {
+    await this.accountService.changeEmail(newEmail);
+  };
 
   onSignout = () => {
     this.accountService.signout();
