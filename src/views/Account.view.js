@@ -46,6 +46,21 @@ export default class AccountView extends AbstractView {
     `;
   }
 
+  getChangePasswordFormTemplate() {
+    return `
+      <form id="change-password-form">
+        <label for="old-password">Old password</label>
+        <input id="old-password" type="password"/>
+        <label for="new-password">New password</label>
+        <input id="new-password" type="password"/>
+        <label for="confirm-password">Confirm new password</label>
+        <input id="confirm-password" type="password"/>
+        <button id="save-new-password" type="submit">Save</button>
+        <button id="cancel-new-password">Cancel</button>
+      </form>
+    `;
+  }
+
   renderAccountInfo(info) {
     this.element.querySelector('.account__name').innerText = info.name;
     this.element.querySelector('.account__email').innerText = info.email;
