@@ -51,23 +51,23 @@ export default class AccountView extends AbstractView {
     this.element.querySelector('.account__email').innerText = info.email;
   }
 
-  showChangeNameForm() {
+  showChangeNameForm = () => {
     this.element.querySelector('.account__form-container').innerHTML =
       this.getChangeNameForm();
-  }
+  };
 
-  closeChangeNameForm() {
+  closeChangeNameForm = () => {
     this.element.querySelector('.account__form-container').innerHTML = '';
-  }
+  };
 
-  showChangeEmailForm() {
+  showChangeEmailForm = () => {
     this.element.querySelector('.account__form-container').innerHTML =
       this.getChangeEmailFormTemplate();
-  }
+  };
 
-  closeChangeEmailForm() {
-    this.element.querySelector('.accout__form-container').innerHTML = '';
-  }
+  closeChangeEmailForm = () => {
+    this.element.querySelector('.account__form-container').innerHTML = '';
+  };
 
   attachChangeNameHandler() {
     this.element
