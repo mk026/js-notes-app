@@ -14,6 +14,10 @@ export default class AccountView extends AbstractView {
           <h3 class="account__name"></h3>
           <p class="account__email"></p>
         </div>
+        <div class="account__controls">
+          <button id="change-name">Change name</button>
+          <button id="change-email">Change email</button>
+        </div>
         <div class="account__form-container"></div>
         <button id="signout">Signout</button>
       </div>
@@ -22,7 +26,7 @@ export default class AccountView extends AbstractView {
 
   getChangeNameFormTemplate() {
     return `
-      <form id="change-name">
+      <form id="change-name-form">
         <label for="new-name">New name</label>
         <input id="new-name" type="text"/>
         <button id="save-new-name" type="submit">Save</button>
@@ -33,7 +37,7 @@ export default class AccountView extends AbstractView {
 
   getChangeEmailFormTemplate() {
     return `
-      <form id="change-email">
+      <form id="change-email-form">
         <label for="new-email">New email</label>
         <input id="new-email" type="text"/>
         <button id="save-new-email" type="submit">Save</button>
