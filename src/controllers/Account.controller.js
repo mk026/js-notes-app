@@ -12,6 +12,8 @@ export default class AccountController {
     this.view.setOnChangeEmail(this.onChangeEmail);
     this.view.setOnSignout(this.onSignout);
     this.view.attachSignoutHandler();
+    this.view.attachChangeNameHandler();
+    this.view.attachChangeEmailHandler();
 
     const accountInfo = await this.accountService.getAccountInfo();
     this.view.renderAccountInfo(accountInfo);
