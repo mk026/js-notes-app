@@ -23,7 +23,7 @@ export default class AccountService {
       const response = await fetch(`${this.baseUrl}/user`, {
         method: 'PUT',
         body: JSON.stringify({ name: newName }),
-        headers: { Authorization: token },
+        headers: { 'Content-Type': 'application/json', Authorization: token },
       });
       const data = await response.json();
       return data;
@@ -38,7 +38,7 @@ export default class AccountService {
       const response = await fetch(`${this.baseUrl}/user`, {
         method: 'PUT',
         body: JSON.stringify({ email: newEmail }),
-        headers: { Authorization: token },
+        headers: { 'Content-Type': 'application/json', Authorization: token },
       });
       const data = await response.json();
       return data;
