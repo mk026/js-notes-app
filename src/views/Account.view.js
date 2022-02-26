@@ -68,7 +68,9 @@ export default class AccountView extends AbstractView {
 
   showChangeNameForm = () => {
     this.element.querySelector('.account__form-container').innerHTML =
-      this.getChangeNameForm();
+      this.getChangeNameFormTemplate();
+
+    this.attachCancelChangeNameHandler();
   };
 
   closeChangeNameForm = () => {
@@ -78,6 +80,8 @@ export default class AccountView extends AbstractView {
   showChangeEmailForm = () => {
     this.element.querySelector('.account__form-container').innerHTML =
       this.getChangeEmailFormTemplate();
+
+    this.attachCancelChangeEmailHandler();
   };
 
   closeChangeEmailForm = () => {
@@ -94,6 +98,18 @@ export default class AccountView extends AbstractView {
     this.element
       .querySelector('#change-email')
       .addEventListener('click', this.showChangeEmailForm);
+  }
+
+  attachCancelChangeNameHandler() {
+    this.element
+      .querySelector('#cancel-new-name')
+      .addEventListener('click', this.closeChangeNameForm);
+  }
+
+  attachCancelChangeEmailHandler() {
+    this.element
+      .querySelector('#cancel-new-email')
+      .addEventListener('click', this.closeChangeEmailForm);
   }
 
   setOnChangeName(handler) {
