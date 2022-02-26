@@ -94,6 +94,9 @@ export default class AccountView extends AbstractView {
   showChangePasswordForm = () => {
     this.element.querySelector('.account__form-container').innerHTML =
       this.getChangePasswordFormTemplate();
+
+    this.attachSaveNewPasswordHandler();
+    this.attachCancelChangePasswordHandler();
   };
 
   closeChangePasswordForm = () => {
