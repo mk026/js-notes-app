@@ -10,6 +10,7 @@ export default class AccountController {
 
     this.view.setOnChangeName(this.onChangeName);
     this.view.setOnChangeEmail(this.onChangeEmail);
+    this.view.setOnChangePassword(this.onChangePassword);
     this.view.setOnSignout(this.onSignout);
     this.view.attachSignoutHandler();
     this.view.attachChangeNameHandler();
@@ -29,6 +30,10 @@ export default class AccountController {
 
   onChangeEmail = async (newEmail) => {
     await this.accountService.changeEmail(newEmail);
+  };
+
+  onChangePassword = async (oldPassword, newPassword) => {
+    await this.accountService.changePassword(oldPassword, newPassword);
   };
 
   onSignout = () => {

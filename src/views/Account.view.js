@@ -122,6 +122,10 @@ export default class AccountView extends AbstractView {
     this.onChangeEmail = handler;
   }
 
+  setOnChangePassword(handler) {
+    this.onChangePassword = handler;
+  }
+
   setOnSignout(handler) {
     this.onSignout = handler;
   }
