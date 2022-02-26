@@ -90,6 +90,15 @@ export default class AccountView extends AbstractView {
     this.element.querySelector('.account__form-container').innerHTML = '';
   };
 
+  showChangePasswordForm = () => {
+    this.element.querySelector('.account__form-container').innerHTML =
+      this.getChangePasswordFormTemplate();
+  };
+
+  closeChangePasswordForm = () => {
+    this.element.querySelector('.account__form-container').innerHTML = '';
+  };
+
   attachChangeNameHandler() {
     this.element
       .querySelector('#change-name')
