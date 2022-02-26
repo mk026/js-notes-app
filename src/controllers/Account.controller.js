@@ -15,6 +15,7 @@ export default class AccountController {
     this.view.attachSignoutHandler();
     this.view.attachChangeNameHandler();
     this.view.attachChangeEmailHandler();
+    this.view.attachChangePasswordHandler();
 
     const accountInfo = await this.accountService.getAccountInfo();
     this.view.renderAccountInfo(accountInfo);

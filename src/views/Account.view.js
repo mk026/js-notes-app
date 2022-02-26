@@ -17,6 +17,7 @@ export default class AccountView extends AbstractView {
         <div class="account__controls">
           <button id="change-name">Change name</button>
           <button id="change-email">Change email</button>
+          <button id="change-password">Change password</button>
         </div>
         <div class="account__form-container"></div>
         <button id="signout">Signout</button>
@@ -109,6 +110,12 @@ export default class AccountView extends AbstractView {
     this.element
       .querySelector('#change-email')
       .addEventListener('click', this.showChangeEmailForm);
+  }
+
+  attachChangePasswordHandler() {
+    this.element
+      .querySelector('#change-password')
+      .addEventListener('click', this.showChangePasswordForm);
   }
 
   attachCancelChangeNameHandler() {
