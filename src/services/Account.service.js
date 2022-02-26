@@ -47,7 +47,20 @@ export default class AccountService {
     }
   }
 
-  changePassword() {}
+  async changePassword(oldPassword, newPassword) {
+    try {
+      const token = `Bearer ${this.authService.getToken()}`;
+      const response = await fetch(`${this.baseUrl}/password_update`, {
+        method: 'PUT',
+        body: JSON.stringify({ oldPassword, newPassword }),
+        headers: { 'Content-Type': 'application/json', Authorization: token },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   signout() {
     this.authService.signout();
