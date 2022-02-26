@@ -123,6 +123,12 @@ export default class AccountView extends AbstractView {
       .addEventListener('click', this.closeChangeEmailForm);
   }
 
+  attachCancelChangePasswordHandler() {
+    this.element
+      .querySelector('#cancel-new-password')
+      .addEventListener('click', this.closeChangePasswordForm);
+  }
+
   setOnChangeName(handler) {
     this.onChangeName = handler;
   }
@@ -153,6 +159,14 @@ export default class AccountView extends AbstractView {
     this.onChangeEmail(newEmail);
   };
 
+  saveNewPasswordHandler = (event) => {
+    event.preventDefault();
+
+    const oldPassword = this.element.querySelector('#old-password').value;
+    const newPassword = this.element.querySelector('#new-password').value;
+    this.onChangePassword(oldPassword, newPassword);
+  };
+
   signoutHandler = () => {
     this.onSignout();
   };
@@ -167,6 +181,12 @@ export default class AccountView extends AbstractView {
     this.element
       .querySelector('#change-email-form')
       .addEventListener('submit', this.saveNewEmailHandler);
+  }
+
+  attachSaveNewPasswordHandler() {
+    this.element
+      .querySelector('#change-password-form')
+      .addEventListener('submit', this.saveNewPasswordHandler);
   }
 
   attachSignoutHandler() {
