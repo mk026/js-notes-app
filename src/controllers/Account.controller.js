@@ -33,7 +33,10 @@ export default class AccountController {
     await this.accountService.changeEmail(newEmail);
   };
 
-  onChangePassword = async (oldPassword, newPassword) => {
+  onChangePassword = async (oldPassword, newPassword, confirmPassword) => {
+    if (newPassword !== confirmPassword) {
+      return;
+    }
     await this.accountService.changePassword(oldPassword, newPassword);
   };
 

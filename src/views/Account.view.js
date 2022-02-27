@@ -174,7 +174,9 @@ export default class AccountView extends AbstractView {
 
     const oldPassword = this.element.querySelector('#old-password').value;
     const newPassword = this.element.querySelector('#new-password').value;
-    this.onChangePassword(oldPassword, newPassword);
+    const confirmPassword =
+      this.element.querySelector('#confirm-password').value;
+    this.onChangePassword(oldPassword, newPassword, confirmPassword);
   };
 
   signoutHandler = () => {
