@@ -1,11 +1,13 @@
 import AbstractView from './Abstract.view';
 import ChangeNameView from './ChangeName.view';
+import ChangeEmailView from './ChangeEmail.view';
 
 export default class AccountView extends AbstractView {
   constructor() {
     super();
     this.element = this.getElement();
     this.changeNameView = new ChangeNameView();
+    this.changeEmailView = new ChangeEmailView();
   }
 
   getTemplate() {
@@ -24,17 +26,6 @@ export default class AccountView extends AbstractView {
         <div class="account__form-container"></div>
         <button id="signout">Signout</button>
       </div>
-    `;
-  }
-
-  getChangeEmailFormTemplate() {
-    return `
-      <form id="change-email-form">
-        <label for="new-email">New email</label>
-        <input id="new-email" type="text"/>
-        <button id="save-new-email" type="submit">Save</button>
-        <button id="cancel-new-email">Cancel</button>
-      </form>
     `;
   }
 
@@ -65,15 +56,9 @@ export default class AccountView extends AbstractView {
   };
 
   showChangeEmailForm = () => {
-    this.element.querySelector('.account__form-container').innerHTML =
-      this.getChangeEmailFormTemplate();
-
-    this.attachSaveNewEmailHandler();
-    this.attachCancelChangeEmailHandler();
-  };
-
-  closeChangeEmailForm = () => {
-    this.element.querySelector('.account__form-container').innerHTML = '';
+    this.changeEmailView.mount(
+      this.element.querySelector('.account__form-container')
+    );
   };
 
   showChangePasswordForm = () => {
@@ -106,12 +91,6 @@ export default class AccountView extends AbstractView {
       .addEventListener('click', this.showChangePasswordForm);
   }
 
-  attachCancelChangeEmailHandler() {
-    this.element
-      .querySelector('#cancel-new-email')
-      .addEventListener('click', this.closeChangeEmailForm);
-  }
-
   attachCancelChangePasswordHandler() {
     this.element
       .querySelector('#cancel-new-password')
@@ -123,7 +102,7 @@ export default class AccountView extends AbstractView {
   }
 
   setOnChangeEmail(handler) {
-    this.onChangeEmail = handler;
+    this.changeEmailView.setOnChangeEmail(handler);
   }
 
   setOnChangePassword(handler) {
@@ -133,13 +112,6 @@ export default class AccountView extends AbstractView {
   setOnSignout(handler) {
     this.onSignout = handler;
   }
-
-  saveNewEmailHandler = (event) => {
-    event.preventDefault();
-
-    const newEmail = this.element.querySelector('#new-email').value;
-    this.onChangeEmail(newEmail);
-  };
 
   saveNewPasswordHandler = (event) => {
     event.preventDefault();
@@ -154,12 +126,6 @@ export default class AccountView extends AbstractView {
   signoutHandler = () => {
     this.onSignout();
   };
-
-  attachSaveNewEmailHandler() {
-    this.element
-      .querySelector('#change-email-form')
-      .addEventListener('submit', this.saveNewEmailHandler);
-  }
 
   attachSaveNewPasswordHandler() {
     this.element
