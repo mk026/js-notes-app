@@ -1,6 +1,7 @@
 import AbstractView from './Abstract.view';
 import ChangeNameView from './ChangeName.view';
 import ChangeEmailView from './ChangeEmail.view';
+import ChangePasswordView from './ChangePassword.view';
 
 export default class AccountView extends AbstractView {
   constructor() {
@@ -8,6 +9,7 @@ export default class AccountView extends AbstractView {
     this.element = this.getElement();
     this.changeNameView = new ChangeNameView();
     this.changeEmailView = new ChangeEmailView();
+    this.changePasswordView = new ChangePasswordView();
   }
 
   getTemplate() {
@@ -29,21 +31,6 @@ export default class AccountView extends AbstractView {
     `;
   }
 
-  getChangePasswordFormTemplate() {
-    return `
-      <form id="change-password-form">
-        <label for="old-password">Old password</label>
-        <input id="old-password" type="password"/>
-        <label for="new-password">New password</label>
-        <input id="new-password" type="password"/>
-        <label for="confirm-password">Confirm new password</label>
-        <input id="confirm-password" type="password"/>
-        <button id="save-new-password" type="submit">Save</button>
-        <button id="cancel-new-password">Cancel</button>
-      </form>
-    `;
-  }
-
   renderAccountInfo(info) {
     this.element.querySelector('.account__name').innerText = info.name;
     this.element.querySelector('.account__email').innerText = info.email;
@@ -62,15 +49,9 @@ export default class AccountView extends AbstractView {
   };
 
   showChangePasswordForm = () => {
-    this.element.querySelector('.account__form-container').innerHTML =
-      this.getChangePasswordFormTemplate();
-
-    this.attachSaveNewPasswordHandler();
-    this.attachCancelChangePasswordHandler();
-  };
-
-  closeChangePasswordForm = () => {
-    this.element.querySelector('.account__form-container').innerHTML = '';
+    this.changePasswordView.mount(
+      this.element.querySelector('.account__form-container')
+    );
   };
 
   attachChangeNameHandler() {
@@ -91,12 +72,6 @@ export default class AccountView extends AbstractView {
       .addEventListener('click', this.showChangePasswordForm);
   }
 
-  attachCancelChangePasswordHandler() {
-    this.element
-      .querySelector('#cancel-new-password')
-      .addEventListener('click', this.closeChangePasswordForm);
-  }
-
   setOnChangeName(handler) {
     this.changeNameView.setOnChangeName(handler);
   }
@@ -106,32 +81,16 @@ export default class AccountView extends AbstractView {
   }
 
   setOnChangePassword(handler) {
-    this.onChangePassword = handler;
+    this.changePasswordView.setOnChangePassword(handler);
   }
 
   setOnSignout(handler) {
     this.onSignout = handler;
   }
 
-  saveNewPasswordHandler = (event) => {
-    event.preventDefault();
-
-    const oldPassword = this.element.querySelector('#old-password').value;
-    const newPassword = this.element.querySelector('#new-password').value;
-    const confirmPassword =
-      this.element.querySelector('#confirm-password').value;
-    this.onChangePassword(oldPassword, newPassword, confirmPassword);
-  };
-
   signoutHandler = () => {
     this.onSignout();
   };
-
-  attachSaveNewPasswordHandler() {
-    this.element
-      .querySelector('#change-password-form')
-      .addEventListener('submit', this.saveNewPasswordHandler);
-  }
 
   attachSignoutHandler() {
     this.element
