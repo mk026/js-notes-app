@@ -50,8 +50,6 @@ export default class ChangeEmailView extends AbstractView {
   };
 
   attachSaveNewEmailHandler() {
-    this.element
-      .querySelector('#change-email-form')
-      .addEventListener('submit', this.saveNewEmailHandler);
+    this.element.addEventListener('submit', this.saveNewEmailHandler);
   }
 }

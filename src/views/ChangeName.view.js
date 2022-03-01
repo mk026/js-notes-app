@@ -50,8 +50,6 @@ export default class ChangeNameView extends AbstractView {
   };
 
   attachSaveNewNameHandler() {
-    this.element
-      .querySelector('#change-name-form')
-      .addEventListener('submit', this.saveNewNameHandler);
+    this.element.addEventListener('submit', this.saveNewNameHandler);
   }
 }

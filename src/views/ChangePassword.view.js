@@ -57,8 +57,6 @@ export default class ChangePasswordView extends AbstractView {
   };
 
   attachSaveNewPasswordHandler() {
-    this.element
-      .querySelector('#change-password-form')
-      .addEventListener('submit', this.saveNewPasswordHandler);
+    this.element.addEventListener('submit', this.saveNewPasswordHandler);
   }
 }
