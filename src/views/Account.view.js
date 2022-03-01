@@ -12,6 +12,10 @@ export default class AccountView extends AbstractView {
     this.changePasswordView = new ChangePasswordView();
   }
 
+  get formContainer() {
+    return this.element.querySelector('.account__form-container');
+  }
+
   getTemplate() {
     return `
       <div class="account">
@@ -37,21 +41,15 @@ export default class AccountView extends AbstractView {
   }
 
   showChangeNameForm = () => {
-    this.changeNameView.mount(
-      this.element.querySelector('.account__form-container')
-    );
+    this.changeNameView.mount(this.formContainer);
   };
 
   showChangeEmailForm = () => {
-    this.changeEmailView.mount(
-      this.element.querySelector('.account__form-container')
-    );
+    this.changeEmailView.mount(this.formContainer);
   };
 
   showChangePasswordForm = () => {
-    this.changePasswordView.mount(
-      this.element.querySelector('.account__form-container')
-    );
+    this.changePasswordView.mount(this.formContainer);
   };
 
   attachChangeNameHandler() {
