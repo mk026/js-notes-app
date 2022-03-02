@@ -22,6 +22,7 @@ export default class AccountController {
   }
 
   destroy() {
+    this.view.removeSignoutHandler();
     this.view.removeElement();
   }
 

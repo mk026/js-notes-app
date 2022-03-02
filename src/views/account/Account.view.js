@@ -95,4 +95,10 @@ export default class AccountView extends AbstractView {
       .querySelector('#signout')
       .addEventListener('click', this.signoutHandler);
   }
+
+  removeSignoutHandler() {
+    this.element
+      .querySelector('#signout')
+      .removeEventListener('click', this.signoutHandler);
+  }
 }
