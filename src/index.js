@@ -10,7 +10,7 @@ import HomeView from './views/Home.view';
 import NotesView from './views/notes/Notes.view';
 import TodosView from './views/todos/Todos.view';
 import AuthView from './views/Auth.view';
-import AccountView from './views/Account.view';
+import AccountView from './views/account/Account.view';
 
 import NotesModel from './models/Notes.model';
 import TodosModel from './models/Todos.model';

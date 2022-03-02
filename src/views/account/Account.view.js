@@ -1,4 +1,4 @@
-import AbstractView from './Abstract.view';
+import AbstractView from '../Abstract.view';
 import ChangeNameView from './ChangeName.view';
 import ChangeEmailView from './ChangeEmail.view';
 import ChangePasswordView from './ChangePassword.view';
