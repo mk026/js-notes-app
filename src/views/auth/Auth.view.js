@@ -1,4 +1,4 @@
-import AbstractView from './Abstract.view';
+import AbstractView from '../Abstract.view';
 import SigninView from './Signin.view';
 import SignupView from './Signup.view';
 
