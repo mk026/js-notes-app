@@ -33,14 +33,11 @@ export default class ChangePasswordView extends AbstractView {
   }
 
   closeChangePasswordForm = () => {
+    this.removeSaveNewPasswordHandler();
+    this.removeCancelChangePasswordHandler();
+
     this.unmount();
   };
-
-  attachCancelChangePasswordHandler() {
-    this.element
-      .querySelector('#cancel-new-password')
-      .addEventListener('click', this.closeChangePasswordForm);
-  }
 
   setOnChangePassword(handler) {
     this.onChangePassword = handler;
@@ -58,5 +55,21 @@ export default class ChangePasswordView extends AbstractView {
 
   attachSaveNewPasswordHandler() {
     this.element.addEventListener('submit', this.saveNewPasswordHandler);
+  }
+
+  attachCancelChangePasswordHandler() {
+    this.element
+      .querySelector('#cancel-new-password')
+      .addEventListener('click', this.closeChangePasswordForm);
+  }
+
+  removeSaveNewPasswordHandler() {
+    this.element.removeEventListener('submit', this.saveNewPasswordHandler);
+  }
+
+  removeCancelChangePasswordHandler() {
+    this.element
+      .querySelector('#cancel-new-password')
+      .removeEventListener('click', this.closeChangePasswordForm);
   }
 }

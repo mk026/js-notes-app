@@ -29,14 +29,11 @@ export default class ChangeEmailView extends AbstractView {
   }
 
   closeChangeEmailForm = () => {
+    this.removeSaveNewEmailHandler();
+    this.removeCancelChangeEmailHandler();
+
     this.unmount();
   };
-
-  attachCancelChangeEmailHandler() {
-    this.element
-      .querySelector('#cancel-new-email')
-      .addEventListener('click', this.closeChangeEmailForm);
-  }
 
   setOnChangeEmail(handler) {
     this.onChangeEmail = handler;
@@ -51,5 +48,21 @@ export default class ChangeEmailView extends AbstractView {
 
   attachSaveNewEmailHandler() {
     this.element.addEventListener('submit', this.saveNewEmailHandler);
+  }
+
+  attachCancelChangeEmailHandler() {
+    this.element
+      .querySelector('#cancel-new-email')
+      .addEventListener('click', this.closeChangeEmailForm);
+  }
+
+  removeSaveNewEmailHandler() {
+    this.element.removeEventListener('submit', this.saveNewEmailHandler);
+  }
+
+  removeCancelChangeEmailHandler() {
+    this.element
+      .querySelector('#cancel-new-email')
+      .removeEventListener('click', this.closeChangeEmailForm);
   }
 }

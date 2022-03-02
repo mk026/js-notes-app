@@ -29,14 +29,11 @@ export default class ChangeNameView extends AbstractView {
   }
 
   closeChangeNameForm = () => {
+    this.removeSaveNewNameHandler();
+    this.removeCancelChangeNameHandler();
+
     this.unmount();
   };
-
-  attachCancelChangeNameHandler() {
-    this.element
-      .querySelector('#cancel-new-name')
-      .addEventListener('click', this.closeChangeNameForm);
-  }
 
   setOnChangeName(handler) {
     this.onChangeName = handler;
@@ -51,5 +48,21 @@ export default class ChangeNameView extends AbstractView {
 
   attachSaveNewNameHandler() {
     this.element.addEventListener('submit', this.saveNewNameHandler);
+  }
+
+  attachCancelChangeNameHandler() {
+    this.element
+      .querySelector('#cancel-new-name')
+      .addEventListener('click', this.closeChangeNameForm);
+  }
+
+  removeSaveNewNameHandler() {
+    this.element.removeEventListener('submit', this.saveNewNameHandler);
+  }
+
+  removeCancelChangeNameHandler() {
+    this.element
+      .querySelector('#cancel-new-name')
+      .removeEventListener('click', this.closeChangeNameForm);
   }
 }
