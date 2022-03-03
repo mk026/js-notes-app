@@ -27,15 +27,28 @@ export default class AccountController {
   }
 
   onChangeName = async (newName) => {
+    if (!newName.trim().length) {
+      this.view.showChangeNameError('Name should not be empty');
+      return;
+    }
     await this.accountService.changeName(newName);
   };
 
   onChangeEmail = async (newEmail) => {
+    if (!newEmail.trim().length) {
+      this.view.showChangeEmailError('Email should not be empty');
+      return;
+    }
     await this.accountService.changeEmail(newEmail);
   };
 
   onChangePassword = async (oldPassword, newPassword, confirmPassword) => {
+    if (!newPassword.trim().length) {
+      this.view.showChangePasswordError('Password should not be empty');
+      return;
+    }
     if (newPassword !== confirmPassword) {
+      this.view.showChangePasswordError('Passwords are not equal');
       return;
     }
     await this.accountService.changePassword(oldPassword, newPassword);
