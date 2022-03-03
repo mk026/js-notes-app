@@ -6,6 +6,10 @@ export default class ChangePasswordView extends AbstractView {
     this.element = this.getElement();
   }
 
+  get errorContainer() {
+    return this.element.querySelector('.error-container');
+  }
+
   getTemplate() {
     return `
       <form id="change-password-form">
@@ -17,6 +21,7 @@ export default class ChangePasswordView extends AbstractView {
         <input id="confirm-password" type="password"/>
         <button id="save-new-password" type="submit">Save</button>
         <button id="cancel-new-password">Cancel</button>
+        <div class="error-container"></div>
       </form>
     `;
   }
@@ -41,6 +46,16 @@ export default class ChangePasswordView extends AbstractView {
 
   setOnChangePassword(handler) {
     this.onChangePassword = handler;
+  }
+
+  showError(msg) {
+    this.errorContainer.classList.add('show');
+    this.errorContainer.innerText = msg;
+  }
+
+  hideError() {
+    this.errorContainer.classList.remove('show');
+    this.errorContainer.innerText = '';
   }
 
   saveNewPasswordHandler = (event) => {
