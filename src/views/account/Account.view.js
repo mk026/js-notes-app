@@ -56,6 +56,10 @@ export default class AccountView extends AbstractView {
     this.changeNameView.showError(msg);
   }
 
+  showChangeEmailError(msg) {
+    this.changeEmailView.showError(msg);
+  }
+
   attachChangeNameHandler() {
     this.element
       .querySelector('#change-name')

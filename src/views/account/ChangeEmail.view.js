@@ -6,6 +6,10 @@ export default class ChangeEmailView extends AbstractView {
     this.element = this.getElement();
   }
 
+  get errorContainer() {
+    return this.element.querySelector('.error-container');
+  }
+
   getTemplate() {
     return `
       <form id="change-email-form">
@@ -13,6 +17,7 @@ export default class ChangeEmailView extends AbstractView {
         <input id="new-email" type="text"/>
         <button id="save-new-email" type="submit">Save</button>
         <button id="cancel-new-email">Cancel</button>
+        <div class="error-container"></div>
       </form>
     `;
   }
@@ -37,6 +42,16 @@ export default class ChangeEmailView extends AbstractView {
 
   setOnChangeEmail(handler) {
     this.onChangeEmail = handler;
+  }
+
+  showError(msg) {
+    this.errorContainer.classList.add('show');
+    this.errorContainer.innerText = msg;
+  }
+
+  hideError() {
+    this.errorContainer.classList.remove('show');
+    this.errorContainer.innerText = '';
   }
 
   saveNewEmailHandler = (event) => {
