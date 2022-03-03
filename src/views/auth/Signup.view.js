@@ -33,6 +33,8 @@ export default class SignupView extends AbstractView {
   }
 
   unmount() {
+    this.removeSignupHandler();
+
     this.element.remove();
   }
 
@@ -48,5 +50,9 @@ export default class SignupView extends AbstractView {
 
   attachSignupHandler() {
     this.element.addEventListener('submit', this.signupHandler);
+  }
+
+  removeSignupHandler() {
+    this.element.removeEventListener('submit', this.signupHandler);
   }
 }
