@@ -52,6 +52,10 @@ export default class AccountView extends AbstractView {
     this.changePasswordView.mount(this.formContainer);
   };
 
+  showChangeNameError(msg) {
+    this.changeNameView.showError(msg);
+  }
+
   attachChangeNameHandler() {
     this.element
       .querySelector('#change-name')

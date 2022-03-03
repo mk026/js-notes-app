@@ -6,6 +6,10 @@ export default class ChangeNameView extends AbstractView {
     this.element = this.getElement();
   }
 
+  get errorContainer() {
+    return this.element.querySelector('.error-container');
+  }
+
   getTemplate() {
     return `
       <form id="change-name-form">
@@ -13,6 +17,7 @@ export default class ChangeNameView extends AbstractView {
         <input id="new-name" type="text"/>
         <button id="save-new-name" type="submit">Save</button>
         <button id="cancel-new-name">Cancel</button>
+        <div class="error-container"></div>
       </form>
     `;
   }
@@ -37,6 +42,16 @@ export default class ChangeNameView extends AbstractView {
 
   setOnChangeName(handler) {
     this.onChangeName = handler;
+  }
+
+  showError(msg) {
+    this.errorContainer.classList.add('show');
+    this.errorContainer.innerText = msg;
+  }
+
+  hideError() {
+    this.errorContainer.classList.remove('show');
+    this.errorContainer.innerText = '';
   }
 
   saveNewNameHandler = (event) => {
