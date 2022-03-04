@@ -6,6 +6,10 @@ export default class AddNoteView extends AbstractView {
     this.element = this.getElement();
   }
 
+  get errorContainer() {
+    return this.element.querySelector('.error-container');
+  }
+
   getTemplate() {
     return `
       <form id="add-note">
@@ -15,6 +19,7 @@ export default class AddNoteView extends AbstractView {
         <textarea id="new-note-content"/></textarea>
         <button type="submit">Save</button>
         <button id="close-new-note">Cancel</button>
+        <div class="error-container"></div>
       </form>
     `;
   }
@@ -32,6 +37,16 @@ export default class AddNoteView extends AbstractView {
 
   setOnAddNote(handler) {
     this.onAddNote = handler;
+  }
+
+  showError(msg) {
+    this.errorContainer.classList.add('show');
+    this.errorContainer.innerText = msg;
+  }
+
+  hideError() {
+    this.errorContainer.classList.remove('show');
+    this.errorContainer.innerText = '';
   }
 
   addNoteHandler = (event) => {
