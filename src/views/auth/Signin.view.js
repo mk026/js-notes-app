@@ -6,6 +6,10 @@ export default class SigninView extends AbstractView {
     this.element = this.getElement();
   }
 
+  get errorContainer() {
+    return this.element.querySelector('.error-container');
+  }
+
   getTemplate() {
     return `
       <form class="signin-form">
@@ -14,6 +18,7 @@ export default class SigninView extends AbstractView {
         <label for="password">Password</label>
         <input id="password" type="password"/>
         <button type="submit">Sign in</button>
+        <div class="error-container"></div>
       </form>
     `;
   }
@@ -32,6 +37,16 @@ export default class SigninView extends AbstractView {
     this.removeSigninHandler();
 
     this.element.remove();
+  }
+
+  showError(msg) {
+    this.errorContainer.classList.add('show');
+    this.errorContainer.innerText = msg;
+  }
+
+  hideError() {
+    this.errorContainer.classList.remove('show');
+    this.errorContainer.innerText = '';
   }
 
   signinHandler = (event) => {
