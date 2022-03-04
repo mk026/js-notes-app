@@ -47,6 +47,10 @@ export default class AuthView extends AbstractView {
     this.attachSwitchToSignupHandler();
   };
 
+  showSignupError(msg) {
+    this.signupView.showError(msg);
+  }
+
   attachSwitchToSignupHandler() {
     this.element
       .querySelector('#switch-to-signup')
