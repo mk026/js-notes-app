@@ -56,8 +56,9 @@ export default class AddNoteView extends AbstractView {
     const content = this.element.querySelector('#new-note-content').value;
     const date = new Date().toLocaleDateString();
 
-    this.onAddNote({ title, content, date });
-    this.closeAddNoteForm();
+    if (this.onAddNote({ title, content, date })) {
+      this.closeAddNoteForm();
+    }
   };
 
   closeAddNoteForm = () => {

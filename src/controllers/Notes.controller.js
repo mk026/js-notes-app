@@ -33,16 +33,17 @@ export default class NotesController {
   onAddNote = (note) => {
     if (!note.title.trim().length) {
       this.view.showAddNoteError('Note title should not be empty');
-      return;
+      return false;
     }
     if (!note.content.trim().length) {
       this.view.showAddNoteError('Note content should not be empty');
-      return;
+      return false;
     }
     this.model.addNote({
       author: 'Author name',
       ...note,
     });
+    return true;
   };
 
   onEditNote = (id) => {
@@ -53,13 +54,14 @@ export default class NotesController {
   onSaveEditedNote = (newData) => {
     if (!newData.title.trim().length) {
       this.view.showEditNoteError('Note title should not be empty');
-      return;
+      return false;
     }
     if (!newData.content.trim().length) {
       this.view.showEditNoteError('Note content should not be empty');
-      return;
+      return false;
     }
     this.model.editNote(this.editedNoteId, newData);
+    return true;
   };
 
   onDeleteNote = (noteId) => {

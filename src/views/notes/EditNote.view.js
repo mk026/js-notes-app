@@ -71,8 +71,9 @@ export default class EditNoteView extends AbstractView {
     const content = this.element.querySelector('#edit-note-content').value;
     const editDate = new Date().toLocaleDateString();
 
-    this.onSaveEditedNote({ title, content, editDate });
-    this.closeEditNoteForm();
+    if (this.onSaveEditedNote({ title, content, editDate })) {
+      this.closeEditNoteForm();
+    }
   };
 
   attachSaveEditedNoteHandler() {
