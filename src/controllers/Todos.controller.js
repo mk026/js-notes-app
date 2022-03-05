@@ -31,10 +31,15 @@ export default class TodosController {
   };
 
   onAddTodo = (todo) => {
+    if (!todo.title.trim().length) {
+      this.view.showAddTodoError('Todo title should not be empty');
+      return false;
+    }
     this.model.addTodo({
       completed: false,
       ...todo,
     });
+    return true;
   };
 
   onEditTodoTitle = (id) => {
@@ -44,7 +49,12 @@ export default class TodosController {
   };
 
   onSaveEditedTodoTitle = (newTitle) => {
+    if (!newTitle.trim().length) {
+      this.view.showEditTodoError('Todo title should not be empty');
+      return false;
+    }
     this.model.editTodoTitle(this.editedTodoId, newTitle);
+    return true;
   };
 
   onChangeTodoStatus = (id) => {
