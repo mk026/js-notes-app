@@ -47,6 +47,10 @@ export default class TodosView extends AbstractView {
     this.addTodoView.showError(msg);
   }
 
+  showEditTodoError(msg) {
+    this.todoListView.showEditTodoError(msg);
+  }
+
   setOnAddTodo(handler) {
     this.addTodoView.setOnAddTodo(handler);
   }

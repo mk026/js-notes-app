@@ -75,6 +75,10 @@ export default class TodoListView extends AbstractView {
     }
   };
 
+  showEditTodoError(msg) {
+    this.editTodoView.showError(msg);
+  }
+
   editTodoTitleHandler = (event) => {
     if (event.target.classList.contains('edit-todo-title')) {
       const todoId = event.target.parentElement.id;
