@@ -36,6 +36,7 @@ export default class ChangeEmailView extends AbstractView {
   closeChangeEmailForm = () => {
     this.removeSaveNewEmailHandler();
     this.removeCancelChangeEmailHandler();
+    this.hideError();
 
     this.unmount();
   };

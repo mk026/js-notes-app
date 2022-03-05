@@ -40,6 +40,7 @@ export default class ChangePasswordView extends AbstractView {
   closeChangePasswordForm = () => {
     this.removeSaveNewPasswordHandler();
     this.removeCancelChangePasswordHandler();
+    this.hideError();
 
     this.unmount();
   };

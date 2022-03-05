@@ -36,6 +36,7 @@ export default class ChangeNameView extends AbstractView {
   closeChangeNameForm = () => {
     this.removeSaveNewNameHandler();
     this.removeCancelChangeNameHandler();
+    this.hideError();
 
     this.unmount();
   };
