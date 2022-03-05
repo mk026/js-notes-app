@@ -6,6 +6,10 @@ export default class AddTodoView extends AbstractView {
     this.element = this.getElement();
   }
 
+  get errorContainer() {
+    return this.element.querySelector('.error-container');
+  }
+
   getTemplate() {
     return `
       <form id="add-todo">
@@ -13,6 +17,7 @@ export default class AddTodoView extends AbstractView {
         <input id="new-todo-title" type="text"/>
         <button type="submit">Save</button>
         <button id="close-new-todo">Cancel</button>
+        <div class="error-container"></div>
       </form>
     `;
   }
@@ -32,14 +37,25 @@ export default class AddTodoView extends AbstractView {
     this.onAddTodo = handler;
   }
 
+  showError(msg) {
+    this.errorContainer.classList.add('show');
+    this.errorContainer.innerText = msg;
+  }
+
+  hideError() {
+    this.errorContainer.classList.remove('show');
+    this.errorContainer.innerText = '';
+  }
+
   addTodoHandler = (event) => {
     event.preventDefault();
 
     const title = this.element.querySelector('#new-todo-title').value;
     const date = new Date().toLocaleDateString();
 
-    this.onAddTodo({ title, date });
-    this.closeAddTodoForm();
+    if (this.onAddTodo({ title, date })) {
+      this.closeAddTodoForm();
+    }
   };
 
   closeAddTodoForm = () => {
