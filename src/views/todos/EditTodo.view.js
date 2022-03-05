@@ -41,6 +41,7 @@ export default class EditTodoView extends AbstractView {
     if (this.editedTodo) {
       this.removeSaveEditedTodoTitleHandler();
       this.removeCloseEditTodoTitleFormHandler();
+      this.hideError();
       this.unmount();
     }
   };

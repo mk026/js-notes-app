@@ -61,6 +61,7 @@ export default class AddTodoView extends AbstractView {
   closeAddTodoForm = () => {
     this.removeAddTodoHandler();
     this.removeCloseAddTodoFormHandler();
+    this.hideError();
 
     this.unmount();
   };

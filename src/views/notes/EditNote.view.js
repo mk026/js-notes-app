@@ -60,6 +60,7 @@ export default class EditNoteView extends AbstractView {
   closeEditNoteForm = () => {
     this.removeSaveEditedNoteHandler();
     this.removeCancelEditedNoteHandler();
+    this.hideError();
 
     this.unmount();
   };

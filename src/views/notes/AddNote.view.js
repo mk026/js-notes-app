@@ -64,6 +64,7 @@ export default class AddNoteView extends AbstractView {
   closeAddNoteForm = () => {
     this.removeAddNoteHandler();
     this.removeCloseAddNoteFormHandler();
+    this.hideError();
 
     this.unmount();
   };
