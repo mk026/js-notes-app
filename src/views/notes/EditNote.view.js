@@ -12,17 +12,15 @@ export default class EditNoteView extends AbstractView {
 
   getTemplate() {
     return `
-      <div>
-        <form id="edit-note-form">
-          <label for="edit-note-title">Title</label>
-          <textarea id="edit-note-title"></textarea>
-          <label for="edit-note-content">Content</label>
-          <textarea id="edit-note-content"/></textarea>
-          <button type="submit">Save</button>
-          <button type="button" id="close-edit-note-form">Cancel</button>
-          <div class="error-container"></div>
-        </form>
-      </div>
+      <form id="edit-note-form">
+        <label for="edit-note-title">Title</label>
+        <textarea id="edit-note-title"></textarea>
+        <label for="edit-note-content">Content</label>
+        <textarea id="edit-note-content"/></textarea>
+        <button type="submit">Save</button>
+        <button type="button" id="close-edit-note-form">Cancel</button>
+        <div class="error-container"></div>
+      </form>
     `;
   }
 
