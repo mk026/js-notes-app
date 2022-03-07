@@ -1,6 +1,8 @@
-export default class AuthService {
+import ApiService from './Api.service';
+
+export default class AuthService extends ApiService {
   constructor(baseUrl) {
-    this.baseUrl = baseUrl;
+    super(baseUrl);
     this.token = this.getStoredToken();
   }
 
@@ -22,33 +24,15 @@ export default class AuthService {
   }
 
   async signup(name, email, password) {
-    try {
-      const response = await fetch(`${this.baseUrl}/signup`, {
-        method: 'POST',
-        body: JSON.stringify({ name, email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const data = await response.json();
-      this.setToken(data.token);
-      this.onAuthStatusChange();
-    } catch (error) {
-      console.log(error);
-    }
+    const data = await this.post('signup', { name, email, password });
+    this.setToken(data.token);
+    this.onAuthStatusChange();
   }
 
   async signin(email, password) {
-    try {
-      const response = await fetch(`${this.baseUrl}/signin`, {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const data = await response.json();
-      this.setToken(data.token);
-      this.onAuthStatusChange();
-    } catch (error) {
-      console.log(error);
-    }
+    const data = await this.post('signin', { email, password });
+    this.setToken(data.token);
+    this.onAuthStatusChange();
   }
 
   signout() {
