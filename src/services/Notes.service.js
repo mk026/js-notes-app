@@ -15,14 +15,14 @@ export default class NotesService extends ApiService {
   }
 
   async getNotes() {
-    const token = `Bearer ${this.authService.getToken()}`;
+    const token = this.authService.getToken();
     const data = await this.get('notes', token);
 
     return this.transformData(data);
   }
 
   async addNote(noteData) {
-    const token = `Bearer ${this.authService.getToken()}`;
+    const token = this.authService.getToken();
     const data = await this.post('notes', noteData, token);
     const newNote = { ...data, id: data._id };
     delete newNote._id;
@@ -32,7 +32,7 @@ export default class NotesService extends ApiService {
   async editNote(noteData) {
     const editedNote = { ...noteData, _id: noteData.id };
     delete editedNote.id;
-    const token = `Bearer ${this.authService.getToken()}`;
+    const token = this.authService.getToken();
     const data = await this.put('notes', editedNote, token);
     const updatedNote = { ...data, id: data._id };
     delete updatedNote._id;
@@ -40,7 +40,7 @@ export default class NotesService extends ApiService {
   }
 
   async removeNote(id) {
-    const token = `Bearer ${this.authService.getToken()}`;
+    const token = this.authService.getToken();
     const data = await this.delete(`notes/${id}`, token);
     const deletedNote = { ...data, id: data._id };
     delete deletedNote._id;

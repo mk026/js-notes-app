@@ -3,10 +3,19 @@ export default class ApiService {
     this.baseUrl = baseUrl;
   }
 
+  getHeaders(token) {
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+    return headers;
+  }
+
   async get(endPoint, token) {
-    const headers = token ? { Authorization: token } : {};
     try {
-      const response = await fetch(`${this.baseUrl}/${endPoint}`, { headers });
+      const response = await fetch(`${this.baseUrl}/${endPoint}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
       const data = await response.json();
       return data;
     } catch (error) {
@@ -15,14 +24,11 @@ export default class ApiService {
   }
 
   async post(endPoint, body, token) {
-    const headers = token
-      ? { 'Content-Type': 'application/json', Authorization: token }
-      : { 'Content-Type': 'application/json' };
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         method: 'POST',
         body: JSON.stringify(body),
-        headers,
+        headers: this.getHeaders(token),
       });
       const data = await response.json();
       return data;
@@ -32,14 +38,11 @@ export default class ApiService {
   }
 
   async put(endPoint, body, token) {
-    const headers = token
-      ? { 'Content-Type': 'application/json', Authorization: token }
-      : { 'Content-Type': 'application/json' };
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         method: 'PUT',
         body: JSON.stringify(body),
-        headers,
+        headers: this.getHeaders(token),
       });
       const data = await response.json();
       return data;
@@ -49,11 +52,10 @@ export default class ApiService {
   }
 
   async delete(endPoint, token) {
-    const headers = token ? { Authorization: token } : {};
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         method: 'DELETE',
-        headers,
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       const data = await response.json();
       return data;
