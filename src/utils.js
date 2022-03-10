@@ -22,3 +22,17 @@ export const validateEmail = (email) => {
   }
   return error;
 };
+
+export const validateInput = (inputStr, inputName, minLength, maxLength) => {
+  let error = null;
+  if (!inputStr.trim().length) {
+    error = `${inputName} should not be empty`;
+  }
+  if (minLength && inputStr.trim().length < minLength) {
+    error = `${inputName} should be at least ${minLength} character(s) long`;
+  }
+  if (maxLength && inputStr.trim().length > maxLength) {
+    error = `${inputName} should not be more than ${maxLength} character(s) long`;
+  }
+  return error;
+};
