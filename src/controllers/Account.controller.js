@@ -1,3 +1,5 @@
+import { validateEmail, validatePassword } from '../utils';
+
 export default class AccountController {
   constructor(appRoot, view, accountService) {
     this.appRoot = appRoot;
@@ -35,16 +37,18 @@ export default class AccountController {
   };
 
   onChangeEmail = async (newEmail) => {
-    if (!newEmail.trim().length) {
-      this.view.showChangeEmailError('Email should not be empty');
+    const emailError = validateEmail(newEmail);
+    if (emailError) {
+      this.view.showChangeEmailError(emailError);
       return;
     }
     await this.accountService.changeEmail(newEmail);
   };
 
   onChangePassword = async (oldPassword, newPassword, confirmPassword) => {
-    if (!newPassword.trim().length) {
-      this.view.showChangePasswordError('Password should not be empty');
+    const passwordError = validatePassword(newPassword, 8, 100);
+    if (passwordError) {
+      this.view.showChangePasswordError(passwordError);
       return;
     }
     if (newPassword !== confirmPassword) {
