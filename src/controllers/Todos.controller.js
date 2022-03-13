@@ -1,3 +1,5 @@
+import { validateInput } from '../utils';
+
 export default class TodosController {
   constructor(appRoot, view, model) {
     this.appRoot = appRoot;
@@ -31,8 +33,9 @@ export default class TodosController {
   };
 
   onAddTodo = (todo) => {
-    if (!todo.title.trim().length) {
-      this.view.showAddTodoError('Todo title should not be empty');
+    const titleError = validateInput(todo.title, 'Todo title');
+    if (titleError) {
+      this.view.showAddTodoError(titleError);
       return false;
     }
     this.model.addTodo({
@@ -49,8 +52,9 @@ export default class TodosController {
   };
 
   onSaveEditedTodoTitle = (newTitle) => {
-    if (!newTitle.trim().length) {
-      this.view.showEditTodoError('Todo title should not be empty');
+    const titleError = validateInput(newTitle, 'Todo title');
+    if (titleError) {
+      this.view.showEditTodoError(titleError);
       return false;
     }
     this.model.editTodoTitle(this.editedTodoId, newTitle);
