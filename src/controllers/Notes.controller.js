@@ -1,3 +1,5 @@
+import { validateInput } from '../utils';
+
 export default class NotesController {
   constructor(appRoot, view, model) {
     this.appRoot = appRoot;
@@ -31,12 +33,14 @@ export default class NotesController {
   };
 
   onAddNote = (note) => {
-    if (!note.title.trim().length) {
-      this.view.showAddNoteError('Note title should not be empty');
+    const titleError = validateInput(note.title, 'Note title');
+    const contentError = validateInput(note.content, 'Note content');
+    if (titleError) {
+      this.view.showAddNoteError(titleError);
       return false;
     }
-    if (!note.content.trim().length) {
-      this.view.showAddNoteError('Note content should not be empty');
+    if (contentError) {
+      this.view.showAddNoteError(contentError);
       return false;
     }
     this.model.addNote({
@@ -52,12 +56,14 @@ export default class NotesController {
   };
 
   onSaveEditedNote = (newData) => {
-    if (!newData.title.trim().length) {
-      this.view.showEditNoteError('Note title should not be empty');
+    const titleError = validateInput(newData.title, 'Note title');
+    const contentError = validateInput(newData.content, 'Note content');
+    if (titleError) {
+      this.view.showEditNoteError(titleError);
       return false;
     }
-    if (!newData.content.trim().length) {
-      this.view.showEditNoteError('Note content should not be empty');
+    if (contentError) {
+      this.view.showEditNoteError(contentError);
       return false;
     }
     this.model.editNote(this.editedNoteId, newData);
