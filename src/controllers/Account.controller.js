@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from '../utils';
+import { validateEmail, validatePassword, validateInput } from '../utils';
 
 export default class AccountController {
   constructor(appRoot, view, accountService) {
@@ -29,8 +29,9 @@ export default class AccountController {
   }
 
   onChangeName = async (newName) => {
-    if (!newName.trim().length) {
-      this.view.showChangeNameError('Name should not be empty');
+    const nameError = validateInput(newName, 'Name');
+    if (nameError) {
+      this.view.showChangeNameError(nameError);
       return;
     }
     await this.accountService.changeName(newName);

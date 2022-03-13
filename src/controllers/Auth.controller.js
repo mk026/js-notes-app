@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from '../utils';
+import { validateEmail, validatePassword, validateInput } from '../utils';
 
 export default class AuthController {
   constructor(appRoot, view, authService) {
@@ -23,6 +23,7 @@ export default class AuthController {
   onSignup = async (name, email, password) => {
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password, 8, 100);
+    const nameError = validateInput(name, 'Name');
     if (emailError) {
       this.view.showSignupError(emailError);
       return;
@@ -31,8 +32,8 @@ export default class AuthController {
       this.view.showSignupError(passwordError);
       return;
     }
-    if (!name.trim().length) {
-      this.view.showSignupError('Name should not be empty');
+    if (nameError) {
+      this.view.showSignupError(nameError);
       return;
     }
     await this.authService.signup(name, email, password);
