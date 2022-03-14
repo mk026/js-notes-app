@@ -1,4 +1,4 @@
-import { validateInput } from '../utils';
+import { validateInput } from '../utils/validation';
 
 export default class TodosController {
   constructor(appRoot, view, model) {

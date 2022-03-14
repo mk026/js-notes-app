@@ -1,4 +1,4 @@
-import { validateInput } from '../utils';
+import { validateInput } from '../utils/validation';
 
 export default class NotesController {
   constructor(appRoot, view, model) {

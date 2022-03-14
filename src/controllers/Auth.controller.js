@@ -1,4 +1,8 @@
-import { validateEmail, validatePassword, validateInput } from '../utils';
+import {
+  validateEmail,
+  validatePassword,
+  validateInput,
+} from '../utils/validation';
 
 export default class AuthController {
   constructor(appRoot, view, authService) {
