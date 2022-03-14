@@ -24,6 +24,9 @@ export default class AccountController {
   }
 
   destroy() {
+    this.view.removeChangeNameHandler();
+    this.view.removeChangeEmailHandler();
+    this.view.removeChangePasswordHandler();
     this.view.removeSignoutHandler();
     this.view.removeElement();
   }

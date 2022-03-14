@@ -113,4 +113,22 @@ export default class AccountView extends AbstractView {
       .querySelector('#signout')
       .removeEventListener('click', this.signoutHandler);
   }
+
+  removeChangeNameHandler() {
+    this.element
+      .querySelector('#change-name')
+      .removeEventListener('click', this.showChangeNameForm);
+  }
+
+  removeChangeEmailHandler() {
+    this.element
+      .querySelector('#change-email')
+      .removeEventListener('click', this.showChangeEmailForm);
+  }
+
+  removeChangePasswordHandler() {
+    this.element
+      .querySelector('#change-password')
+      .removeEventListener('click', this.showChangePasswordForm);
+  }
 }
