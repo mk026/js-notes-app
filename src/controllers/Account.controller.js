@@ -4,6 +4,8 @@ import {
   validateInput,
 } from '../utils/validation';
 
+import { PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH } from '../config';
+
 export default class AccountController {
   constructor(appRoot, view, accountService) {
     this.appRoot = appRoot;
@@ -54,7 +56,11 @@ export default class AccountController {
   };
 
   onChangePassword = async (oldPassword, newPassword, confirmPassword) => {
-    const passwordError = validatePassword(newPassword, 8, 100);
+    const passwordError = validatePassword(
+      newPassword,
+      PASSWORD_MIN_LENGTH,
+      PASSWORD_MAX_LENGTH
+    );
     if (passwordError) {
       this.view.showChangePasswordError(passwordError);
       return;
