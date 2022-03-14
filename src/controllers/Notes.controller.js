@@ -1,4 +1,10 @@
 import { validateInput } from '../utils/validation';
+import {
+  NOTE_TITLE_MIN_LENGTH,
+  NOTE_TITLE_MAX_LENGTH,
+  NOTE_CONTENT_MIN_LENGTH,
+  NOTE_CONTENT_MAX_LENGTH,
+} from '../config';
 
 export default class NotesController {
   constructor(appRoot, view, model) {
@@ -33,8 +39,18 @@ export default class NotesController {
   };
 
   onAddNote = (note) => {
-    const titleError = validateInput(note.title, 'Note title');
-    const contentError = validateInput(note.content, 'Note content');
+    const titleError = validateInput(
+      note.title,
+      'Note title',
+      NOTE_TITLE_MIN_LENGTH,
+      NOTE_TITLE_MAX_LENGTH
+    );
+    const contentError = validateInput(
+      note.content,
+      'Note content',
+      NOTE_CONTENT_MIN_LENGTH,
+      NOTE_CONTENT_MAX_LENGTH
+    );
     if (titleError) {
       this.view.showAddNoteError(titleError);
       return false;
@@ -56,8 +72,18 @@ export default class NotesController {
   };
 
   onSaveEditedNote = (newData) => {
-    const titleError = validateInput(newData.title, 'Note title');
-    const contentError = validateInput(newData.content, 'Note content');
+    const titleError = validateInput(
+      newData.title,
+      'Note title',
+      NOTE_TITLE_MIN_LENGTH,
+      NOTE_TITLE_MAX_LENGTH
+    );
+    const contentError = validateInput(
+      newData.content,
+      'Note content',
+      NOTE_CONTENT_MIN_LENGTH,
+      NOTE_CONTENT_MAX_LENGTH
+    );
     if (titleError) {
       this.view.showEditNoteError(titleError);
       return false;
