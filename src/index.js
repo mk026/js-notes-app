@@ -23,14 +23,14 @@ import TodosService from './services/Todos.service';
 import AccountService from './services/Account.service';
 import AuthService from './services/Auth.service';
 
+import { API_BASE_URL } from './config';
+
 const appRoot = document.getElementById('app');
 
-const apiBaseUrl = 'http://localhost:8080/api';
-
-const authService = new AuthService(apiBaseUrl);
-const accountService = new AccountService(apiBaseUrl, authService);
-const notesService = new NotesService(apiBaseUrl, authService);
-const todosService = new TodosService(apiBaseUrl, authService);
+const authService = new AuthService(API_BASE_URL);
+const accountService = new AccountService(API_BASE_URL, authService);
+const notesService = new NotesService(API_BASE_URL, authService);
+const todosService = new TodosService(API_BASE_URL, authService);
 
 const notesModel = new NotesModel(notesService);
 const todosModel = new TodosModel(todosService);
