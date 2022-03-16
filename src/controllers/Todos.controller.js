@@ -1,4 +1,5 @@
 import { validateInput } from '../utils/validation';
+import { TODO_TITLE_MIN_LENGTH, TODO_TITLE_MAX_LENGTH } from '../config';
 
 export default class TodosController {
   constructor(appRoot, view, model) {
@@ -52,7 +53,12 @@ export default class TodosController {
   };
 
   onSaveEditedTodoTitle = (newTitle) => {
-    const titleError = validateInput(newTitle, 'Todo title');
+    const titleError = validateInput(
+      newTitle,
+      'Todo title',
+      TODO_TITLE_MIN_LENGTH,
+      TODO_TITLE_MAX_LENGTH
+    );
     if (titleError) {
       this.view.showEditTodoError(titleError);
       return false;
