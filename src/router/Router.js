@@ -1,3 +1,5 @@
+import { AccessMode } from '../config';
+
 export default class Router {
   constructor(routes, authService) {
     this.routes = routes;
@@ -16,7 +18,7 @@ export default class Router {
   }
 
   getUnauthRoutes() {
-    return this.routes.filter((route) => !route.authOnly);
+    return this.routes.filter((route) => route.access !== AccessMode.AUTH);
   }
 
   setChangeActiveLinkHandler(handler) {
@@ -24,9 +26,9 @@ export default class Router {
   }
 
   checkAccess(path) {
-    const isRouteProtected = this.getRoutes().find(
-      (route) => route.path == path
-    ).authOnly;
+    const isRouteProtected =
+      this.getRoutes().find((route) => route.path == path).access ===
+      AccessMode.AUTH;
 
     if (isRouteProtected && this.authService.getToken()) {
       return true;
