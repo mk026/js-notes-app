@@ -13,8 +13,8 @@ export default class Router {
     });
   }
 
-  getRoutes() {
-    return this.routes;
+  getAuthRoutes() {
+    return this.routes.filter((route) => route.access !== AccessMode.UNAUTH);
   }
 
   getUnauthRoutes() {
@@ -26,17 +26,21 @@ export default class Router {
   }
 
   checkAccess(path) {
-    const isRouteProtected =
-      this.getRoutes().find((route) => route.path == path).access ===
-      AccessMode.AUTH;
+    const routeAccess = this.getRoutes().find(
+      (route) => route.path == path
+    ).access;
+    const hasToken = this.authService.getToken();
 
-    if (isRouteProtected && this.authService.getToken()) {
+    if (routeAccess === AccessMode.ALL) {
       return true;
-    } else if (!isRouteProtected) {
-      return true;
-    } else {
-      return false;
     }
+    if (routeAccess === AccessMode.AUTH && hasToken) {
+      return true;
+    }
+    if (routeAccess === AccessMode.UNAUTH && !hasToken) {
+      return true;
+    }
+    return false;
   }
 
   navigateTo = (url, pushState = true) => {

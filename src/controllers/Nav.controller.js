@@ -21,7 +21,7 @@ export default class NavController {
 
   renderNavLinks() {
     if (this.authService.getToken()) {
-      this.view.renderRoutes(this.router.getRoutes());
+      this.view.renderRoutes(this.router.getAuthRoutes());
     } else {
       this.view.renderRoutes(this.router.getUnauthRoutes());
     }
