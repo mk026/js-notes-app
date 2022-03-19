@@ -1,8 +1,8 @@
 export default class Route {
-  constructor(name, path, controller, authOnly = false) {
+  constructor(name, path, controller, access) {
     this.name = name;
     this.path = path;
     this.controller = controller;
-    this.authOnly = authOnly;
+    this.access = access;
   }
 }

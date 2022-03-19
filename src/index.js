@@ -23,7 +23,7 @@ import TodosService from './services/Todos.service';
 import AccountService from './services/Account.service';
 import AuthService from './services/Auth.service';
 
-import { API_BASE_URL } from './config';
+import { API_BASE_URL, AccessMode } from './config';
 
 const appRoot = document.getElementById('app');
 
@@ -52,11 +52,11 @@ const accountController = new AccountController(
 );
 
 const routes = [
-  new Route('Home', '/', homeController),
-  new Route('Notes', '/notes', notesController, true),
-  new Route('Todos', '/todos', todosController, true),
-  new Route('Auth', '/auth', authController),
-  new Route('Account', '/account', accountController, true),
+  new Route('Home', '/', homeController, AccessMode.ALL),
+  new Route('Notes', '/notes', notesController, AccessMode.AUTH),
+  new Route('Todos', '/todos', todosController, AccessMode.AUTH),
+  new Route('Auth', '/auth', authController, AccessMode.UNAUTH),
+  new Route('Account', '/account', accountController, AccessMode.AUTH),
 ];
 
 const router = new Router(routes, authService);
