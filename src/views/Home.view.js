@@ -6,6 +6,10 @@ export default class HomeView extends AbstractView {
     this.element = this.getElement();
   }
 
+  get msgContainer() {
+    return this.element.querySelector('.home__welcome-msg');
+  }
+
   getTemplate() {
     return `
       <div class="home">
@@ -18,13 +22,11 @@ export default class HomeView extends AbstractView {
   }
 
   showUnauthMessage() {
-    this.element.querySelector('.home__welcome-msg').innerText =
+    this.msgContainer.innerText =
       'You are not signed in. Please sign in or sign up to use this app';
   }
 
   showAuthMessage(name) {
-    this.element.querySelector(
-      '.home__welcome-msg'
-    ).innerText = `Welcome, ${name}`;
+    this.msgContainer.innerText = `Welcome, ${name}`;
   }
 }
