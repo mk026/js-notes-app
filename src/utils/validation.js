@@ -3,10 +3,10 @@ export const validatePassword = (password, minLength, maxLength) => {
   if (!password.trim().length) {
     error = 'Password should not be empty';
   }
-  if (password.trim().length < minLength) {
+  if (minLength && password.trim().length < minLength) {
     error = `Password should be at least ${minLength} character(s) long`;
   }
-  if (password.trim().length > maxLength) {
+  if (maxLength && password.trim().length > maxLength) {
     error = `Password should not be more than ${maxLength} character(s) long`;
   }
   return error;

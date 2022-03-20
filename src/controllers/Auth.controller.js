@@ -51,11 +51,7 @@ export default class AuthController {
 
   onSignin = async (email, password) => {
     const emailError = validateEmail(email);
-    const passwordError = validatePassword(
-      password,
-      PASSWORD_MIN_LENGTH,
-      PASSWORD_MAX_LENGTH
-    );
+    const passwordError = validatePassword(password);
     if (emailError) {
       this.view.showSigninError(emailError);
       return;
