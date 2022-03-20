@@ -41,7 +41,12 @@ const todosView = new TodosView();
 const authView = new AuthView();
 const accountView = new AccountView();
 
-const homeController = new HomeController(appRoot, homeView);
+const homeController = new HomeController(
+  appRoot,
+  homeView,
+  authService,
+  accountService
+);
 const notesController = new NotesController(appRoot, notesView, notesModel);
 const todosController = new TodosController(appRoot, todosView, todosModel);
 const authController = new AuthController(appRoot, authView, authService);
