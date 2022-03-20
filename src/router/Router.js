@@ -26,9 +26,7 @@ export default class Router {
   }
 
   checkAccess(path) {
-    const routeAccess = this.getRoutes().find(
-      (route) => route.path == path
-    ).access;
+    const routeAccess = this.routes.find((route) => route.path == path).access;
     const hasToken = this.authService.getToken();
 
     if (routeAccess === AccessMode.ALL) {
