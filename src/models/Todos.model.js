@@ -1,7 +1,7 @@
 export default class TodosModel {
-  constructor(apiService) {
+  constructor(todosService) {
     this.todos = [];
-    this.apiService = apiService;
+    this.todosService = todosService;
   }
 
   setOnTodosListChanged(handler) {
@@ -13,7 +13,7 @@ export default class TodosModel {
   }
 
   async getTodos() {
-    this.todos = await this.apiService.getTodos();
+    this.todos = await this.todosService.getTodos();
     return this.todos;
   }
 
@@ -22,7 +22,7 @@ export default class TodosModel {
   }
 
   async addTodo(todo) {
-    const newTodo = await this.apiService.addTodo(todo);
+    const newTodo = await this.todosService.addTodo(todo);
     this.todos.push(newTodo);
     this.update(this.todos);
   }
@@ -30,7 +30,7 @@ export default class TodosModel {
   async editTodoTitle(id, newTitle) {
     const editedTodo = this.getTodoById(id);
     editedTodo.title = newTitle;
-    const updatedTodo = await this.apiService.editTodo(editedTodo);
+    const updatedTodo = await this.todosService.editTodo(editedTodo);
     this.todos = this.todos.map((todo) => (todo.id == id ? updatedTodo : todo));
     this.update(this.todos);
   }
@@ -38,13 +38,13 @@ export default class TodosModel {
   async changeTodoStatus(id) {
     const editedTodo = this.getTodoById(id);
     editedTodo.completed = !editedTodo.completed;
-    const updatedTodo = await this.apiService.editTodo(editedTodo);
+    const updatedTodo = await this.todosService.editTodo(editedTodo);
     this.todos = this.todos.map((todo) => (todo.id == id ? updatedTodo : todo));
     this.update(this.todos);
   }
 
   async removeTodo(id) {
-    const deletedTodo = await this.apiService.removeTodo(id);
+    const deletedTodo = await this.todosService.removeTodo(id);
     this.todos = this.todos.filter((todo) => todo.id != deletedTodo.id);
     this.update(this.todos);
   }

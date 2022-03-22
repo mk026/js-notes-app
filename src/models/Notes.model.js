@@ -1,7 +1,7 @@
 export default class NotesModel {
-  constructor(apiService) {
+  constructor(notesService) {
     this.notes = [];
-    this.apiService = apiService;
+    this.notesService = notesService;
   }
 
   setOnNotesListChanged(handler) {
@@ -13,7 +13,7 @@ export default class NotesModel {
   }
 
   async getNotes() {
-    this.notes = await this.apiService.getNotes();
+    this.notes = await this.notesService.getNotes();
     return this.notes;
   }
 
@@ -22,14 +22,14 @@ export default class NotesModel {
   }
 
   async addNote(note) {
-    const newNote = await this.apiService.addNote(note);
+    const newNote = await this.notesService.addNote(note);
     this.notes.push(newNote);
     this.update(this.notes);
   }
 
   async editNote(id, newData) {
     const oldNote = this.getNoteById(id);
-    const updatedNote = await this.apiService.editNote({
+    const updatedNote = await this.notesService.editNote({
       ...oldNote,
       ...newData,
     });
@@ -38,7 +38,7 @@ export default class NotesModel {
   }
 
   async removeNote(id) {
-    const deletedNote = await this.apiService.removeNote(id);
+    const deletedNote = await this.notesService.removeNote(id);
     this.notes = this.notes.filter((note) => note.id != deletedNote.id);
     this.update(this.notes);
   }
