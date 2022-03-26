@@ -16,6 +16,9 @@ export default class ApiService {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
       const data = await response.json();
       return data;
     } catch (error) {
@@ -30,6 +33,9 @@ export default class ApiService {
         body: JSON.stringify(body),
         headers: this.getHeaders(token),
       });
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
       const data = await response.json();
       return data;
     } catch (error) {
@@ -44,6 +50,9 @@ export default class ApiService {
         body: JSON.stringify(body),
         headers: this.getHeaders(token),
       });
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
       const data = await response.json();
       return data;
     } catch (error) {
@@ -57,6 +66,9 @@ export default class ApiService {
         method: 'DELETE',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
       const data = await response.json();
       return data;
     } catch (error) {
