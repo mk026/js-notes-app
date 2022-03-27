@@ -1,3 +1,5 @@
+import { HttpMethod } from '../config';
+
 export default class ApiService {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
@@ -14,6 +16,7 @@ export default class ApiService {
   async get(endPoint, token) {
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
+        method: HttpMethod.GET,
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       if (!response.ok) {
@@ -29,7 +32,7 @@ export default class ApiService {
   async post(endPoint, body, token) {
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
-        method: 'POST',
+        method: HttpMethod.POST,
         body: JSON.stringify(body),
         headers: this.getHeaders(token),
       });
@@ -46,7 +49,7 @@ export default class ApiService {
   async put(endPoint, body, token) {
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
-        method: 'PUT',
+        method: HttpMethod.PUT,
         body: JSON.stringify(body),
         headers: this.getHeaders(token),
       });
@@ -63,7 +66,7 @@ export default class ApiService {
   async delete(endPoint, token) {
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
-        method: 'DELETE',
+        method: HttpMethod.DELETE,
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       if (!response.ok) {
