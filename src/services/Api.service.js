@@ -5,10 +5,13 @@ export default class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  getHeaders(token) {
-    const headers = { 'Content-Type': 'application/json' };
+  getHeaders(token, hasBody) {
+    const headers = {};
     if (token) {
-      headers.Authorization = `Bearer ${token}`;
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    if (hasBody) {
+      headers['Content-Type'] = 'application/json';
     }
     return headers;
   }
@@ -17,7 +20,7 @@ export default class ApiService {
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         method: HttpMethod.GET,
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        headers: this.getHeaders(token),
       });
       if (!response.ok) {
         throw new Error(`Request failed with status: ${response.status}`);
@@ -34,7 +37,7 @@ export default class ApiService {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         method: HttpMethod.POST,
         body: JSON.stringify(body),
-        headers: this.getHeaders(token),
+        headers: this.getHeaders(token, true),
       });
       if (!response.ok) {
         throw new Error(`Request failed with status: ${response.status}`);
@@ -51,7 +54,7 @@ export default class ApiService {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         method: HttpMethod.PUT,
         body: JSON.stringify(body),
-        headers: this.getHeaders(token),
+        headers: this.getHeaders(token, true),
       });
       if (!response.ok) {
         throw new Error(`Request failed with status: ${response.status}`);
@@ -67,7 +70,7 @@ export default class ApiService {
     try {
       const response = await fetch(`${this.baseUrl}/${endPoint}`, {
         method: HttpMethod.DELETE,
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        headers: this.getHeaders(token),
       });
       if (!response.ok) {
         throw new Error(`Request failed with status: ${response.status}`);
