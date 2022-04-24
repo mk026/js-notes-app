@@ -8,29 +8,25 @@ export default class AccountService extends ApiService {
 
   async getAccountInfo() {
     const token = this.authService.getToken();
-    const data = await this.get('user', token);
+    const data = await this.get('users', token);
     return data;
   }
 
   async changeName(newName) {
     const token = this.authService.getToken();
-    const data = await this.put('user', { name: newName }, token);
+    const data = await this.put('users', { name: newName }, token);
     return data;
   }
 
   async changeEmail(newEmail) {
     const token = this.authService.getToken();
-    const data = await this.put('user', { email: newEmail }, token);
+    const data = await this.put('users', { email: newEmail }, token);
     return data;
   }
 
   async changePassword(oldPassword, newPassword) {
     const token = this.authService.getToken();
-    const data = await this.put(
-      'password_update',
-      { oldPassword, newPassword },
-      token
-    );
+    const data = await this.put('users', { oldPassword, newPassword }, token);
     return data;
   }
 
