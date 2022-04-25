@@ -1,0 +1,36 @@
+.nav {
+  background-color: #202020;
+}
+
+.nav__list {
+  display: flex;
+  flex-flow: row wrap;
+
+  list-style: none;
+}
+
+.nav__el {
+  flex: 0 0 100px;
+}
+
+.nav__link {
+  font-size: 1.2rem;
+  color: #d3d3d3;
+
+  display: inline-block;
+  padding: 20px;
+
+  text-decoration: none;
+
+  transition: all 0.1s linear;
+}
+
+.nav__link:hover {
+  color: white;
+}
+
+.nav__link.active {
+  color: white;
+
+  background-color: #2e2e2e;
+}
