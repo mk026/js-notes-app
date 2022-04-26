@@ -1,4 +1,5 @@
 import AbstractView from './Abstract.view';
+import classes from '../styles/Home.module.css';
 
 export default class HomeView extends AbstractView {
   constructor() {
@@ -6,27 +7,27 @@ export default class HomeView extends AbstractView {
     this.element = this.getElement();
   }
 
-  get msgContainer() {
-    return this.element.querySelector('.home__welcome-msg');
+  get statusContainer() {
+    return this.element.querySelector(`.${classes.home__status}`);
   }
 
   getTemplate() {
     return `
-      <div class="home">
-        <h2>Home</h2>
-        <div class="home__content">
-          <h3 class="home__welcome-msg"></h3>
+      <div class="${classes.home}">
+        <h2 class="${classes.home__title}">Welcome to Notes Application</h2>
+        <div class="${classes.home__content}">
+          <h3 class="${classes.home__status}"></h3>
         </div>
       </div>
     `;
   }
 
   showUnauthMessage() {
-    this.msgContainer.innerText =
+    this.statusContainer.innerText =
       'You are not signed in. Please sign in or sign up to use this app';
   }
 
   showAuthMessage(name) {
-    this.msgContainer.innerText = `Welcome, ${name}`;
+    this.statusContainer.innerText = `Welcome, ${name}`;
   }
 }
