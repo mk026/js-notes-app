@@ -25,6 +25,8 @@ import AuthService from './services/Auth.service';
 
 import { API_BASE_URL, AccessMode } from './config';
 
+import './styles/index.css';
+
 const appRoot = document.getElementById('app');
 
 const authService = new AuthService(API_BASE_URL);
