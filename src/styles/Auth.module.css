@@ -1,0 +1,32 @@
+.auth {
+  padding: 20px;
+}
+
+.auth__title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.auth__controls {
+  display: flex;
+  flex-flow: row nowrap;
+
+  margin: 20px auto;
+  padding: 10px;
+
+  background-color: #dcdcdc;
+}
+
+.auth__container {
+  margin: 20px auto;
+}
+
+.auth__switch {
+  font-size: 1.2rem;
+
+  flex: 0 0 50%;
+  padding: 0;
+
+  border: none;
+  background: none;
+}

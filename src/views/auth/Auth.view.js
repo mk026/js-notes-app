@@ -1,6 +1,7 @@
 import AbstractView from '../Abstract.view';
 import SigninView from './Signin.view';
 import SignupView from './Signup.view';
+import classes from '../../styles/Auth.module.css';
 
 export default class AuthView extends AbstractView {
   constructor() {
@@ -11,18 +12,18 @@ export default class AuthView extends AbstractView {
   }
 
   get formContainer() {
-    return this.element.querySelector('.auth__form-container');
+    return this.element.querySelector(`.${classes.auth__container}`);
   }
 
   getTemplate() {
     return `
-      <div class="auth">
-        <h2>Auth</h2>
-        <div class="auth__controls">
-          <button id="switch-to-signin">Signin</button>
-          <button id="switch-to-signup">Signup</button>
+      <div class="${classes.auth}">
+        <h2 class="${classes.auth__title}">Account</h2>
+        <div class="${classes.auth__controls}">
+          <button id="switch-to-signin" class="${classes.auth__switch}">Signin</button>
+          <button id="switch-to-signup" class="${classes.auth__switch}">Signup</button>
         </div>
-        <div class="auth__form-container"></div>
+        <div class="${classes.auth__container}"></div>
       </div>
     `;
   }
