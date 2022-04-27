@@ -1,6 +1,7 @@
 import AbstractView from '../Abstract.view';
 import AddTodoView from './AddTodo.view';
 import TodoListView from './TodoList.view';
+import classes from '../../styles/Todos.module.css';
 
 export default class TodosView extends AbstractView {
   constructor() {
@@ -11,22 +12,22 @@ export default class TodosView extends AbstractView {
   }
 
   get formContainer() {
-    return this.element.querySelector('.todos__form-container');
+    return this.element.querySelector(`.${classes.todos__form}`);
   }
 
   get listContainer() {
-    return this.element.querySelector('.todos__list-container');
+    return this.element.querySelector(`.${classes.todos__list}`);
   }
 
   getTemplate() {
     return `
-      <div class="todos">
-        <h2>Todos</h2>
-        <div class="todos__controls">
+      <div class="${classes.todos}">
+        <h2 class="${classes.todos__title}">Todos</h2>
+        <div class="${classes.todos__controls}">
           <button id="show-add-todo">Add new todo</button>
         </div>
-        <div class="todos__form-container"></div>
-        <div class="todos__list-container"></div>
+        <div class="${classes.todos__form}"></div>
+        <div class="${classes.todos__list}"></div>
       </div>
     `;
   }

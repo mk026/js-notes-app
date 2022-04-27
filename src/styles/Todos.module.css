@@ -1,0 +1,22 @@
+.todos {
+  padding: 20px;
+}
+
+.todos__title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.todos__controls {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.todos__list {
+  margin: 20px auto;
+}
+
+.todos__form {
+  margin: 20px auto;
+  max-width: 600px;
+}
