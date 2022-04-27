@@ -1,4 +1,5 @@
 import AbstractView from '../Abstract.view';
+import classes from '../../styles/Notes.module.css';
 
 export default class NoteListView extends AbstractView {
   constructor() {
@@ -8,17 +9,17 @@ export default class NoteListView extends AbstractView {
 
   getTemplate() {
     return `
-      <ul class="notes__list"></ul>
+      <ul class="${classes.notes__container}"></ul>
     `;
   }
 
   getNoteTemplate(note) {
     return `
-      <li class="notes__list__el" id="${note.id}">
-        <h3>${note.title}</h3>
-        <p>${note.content}</p>
-        <button class="edit-note">Edit</button>
-        <button class="delete-note">Delete</button>
+      <li class="${classes.note}" id="${note.id}">
+        <h3 class="${classes.note__title}">${note.title}</h3>
+        <p class="${classes.note__content}">${note.content}</p>
+        <button class="${classes.btn} ${classes['btn--edit']}">Edit</button>
+        <button class="${classes.btn} ${classes['btn--delete']}">Delete</button>
       </li>
     `;
   }
@@ -49,14 +50,14 @@ export default class NoteListView extends AbstractView {
   }
 
   editNoteHandler = (event) => {
-    if (event.target.classList.contains('edit-note')) {
+    if (event.target.classList.contains(classes['btn--edit'])) {
       const noteId = event.target.parentElement.id;
       this.onEditNote(noteId);
     }
   };
 
   deleteNoteHandler = (event) => {
-    if (event.target.classList.contains('delete-note')) {
+    if (event.target.classList.contains(classes['btn--delete'])) {
       const noteId = event.target.parentElement.id;
       this.onDeleteNote(noteId);
     }
