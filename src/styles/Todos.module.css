@@ -12,11 +12,11 @@
   margin: 20px auto;
 }
 
-.todos__list {
+.todos__list-container {
   margin: 20px auto;
 }
 
-.todos__form {
+.todos__form-container {
   margin: 20px auto;
   max-width: 600px;
 }
