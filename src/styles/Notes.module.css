@@ -12,16 +12,16 @@
   margin: 20px auto;
 }
 
-.notes__list {
+.notes__list-container {
   margin: 20px auto;
 }
 
-.notes__form {
+.notes__form-container {
   margin: 20px auto;
   max-width: 600px;
 }
 
-.notes__container {
+.notes__list {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;

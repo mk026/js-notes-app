@@ -9,7 +9,7 @@ export default class NoteListView extends AbstractView {
 
   getTemplate() {
     return `
-      <ul class="${classes.notes__container}"></ul>
+      <ul class="${classes.notes__list}"></ul>
     `;
   }
 

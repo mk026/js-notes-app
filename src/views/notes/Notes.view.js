@@ -14,11 +14,11 @@ export default class NotesView extends AbstractView {
   }
 
   get formContainer() {
-    return this.element.querySelector(`.${classes.notes__form}`);
+    return this.element.querySelector(`.${classes['notes__form-container']}`);
   }
 
   get listContainer() {
-    return this.element.querySelector(`.${classes.notes__list}`);
+    return this.element.querySelector(`.${classes['notes__list-container']}`);
   }
 
   getTemplate() {
@@ -28,8 +28,8 @@ export default class NotesView extends AbstractView {
         <div class="${classes.notes__controls}">
           <button id="show-add-note">Add new note</button>
         </div>
-        <div class="${classes.notes__form}"></div>
-        <div class="${classes.notes__list}"></div>
+        <div class="${classes['notes__form-container']}"></div>
+        <div class="${classes['notes__list-container']}"></div>
       </div>
     `;
   }
