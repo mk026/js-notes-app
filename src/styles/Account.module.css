@@ -1,0 +1,35 @@
+.account {
+  padding: 20px;
+}
+
+.account__title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.account__controls {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.account__info {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+
+  border-radius: 10px;
+  background-color: #e2e2e2;
+}
+
+.account__name {
+  font-size: 1.5rem;
+}
+
+.account__email {
+  font-size: 1.2rem;
+}
+
+.account__form {
+  max-width: 600px;
+  margin: 20px auto;
+}

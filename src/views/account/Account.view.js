@@ -2,6 +2,7 @@ import AbstractView from '../Abstract.view';
 import ChangeNameView from './ChangeName.view';
 import ChangeEmailView from './ChangeEmail.view';
 import ChangePasswordView from './ChangePassword.view';
+import classes from '../../styles/Account.module.css';
 
 export default class AccountView extends AbstractView {
   constructor() {
@@ -13,31 +14,33 @@ export default class AccountView extends AbstractView {
   }
 
   get formContainer() {
-    return this.element.querySelector('.account__form-container');
+    return this.element.querySelector(`.${classes.account__form}`);
   }
 
   getTemplate() {
     return `
-      <div class="account">
-        <h2>Account</h2>
-        <div class="account__container">
-          <h3 class="account__name"></h3>
-          <p class="account__email"></p>
+      <div class="${classes.account}">
+        <h2 class="${classes.account__title}">Account</h2>
+        <div class="${classes.account__info}">
+          <h3 class="${classes.account__name}"></h3>
+          <p class="${classes.account__email}"></p>
         </div>
-        <div class="account__controls">
+        <div class="${classes.account__controls}">
           <button id="change-name">Change name</button>
           <button id="change-email">Change email</button>
           <button id="change-password">Change password</button>
+          <button id="signout">Signout</button>
         </div>
-        <div class="account__form-container"></div>
-        <button id="signout">Signout</button>
+        <div class="${classes.account__form}"></div>
       </div>
     `;
   }
 
   renderAccountInfo(info) {
-    this.element.querySelector('.account__name').innerText = info.name;
-    this.element.querySelector('.account__email').innerText = info.email;
+    this.element.querySelector(`.${classes.account__name}`).innerText =
+      info.name;
+    this.element.querySelector(`.${classes.account__email}`).innerText =
+      info.email;
   }
 
   showChangeNameForm = () => {
