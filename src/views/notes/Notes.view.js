@@ -71,7 +71,7 @@ export default class NotesView extends AbstractView {
   }
 
   setOnEditNote(handler) {
-    this.onEditNote = handler;
+    this.noteListView.setOnEditNote(handler);
   }
 
   setOnSaveEditedNote(handler) {
@@ -80,20 +80,5 @@ export default class NotesView extends AbstractView {
 
   setOnDeleteNote(handler) {
     this.noteListView.setOnDeleteNote(handler);
-  }
-
-  editNoteHandler = (event) => {
-    if (event.target.classList.contains('edit-note')) {
-      const noteId = event.target.parentElement.id;
-      this.onEditNote(noteId);
-    }
-  };
-
-  attachEditNoteHandler() {
-    this.element.addEventListener('click', this.editNoteHandler);
-  }
-
-  removeEditNoteHandler() {
-    this.element.removeEventListener('click', this.editNoteHandler);
   }
 }

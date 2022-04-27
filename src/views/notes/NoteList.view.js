@@ -29,18 +29,31 @@ export default class NoteListView extends AbstractView {
 
     container.appendChild(this.element, 'afterbegin');
 
+    this.attachEditNoteHandler();
     this.attachDeleteNoteHandler();
   }
 
   unmount() {
+    this.removeEditNoteHandler();
     this.removeDeleteNoteHandler();
 
     this.element.remove();
   }
 
+  setOnEditNote(handler) {
+    this.onEditNote = handler;
+  }
+
   setOnDeleteNote(handler) {
     this.onDeleteNote = handler;
   }
+
+  editNoteHandler = (event) => {
+    if (event.target.classList.contains('edit-note')) {
+      const noteId = event.target.parentElement.id;
+      this.onEditNote(noteId);
+    }
+  };
 
   deleteNoteHandler = (event) => {
     if (event.target.classList.contains('delete-note')) {
@@ -49,8 +62,16 @@ export default class NoteListView extends AbstractView {
     }
   };
 
+  attachEditNoteHandler() {
+    this.element.addEventListener('click', this.editNoteHandler);
+  }
+
   attachDeleteNoteHandler() {
     this.element.addEventListener('click', this.deleteNoteHandler);
+  }
+
+  removeEditNoteHandler() {
+    this.element.removeEventListener('click', this.editNoteHandler);
   }
 
   removeDeleteNoteHandler() {

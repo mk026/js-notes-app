@@ -23,14 +23,12 @@ export default class NotesController {
 
     this.view.setOnEditNote(this.onEditNote);
     this.view.setOnSaveEditedNote(this.onSaveEditedNote);
-    this.view.attachEditNoteHandler();
 
     this.view.setOnDeleteNote(this.onDeleteNote);
   }
 
   destroy() {
     this.view.removeShowAddNoteFormHandler();
-    this.view.removeEditNoteHandler();
     this.view.removeElement();
   }
 
