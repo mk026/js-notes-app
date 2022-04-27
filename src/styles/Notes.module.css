@@ -1,0 +1,22 @@
+.notes {
+  padding: 20px;
+}
+
+.notes__title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.notes__controls {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.notes__list {
+  margin: 20px auto;
+}
+
+.notes__form {
+  margin: 20px auto;
+  max-width: 600px;
+}

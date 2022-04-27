@@ -2,6 +2,7 @@ import AbstractView from '../Abstract.view';
 import AddNoteView from './AddNote.view';
 import NoteListView from './NoteList.view';
 import EditNoteView from './EditNote.view';
+import classes from '../../styles/Notes.module.css';
 
 export default class NotesView extends AbstractView {
   constructor() {
@@ -13,22 +14,22 @@ export default class NotesView extends AbstractView {
   }
 
   get formContainer() {
-    return this.element.querySelector('.notes__form-container');
+    return this.element.querySelector(`.${classes.notes__form}`);
   }
 
   get listContainer() {
-    return this.element.querySelector('.notes__list-container');
+    return this.element.querySelector(`.${classes.notes__list}`);
   }
 
   getTemplate() {
     return `
-      <div class="notes">
-        <h2>Notes</h2>
-        <div class="notes__controls">
+      <div class="${classes.notes}">
+        <h2 class="${classes.notes__title}">Notes</h2>
+        <div class="${classes.notes__controls}">
           <button id="show-add-note">Add new note</button>
         </div>
-        <div class="notes__form-container"></div>
-        <div class="notes__list-container"></div>
+        <div class="${classes.notes__form}"></div>
+        <div class="${classes.notes__list}"></div>
       </div>
     `;
   }
