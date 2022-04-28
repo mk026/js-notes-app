@@ -10,12 +10,14 @@ export default class HomeController {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
 
     const hasToken = this.authService.getToken();
+    this.view.showLoading();
     if (hasToken) {
       const { name } = await this.accountService.getAccountInfo();
       this.view.showAuthMessage(name);
     } else {
       this.view.showUnauthMessage();
     }
+    this.view.hideLoading();
   }
 
   destroy() {

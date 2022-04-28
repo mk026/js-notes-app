@@ -19,4 +19,14 @@ export default class AbstractView {
       this.element = null;
     }
   }
+
+  showLoading(container) {
+    this.loading = document.createElement('div');
+    this.loading.innerText = 'Loading...';
+    container.insertAdjacentElement('afterbegin', this.loading);
+  }
+
+  hideLoading() {
+    this.loading.remove();
+  }
 }

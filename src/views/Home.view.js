@@ -30,4 +30,9 @@ export default class HomeView extends AbstractView {
   showAuthMessage(name) {
     this.statusContainer.innerText = `Welcome, ${name}`;
   }
+
+  showLoading() {
+    const container = this.element.querySelector(`.${classes.home__content}`);
+    super.showLoading(container);
+  }
 }
