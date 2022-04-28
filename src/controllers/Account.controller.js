@@ -15,6 +15,7 @@ export default class AccountController {
 
   async init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
+    this.view.showLoading();
 
     this.view.setOnChangeName(this.onChangeName);
     this.view.setOnChangeEmail(this.onChangeEmail);
@@ -26,6 +27,7 @@ export default class AccountController {
     this.view.attachChangePasswordHandler();
 
     const accountInfo = await this.accountService.getAccountInfo();
+    this.view.hideLoading();
     this.view.renderAccountInfo(accountInfo);
   }
 

@@ -67,6 +67,11 @@ export default class AccountView extends AbstractView {
     this.changePasswordView.showError(msg);
   }
 
+  showLoading() {
+    const container = this.element.querySelector(`.${classes.account__info}`);
+    super.showLoading(container);
+  }
+
   attachChangeNameHandler() {
     this.element
       .querySelector('#change-name')
