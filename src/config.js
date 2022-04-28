@@ -22,4 +22,4 @@ export const NOTE_CONTENT_MIN_LENGTH = 1;
 export const NOTE_CONTENT_MAX_LENGTH = 500;
 
 export const TODO_TITLE_MIN_LENGTH = 1;
-export const TODO_TITLE_MAX_LENGTH = 1;
+export const TODO_TITLE_MAX_LENGTH = 100;
