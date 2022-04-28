@@ -22,7 +22,7 @@ export default class EditTodoView extends AbstractView {
   }
 
   mount(container, oldTitle) {
-    this.editedTodo = container.querySelector('.todo__title');
+    this.editedTodo = container;
     this.setInitialInputValue(oldTitle);
     this.editedTodo.replaceWith(this.element);
 

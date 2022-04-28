@@ -64,7 +64,9 @@ export default class TodoListView extends AbstractView {
   }
 
   showEditTodoTitleForm(id, title) {
-    this.editedTodo = this.element.querySelector(`#${id}`);
+    this.editedTodo = this.element.querySelector(
+      `#${id} .${classes.todo__title}`
+    );
 
     this.editTodoView.mount(this.editedTodo, title);
   }
