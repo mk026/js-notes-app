@@ -1,5 +1,6 @@
 import AbstractView from '../Abstract.view';
 import EditTodoView from './EditTodo.view';
+import classes from '../../styles/Todos.module.css';
 
 export default class TodoListView extends AbstractView {
   constructor() {
@@ -10,19 +11,19 @@ export default class TodoListView extends AbstractView {
 
   getTemplate() {
     return `
-      <ul class="todos__list"></ul>
+      <ul class="${classes.todos__list}"></ul>
     `;
   }
 
   getTodoTemplate(todo) {
     return `
-      <li class="todos__list__el" id="${todo.id}">
-        <h3 class="todo__title">${todo.title}</h3>
-        <input class="change-todo-status" type="checkbox" ${
-          todo.completed ? 'checked' : ''
-        }/>
-        <button class="edit-todo-title">Edit</button>
-        <button class="delete-todo">Delete</button>
+      <li class="${classes.todo}" id="${todo.id}">
+        <h3 class="${classes.todo__title}">${todo.title}</h3>
+        <input class="${classes.todo__status}" type="checkbox" ${
+      todo.completed ? 'checked' : ''
+    }/>
+        <button class="${classes.btn} ${classes['btn--edit']}">Edit</button>
+        <button class="${classes.btn} ${classes['btn--delete']}">Delete</button>
       </li>
     `;
   }
@@ -80,14 +81,14 @@ export default class TodoListView extends AbstractView {
   }
 
   editTodoTitleHandler = (event) => {
-    if (event.target.classList.contains('edit-todo-title')) {
+    if (event.target.classList.contains(classes['btn--edit'])) {
       const todoId = event.target.parentElement.id;
       this.onEditTodoTitle(todoId);
     }
   };
 
   deleteTodoHandler = (event) => {
-    if (event.target.classList.contains('delete-todo')) {
+    if (event.target.classList.contains(classes['btn--delete'])) {
       if (this.editedTodo) {
         this.editTodoView.unmount();
       }
@@ -97,7 +98,7 @@ export default class TodoListView extends AbstractView {
   };
 
   changeTodoStatusHandler = (event) => {
-    if (event.target.classList.contains('change-todo-status')) {
+    if (event.target.classList.contains(classes.todo__status)) {
       const todoId = event.target.parentElement.id;
 
       this.onChangeTodoStatus(todoId);

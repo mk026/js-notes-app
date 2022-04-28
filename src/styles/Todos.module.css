@@ -20,3 +20,50 @@
   margin: 20px auto;
   max-width: 600px;
 }
+
+.todos__list {
+  list-style: none;
+}
+
+.todo {
+  max-width: 600px;
+  margin: 10px auto;
+  padding: 20px;
+
+  border-radius: 10px;
+  background-color: #ececec;
+}
+
+.todo__title {
+  font-size: 1.2rem;
+}
+
+.todo__status {
+  background-color: #c3c3c3;
+}
+
+.btn {
+  padding: 10px;
+
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  transition: all 0.2s linear;
+}
+
+.btn--edit {
+  background-color: #c3c3c3;
+}
+
+.btn--edit:hover {
+  background-color: #acacac;
+}
+
+.btn--delete {
+  background-color: #f9a0a0;
+}
+
+.btn--delete:hover {
+  background-color: #ff6767;
+}
