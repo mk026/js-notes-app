@@ -16,14 +16,18 @@ export default class TodoListView extends AbstractView {
   }
 
   getTodoTemplate(todo) {
+    const checked = todo.completed ? 'checked' : '';
+
     return `
       <li class="${classes.todo}" id="${todo.id}">
-        <h3 class="${classes.todo__title}">${todo.title}</h3>
-        <input class="${classes.todo__status}" type="checkbox" ${
-      todo.completed ? 'checked' : ''
-    }/>
-        <button class="${classes.btn} ${classes['btn--edit']}">Edit</button>
-        <button class="${classes.btn} ${classes['btn--delete']}">Delete</button>
+        <div>
+          <input class="${classes.todo__status}" type="checkbox" ${checked}/>
+          <h3 class="${classes.todo__title}">${todo.title}</h3>
+        </div>
+        <div>
+          <button class="${classes.btn} ${classes['btn--edit']}">Edit</button>
+          <button class="${classes.btn} ${classes['btn--delete']}">Delete</button>
+        </div>
       </li>
     `;
   }

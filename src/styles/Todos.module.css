@@ -26,6 +26,10 @@
 }
 
 .todo {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
   max-width: 600px;
   margin: 10px auto;
   padding: 20px;
@@ -36,6 +40,8 @@
 
 .todo__title {
   font-size: 1.2rem;
+
+  display: inline-block;
 }
 
 .todo__status {
