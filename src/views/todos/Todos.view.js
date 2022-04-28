@@ -52,6 +52,13 @@ export default class TodosView extends AbstractView {
     this.todoListView.showEditTodoError(msg);
   }
 
+  showLoading() {
+    const container = this.element.querySelector(
+      `.${classes['todos__list-container']}`
+    );
+    super.showLoading(container);
+  }
+
   setOnAddTodo(handler) {
     this.addTodoView.setOnAddTodo(handler);
   }

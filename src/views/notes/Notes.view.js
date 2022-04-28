@@ -54,6 +54,13 @@ export default class NotesView extends AbstractView {
     this.editNoteView.showError(msg);
   }
 
+  showLoading() {
+    const container = this.element.querySelector(
+      `.${classes['notes__list-container']}`
+    );
+    super.showLoading(container);
+  }
+
   attachShowAddNoteFormHandler() {
     this.element
       .querySelector('#show-add-note')
