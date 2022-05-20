@@ -1,3 +1,4 @@
+import { ApiEndpoints } from '../config';
 import ApiService from './Api.service';
 
 export default class AuthService extends ApiService {
@@ -24,13 +25,17 @@ export default class AuthService extends ApiService {
   }
 
   async signup(name, email, password) {
-    const data = await this.post('signup', { name, email, password });
+    const data = await this.post(ApiEndpoints.SIGNUP, {
+      name,
+      email,
+      password,
+    });
     this.setToken(data.token);
     this.onAuthStatusChange();
   }
 
   async signin(email, password) {
-    const data = await this.post('signin', { email, password });
+    const data = await this.post(ApiEndpoints.SIGNIN, { email, password });
     this.setToken(data.token);
     this.onAuthStatusChange();
   }

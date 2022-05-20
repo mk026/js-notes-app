@@ -1,5 +1,13 @@
 export const API_BASE_URL = 'http://localhost:8080/api';
 
+export const ApiEndpoints = {
+  SIGNIN: '/signin',
+  SIGNUP: '/signup',
+  USERS: '/users',
+  NOTES: '/notes',
+  TODOS: '/todos',
+};
+
 export const HttpMethod = {
   GET: 'GET',
   POST: 'POST',

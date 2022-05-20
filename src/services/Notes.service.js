@@ -1,3 +1,4 @@
+import { ApiEndpoints } from '../config';
 import ApiService from './Api.service';
 
 export default class NotesService extends ApiService {
@@ -8,26 +9,26 @@ export default class NotesService extends ApiService {
 
   async getNotes() {
     const token = this.authService.getToken();
-    const notes = await this.get('notes', token);
+    const notes = await this.get(ApiEndpoints.NOTES, token);
 
     return notes;
   }
 
   async addNote(noteData) {
     const token = this.authService.getToken();
-    const newNote = await this.post('notes', noteData, token);
+    const newNote = await this.post(ApiEndpoints.NOTES, noteData, token);
     return newNote;
   }
 
   async editNote(editedNote) {
     const token = this.authService.getToken();
-    const updatedNote = await this.put('notes', editedNote, token);
+    const updatedNote = await this.put(ApiEndpoints.NOTES, editedNote, token);
     return updatedNote;
   }
 
   async removeNote(id) {
     const token = this.authService.getToken();
-    const deletedNote = await this.delete(`notes/${id}`, token);
+    const deletedNote = await this.delete(`${ApiEndpoints.NOTES}/${id}`, token);
     return deletedNote;
   }
 }

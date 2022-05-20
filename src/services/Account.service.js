@@ -1,3 +1,4 @@
+import { ApiEndpoints } from '../config';
 import ApiService from './Api.service';
 
 export default class AccountService extends ApiService {
@@ -8,25 +9,29 @@ export default class AccountService extends ApiService {
 
   async getAccountInfo() {
     const token = this.authService.getToken();
-    const data = await this.get('users', token);
+    const data = await this.get(ApiEndpoints.USERS, token);
     return data;
   }
 
   async changeName(newName) {
     const token = this.authService.getToken();
-    const data = await this.put('users', { name: newName }, token);
+    const data = await this.put(ApiEndpoints.USERS, { name: newName }, token);
     return data;
   }
 
   async changeEmail(newEmail) {
     const token = this.authService.getToken();
-    const data = await this.put('users', { email: newEmail }, token);
+    const data = await this.put(ApiEndpoints.USERS, { email: newEmail }, token);
     return data;
   }
 
   async changePassword(oldPassword, newPassword) {
     const token = this.authService.getToken();
-    const data = await this.put('users', { oldPassword, newPassword }, token);
+    const data = await this.put(
+      ApiEndpoints.USERS,
+      { oldPassword, newPassword },
+      token
+    );
     return data;
   }
 

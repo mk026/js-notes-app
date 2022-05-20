@@ -1,3 +1,4 @@
+import { ApiEndpoints } from '../config';
 import ApiService from './Api.service';
 
 export default class TodosService extends ApiService {
@@ -8,7 +9,7 @@ export default class TodosService extends ApiService {
 
   async getTodos() {
     const token = this.authService.getToken();
-    const data = await this.get('todos', token);
+    const data = await this.get(ApiEndpoints.TODOS, token);
     return data.map(({ _id, title, completed }) => ({
       _id: `todo_${_id}`,
       title,
@@ -18,7 +19,7 @@ export default class TodosService extends ApiService {
 
   async addTodo(todoData) {
     const token = this.authService.getToken();
-    const data = await this.post('todos', todoData, token);
+    const data = await this.post(ApiEndpoints.TODOS, todoData, token);
     const newTodo = { ...data, _id: `todo_${data._id}` };
     return newTodo;
   }
@@ -33,7 +34,10 @@ export default class TodosService extends ApiService {
 
   async removeTodo(id) {
     const token = this.authService.getToken();
-    const data = await this.delete(`todos/${id.replace(/^todo_/, '')}`, token);
+    const data = await this.delete(
+      `${ApiEndpoints.TODOS}/${id.replace(/^todo_/, '')}`,
+      token
+    );
     const deletedTodo = { ...data, _id: `todo_${data._id}` };
     return deletedTodo;
   }
