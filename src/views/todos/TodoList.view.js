@@ -19,7 +19,7 @@ export default class TodoListView extends AbstractView {
     const checked = todo.completed ? 'checked' : '';
 
     return `
-      <li class="${classes.todo}" id="${todo.id}">
+      <li class="${classes.todo}" id="${todo._id}">
         <div>
           <input class="${classes.todo__status}" type="checkbox" ${checked}/>
           <h3 class="${classes.todo__title}">${todo.title}</h3>
@@ -88,7 +88,7 @@ export default class TodoListView extends AbstractView {
 
   editTodoTitleHandler = (event) => {
     if (event.target.classList.contains(classes['btn--edit'])) {
-      const todoId = event.target.parentElement.id;
+      const todoId = event.target.parentElement.parentElement.id;
       this.onEditTodoTitle(todoId);
     }
   };

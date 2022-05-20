@@ -10,7 +10,7 @@ export default class TodosService extends ApiService {
     const token = this.authService.getToken();
     const data = await this.get('todos', token);
     return data.map(({ _id, title, completed }) => ({
-      id: `todo_${_id}`,
+      _id: `todo_${_id}`,
       title,
       completed,
     }));
@@ -19,26 +19,22 @@ export default class TodosService extends ApiService {
   async addTodo(todoData) {
     const token = this.authService.getToken();
     const data = await this.post('todos', todoData, token);
-    const newTodo = { ...data, id: `todo_${data._id}` };
-    delete newTodo._id;
+    const newTodo = { ...data, _id: `todo_${data._id}` };
     return newTodo;
   }
 
   async editTodo(todoData) {
-    const editedTodo = { ...todoData, _id: todoData.id.replace(/^todo_/, '') };
-    delete editedTodo.id;
+    const editedTodo = { ...todoData, _id: todoData._id.replace(/^todo_/, '') };
     const token = this.authService.getToken();
     const data = await this.put('todos', editedTodo, token);
-    const updatedTodo = { ...data, id: `todo_${data._id}` };
-    delete updatedTodo._id;
+    const updatedTodo = { ...data, _id: `todo_${data._id}` };
     return updatedTodo;
   }
 
   async removeTodo(id) {
     const token = this.authService.getToken();
     const data = await this.delete(`todos/${id.replace(/^todo_/, '')}`, token);
-    const deletedTodo = { ...data, id: `todo_${data._id}` };
-    delete deletedTodo._id;
+    const deletedTodo = { ...data, _id: `todo_${data._id}` };
     return deletedTodo;
   }
 }

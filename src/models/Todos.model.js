@@ -18,7 +18,7 @@ export default class TodosModel {
   }
 
   getTodoById(id) {
-    return this.todos.find((todo) => todo.id == id);
+    return this.todos.find((todo) => todo._id == id);
   }
 
   async addTodo(todo) {
@@ -31,7 +31,9 @@ export default class TodosModel {
     const editedTodo = this.getTodoById(id);
     editedTodo.title = newTitle;
     const updatedTodo = await this.todosService.editTodo(editedTodo);
-    this.todos = this.todos.map((todo) => (todo.id == id ? updatedTodo : todo));
+    this.todos = this.todos.map((todo) =>
+      todo._id == id ? updatedTodo : todo
+    );
     this.update(this.todos);
   }
 
@@ -39,13 +41,15 @@ export default class TodosModel {
     const editedTodo = this.getTodoById(id);
     editedTodo.completed = !editedTodo.completed;
     const updatedTodo = await this.todosService.editTodo(editedTodo);
-    this.todos = this.todos.map((todo) => (todo.id == id ? updatedTodo : todo));
+    this.todos = this.todos.map((todo) =>
+      todo._id == id ? updatedTodo : todo
+    );
     this.update(this.todos);
   }
 
   async removeTodo(id) {
     const deletedTodo = await this.todosService.removeTodo(id);
-    this.todos = this.todos.filter((todo) => todo.id != deletedTodo.id);
+    this.todos = this.todos.filter((todo) => todo._id != deletedTodo._id);
     this.update(this.todos);
   }
 }
