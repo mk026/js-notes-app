@@ -15,7 +15,7 @@ export default class NoteListView extends AbstractView {
 
   getNoteTemplate(note) {
     return `
-      <li class="${classes.note}" id="${note.id}">
+      <li class="${classes.note}" id="${note._id}">
         <h3 class="${classes.note__title}">${note.title}</h3>
         <p class="${classes.note__content}">${note.content}</p>
         <button class="${classes.btn} ${classes['btn--edit']}">Edit</button>

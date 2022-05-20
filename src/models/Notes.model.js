@@ -18,7 +18,7 @@ export default class NotesModel {
   }
 
   getNoteById(id) {
-    return this.notes.find((note) => note.id == id);
+    return this.notes.find((note) => note._id == id);
   }
 
   async addNote(note) {
@@ -33,13 +33,15 @@ export default class NotesModel {
       ...oldNote,
       ...newData,
     });
-    this.notes = this.notes.map((note) => (note.id == id ? updatedNote : note));
+    this.notes = this.notes.map((note) =>
+      note._id == id ? updatedNote : note
+    );
     this.update(this.notes);
   }
 
   async removeNote(id) {
     const deletedNote = await this.notesService.removeNote(id);
-    this.notes = this.notes.filter((note) => note.id != deletedNote.id);
+    this.notes = this.notes.filter((note) => note._id != deletedNote._id);
     this.update(this.notes);
   }
 }

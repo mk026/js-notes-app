@@ -59,10 +59,7 @@ export default class NotesController {
       this.view.showAddNoteError(contentError);
       return false;
     }
-    this.model.addNote({
-      author: 'Author name',
-      ...note,
-    });
+    this.model.addNote(note);
     return true;
   };
 

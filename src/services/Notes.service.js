@@ -6,44 +6,28 @@ export default class NotesService extends ApiService {
     this.authService = authService;
   }
 
-  transformData(data) {
-    return data.map(({ _id, title, content }) => ({
-      id: _id,
-      title,
-      content,
-    }));
-  }
-
   async getNotes() {
     const token = this.authService.getToken();
-    const data = await this.get('notes', token);
+    const notes = await this.get('notes', token);
 
-    return this.transformData(data);
+    return notes;
   }
 
   async addNote(noteData) {
     const token = this.authService.getToken();
-    const data = await this.post('notes', noteData, token);
-    const newNote = { ...data, id: data._id };
-    delete newNote._id;
+    const newNote = await this.post('notes', noteData, token);
     return newNote;
   }
 
-  async editNote(noteData) {
-    const editedNote = { ...noteData, _id: noteData.id };
-    delete editedNote.id;
+  async editNote(editedNote) {
     const token = this.authService.getToken();
-    const data = await this.put('notes', editedNote, token);
-    const updatedNote = { ...data, id: data._id };
-    delete updatedNote._id;
+    const updatedNote = await this.put('notes', editedNote, token);
     return updatedNote;
   }
 
   async removeNote(id) {
     const token = this.authService.getToken();
-    const data = await this.delete(`notes/${id}`, token);
-    const deletedNote = { ...data, id: data._id };
-    delete deletedNote._id;
+    const deletedNote = await this.delete(`notes/${id}`, token);
     return deletedNote;
   }
 }
