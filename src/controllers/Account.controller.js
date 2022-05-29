@@ -7,15 +7,17 @@ import {
 import { PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH } from '../config';
 
 export default class AccountController {
-  constructor(appRoot, view, accountService) {
+  constructor(appRoot, view, authService, userModel) {
     this.appRoot = appRoot;
     this.view = view;
-    this.accountService = accountService;
+    this.authService = authService;
+    this.userModel = userModel;
   }
 
-  async init() {
+  init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
-    this.view.showLoading();
+
+    this.userModel.setOnUserDataChanged(this.onUserDataChanged);
 
     this.view.setOnChangeName(this.onChangeName);
     this.view.setOnChangeEmail(this.onChangeEmail);
@@ -26,9 +28,8 @@ export default class AccountController {
     this.view.attachChangeEmailHandler();
     this.view.attachChangePasswordHandler();
 
-    const accountInfo = await this.accountService.getAccountInfo();
-    this.view.hideLoading();
-    this.view.renderAccountInfo(accountInfo);
+    const user = this.userModel.getUser();
+    this.view.renderAccountInfo(user);
   }
 
   destroy() {
@@ -39,13 +40,17 @@ export default class AccountController {
     this.view.removeElement();
   }
 
+  onUserDataChanged = (user) => {
+    this.view.renderAccountInfo(user);
+  };
+
   onChangeName = async (newName) => {
     const nameError = validateInput(newName, 'Name');
     if (nameError) {
       this.view.showChangeNameError(nameError);
       return;
     }
-    await this.accountService.changeName(newName);
+    await this.userModel.changeName(newName);
   };
 
   onChangeEmail = async (newEmail) => {
@@ -54,7 +59,7 @@ export default class AccountController {
       this.view.showChangeEmailError(emailError);
       return;
     }
-    await this.accountService.changeEmail(newEmail);
+    await this.userModel.changeEmail(newEmail);
   };
 
   onChangePassword = async (oldPassword, newPassword, confirmPassword) => {
@@ -71,10 +76,10 @@ export default class AccountController {
       this.view.showChangePasswordError('Passwords are not equal');
       return;
     }
-    await this.accountService.changePassword(oldPassword, newPassword);
+    await this.userModel.changePassword(oldPassword, newPassword);
   };
 
   onSignout = () => {
-    this.accountService.signout();
+    this.authService.signout();
   };
 }

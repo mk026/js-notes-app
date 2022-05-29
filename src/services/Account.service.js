@@ -7,12 +7,6 @@ export default class AccountService extends ApiService {
     this.authService = authService;
   }
 
-  async getAccountInfo() {
-    const token = this.authService.getToken();
-    const data = await this.get(ApiEndpoints.USERS, token);
-    return data;
-  }
-
   async changeName(newName) {
     const token = this.authService.getToken();
     const data = await this.put(ApiEndpoints.USERS, { name: newName }, token);
@@ -33,9 +27,5 @@ export default class AccountService extends ApiService {
       token
     );
     return data;
-  }
-
-  signout() {
-    this.authService.signout();
   }
 }

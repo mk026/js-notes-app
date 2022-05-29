@@ -14,6 +14,7 @@ import AccountView from './views/account/Account.view';
 
 import NotesModel from './models/Notes.model';
 import TodosModel from './models/Todos.model';
+import UserModel from './models/User.model';
 
 import Route from './router/Route';
 import Router from './router/Router';
@@ -36,6 +37,9 @@ const todosService = new TodosService(API_BASE_URL, authService);
 
 const notesModel = new NotesModel(notesService);
 const todosModel = new TodosModel(todosService);
+const userModel = new UserModel(accountService);
+
+authService.setUserModel(userModel);
 
 const homeView = new HomeView();
 const notesView = new NotesView();
@@ -47,7 +51,7 @@ const homeController = new HomeController(
   appRoot,
   homeView,
   authService,
-  accountService
+  userModel
 );
 const notesController = new NotesController(appRoot, notesView, notesModel);
 const todosController = new TodosController(appRoot, todosView, todosModel);
@@ -55,7 +59,8 @@ const authController = new AuthController(appRoot, authView, authService);
 const accountController = new AccountController(
   appRoot,
   accountView,
-  accountService
+  authService,
+  userModel
 );
 
 const routes = [

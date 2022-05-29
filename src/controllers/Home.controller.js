@@ -1,23 +1,21 @@
 export default class HomeController {
-  constructor(appRoot, view, authService, accountService) {
+  constructor(appRoot, view, authService, userModel) {
     this.appRoot = appRoot;
     this.view = view;
     this.authService = authService;
-    this.accountService = accountService;
+    this.userModel = userModel;
   }
 
-  async init() {
+  init() {
     this.appRoot.insertAdjacentElement('beforeend', this.view.getElement());
 
     const hasToken = this.authService.getToken();
-    this.view.showLoading();
     if (hasToken) {
-      const { name } = await this.accountService.getAccountInfo();
+      const { name } = this.userModel.getUser();
       this.view.showAuthMessage(name);
     } else {
       this.view.showUnauthMessage();
     }
-    this.view.hideLoading();
   }
 
   destroy() {

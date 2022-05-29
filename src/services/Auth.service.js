@@ -4,7 +4,6 @@ import ApiService from './Api.service';
 export default class AuthService extends ApiService {
   constructor(baseUrl) {
     super(baseUrl);
-    this.checkAuth();
   }
 
   getToken() {
@@ -28,16 +27,19 @@ export default class AuthService extends ApiService {
     this.onAuthStatusChange = handler;
   }
 
+  setUserModel(userModel) {
+    this.userModel = userModel;
+  }
+
   async checkAuth() {
     const token = this.getStoredToken();
     if (token) {
       const data = await this.get(ApiEndpoints.CHECK, token);
       if (data.token) {
         this.setToken(data.token);
-        this.onAuthStatusChange();
+        this.userModel.setUser(data.user);
       } else {
         this.removeStoredToken();
-        this.onAuthStatusChange();
       }
     }
   }
@@ -49,18 +51,21 @@ export default class AuthService extends ApiService {
       password,
     });
     this.setToken(data.token);
+    this.userModel.setUser(data.user);
     this.onAuthStatusChange();
   }
 
   async signin(email, password) {
     const data = await this.post(ApiEndpoints.SIGNIN, { email, password });
     this.setToken(data.token);
+    this.userModel.setUser(data.user);
     this.onAuthStatusChange();
   }
 
   signout() {
     this.token = null;
     localStorage.removeItem('token');
+    this.userModel.removeUser();
     this.onAuthStatusChange();
   }
 }

@@ -6,11 +6,12 @@ export default class NavController {
     this.authService = authService;
   }
 
-  init() {
+  async init() {
+    this.authService.setOnAuthStatusChange(this.onAuthStatusChange);
+    await this.authService.checkAuth();
+
     this.router.setChangeActiveLinkHandler(this.view.setActiveLink);
     this.router.navigateTo(location.href, false);
-
-    this.authService.setOnAuthStatusChange(this.onAuthStatusChange);
 
     this.appRoot.insertAdjacentElement('afterbegin', this.view.getElement());
     this.renderNavLinks();
