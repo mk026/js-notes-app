@@ -1,4 +1,4 @@
-import { ApiEndpoints } from '../config';
+import { ApiEndpoints, StorageKeys } from '../config';
 import ApiService from './Api.service';
 
 export default class AuthService extends ApiService {
@@ -12,15 +12,15 @@ export default class AuthService extends ApiService {
 
   setToken(token) {
     this.token = token;
-    localStorage.setItem('token', token);
+    localStorage.setItem(StorageKeys.TOKEN, token);
   }
 
   getStoredToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem(StorageKeys.TOKEN);
   }
 
   removeStoredToken() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(StorageKeys.TOKEN);
   }
 
   setOnAuthStatusChange(handler) {
@@ -64,7 +64,7 @@ export default class AuthService extends ApiService {
 
   signout() {
     this.token = null;
-    localStorage.removeItem('token');
+    localStorage.removeItem(StorageKeys.TOKEN);
     this.userModel.removeUser();
     this.onAuthStatusChange();
   }

@@ -1,3 +1,5 @@
+import { Paths } from '../config';
+
 export default class NavController {
   constructor(appRoot, view, router, authService) {
     this.appRoot = appRoot;
@@ -33,7 +35,7 @@ export default class NavController {
   }
 
   onAuthStatusChange = () => {
-    this.router.navigateTo('/');
+    this.router.navigateTo(Paths.HOME);
     this.renderNavLinks();
   };
 

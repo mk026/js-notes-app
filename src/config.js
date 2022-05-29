@@ -22,6 +22,18 @@ export const AccessMode = {
   ALL: 'ALL',
 };
 
+export const StorageKeys = {
+  TOKEN: 'token',
+};
+
+export const Paths = {
+  HOME: '/',
+  NOTES: '/notes',
+  TODOS: '/todos',
+  AUTH: '/auth',
+  ACCOUNT: '/account',
+};
+
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 100;
 

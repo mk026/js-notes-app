@@ -1,4 +1,4 @@
-import { AccessMode } from '../config';
+import { AccessMode, Paths } from '../config';
 
 export default class Router {
   constructor(routes, authService) {
@@ -42,12 +42,12 @@ export default class Router {
   }
 
   navigateTo = (url, pushState = true) => {
-    let routePath = url.replace(/^.*\//, '/');
+    let routePath = url.replace(/^.*\//, Paths.HOME);
 
     if (!this.checkAccess(routePath)) {
-      history.replaceState(null, null, '/');
+      history.replaceState(null, null, Paths.HOME);
       pushState = false;
-      routePath = '/';
+      routePath = Paths.HOME;
     }
 
     if (this.activeRoute) {
