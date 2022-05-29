@@ -4,7 +4,7 @@ import ApiService from './Api.service';
 export default class AuthService extends ApiService {
   constructor(baseUrl) {
     super(baseUrl);
-    this.token = this.getStoredToken();
+    this.checkAuth();
   }
 
   getToken() {
@@ -20,8 +20,26 @@ export default class AuthService extends ApiService {
     return localStorage.getItem('token');
   }
 
+  removeStoredToken() {
+    localStorage.removeItem('token');
+  }
+
   setOnAuthStatusChange(handler) {
     this.onAuthStatusChange = handler;
+  }
+
+  async checkAuth() {
+    const token = this.getStoredToken();
+    if (token) {
+      const data = await this.get(ApiEndpoints.CHECK, token);
+      if (data.token) {
+        this.setToken(data.token);
+        this.onAuthStatusChange();
+      } else {
+        this.removeStoredToken();
+        this.onAuthStatusChange();
+      }
+    }
   }
 
   async signup(name, email, password) {

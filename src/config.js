@@ -3,6 +3,7 @@ export const API_BASE_URL = 'http://localhost:8080/api';
 export const ApiEndpoints = {
   SIGNIN: '/signin',
   SIGNUP: '/signup',
+  CHECK: '/check',
   USERS: '/users',
   NOTES: '/notes',
   TODOS: '/todos',
